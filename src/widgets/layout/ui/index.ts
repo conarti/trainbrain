@@ -1,1 +1,1 @@
-export const MainLayout = () => import('./main-layout.vue')
+export const MainLayout = () => import('./main-layout.vue');
