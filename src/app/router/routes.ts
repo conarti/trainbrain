@@ -1,5 +1,6 @@
-import HomeView from '@/pages/home-page.vue';
+import { TrainPage } from '@/pages/train';
 import { MainLayout } from '@/widgets/layout';
+import { RouteNames } from '@/shared/config/route-names';
 
 export const routes = [
   {
@@ -8,8 +9,8 @@ export const routes = [
     children: [
       {
         path: '',
-        name: 'home',
-        component: HomeView,
+        name: RouteNames.Train,
+        component: TrainPage,
       },
       {
         path: '/about',
