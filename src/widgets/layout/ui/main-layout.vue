@@ -1,16 +1,9 @@
-<script setup lang="ts">
-import { AppLink } from '@/shared/ui/app-link';
-</script>
-
 <template>
   <header>
     <nav>
-      <app-link to="/">
+      <router-link to="/">
         Home
-      </app-link>
-      <app-link to="/about">
-        About
-      </app-link>
+      </router-link>
     </nav>
   </header>
   <main>
