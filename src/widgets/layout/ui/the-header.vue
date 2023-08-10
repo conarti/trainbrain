@@ -1,9 +1,24 @@
+<script setup lang="ts">
+import { RouteNames } from '@/shared/config/route-names';
+
+const APP_TITLE = 'TrainBrain App';
+</script>
+
 <template>
-  <header>
-    <nav>
-      <router-link to="/">
-        Home
-      </router-link>
-    </nav>
-  </header>
+  <q-toolbar>
+    <q-btn
+      flat
+      :label="APP_TITLE"
+      disable
+    />
+
+    <q-space />
+
+    <q-tabs shrink>
+      <q-route-tab
+        :to="{ name: RouteNames.Train }"
+        label="Train"
+      />
+    </q-tabs>
+  </q-toolbar>
 </template>
