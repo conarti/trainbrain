@@ -1,10 +1,16 @@
 <script setup lang="ts">
+import {
+  QLayout,
+  QPageContainer,
+} from 'quasar';
 import TheHeader from './the-header.vue';
 </script>
 
 <template>
-  <TheHeader />
-  <main>
-    <router-view />
-  </main>
+  <q-layout>
+    <TheHeader />
+    <q-page-container>
+      <router-view />
+    </q-page-container>
+  </q-layout>
 </template>
