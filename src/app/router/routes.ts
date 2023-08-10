@@ -12,11 +12,6 @@ export const routes = [
         name: RouteNames.Train,
         component: TrainPage,
       },
-      {
-        path: '/about',
-        name: 'about',
-        component: () => import('@/pages/about-page.vue'),
-      },
     ],
   },
 ];
