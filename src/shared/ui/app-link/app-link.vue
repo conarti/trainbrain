@@ -21,14 +21,19 @@
 
 
 <template>
-  <a v-if="isExternalLink" v-bind="$attrs" :href="to" target="_blank">
+  <a
+    v-if="isExternalLink"
+    v-bind="$attrs"
+    :href="to"
+    target="_blank"
+  >
     <slot />
   </a>
   <router-link
     v-else
+    v-slot="{ href, navigate, isExactActive }"
     v-bind="$props"
     custom
-    v-slot="{ href, navigate, isExactActive }"
   >
     <el-link
       v-bind="$attrs"

@@ -1,5 +1,5 @@
-import { routes } from '@/app/router/routes'; // FIXME why eslint is not working? 'absolute-relative'
 import { createRouter, createWebHistory } from 'vue-router';
+import { routes } from './routes';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
