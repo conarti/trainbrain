@@ -1,11 +1,9 @@
+<script setup lang="ts">
+import TheHeader from './the-header.vue';
+</script>
+
 <template>
-  <header>
-    <nav>
-      <router-link to="/">
-        Home
-      </router-link>
-    </nav>
-  </header>
+  <TheHeader />
   <main>
     <router-view />
   </main>
