@@ -102,6 +102,6 @@ function generateExample(): Exercise {
 	};
 }
 
-export function generateExercises(count: number) {
+export function generateExercises(count: number): Exercise[] {
 	return generateArray(count, generateExample);
 }
