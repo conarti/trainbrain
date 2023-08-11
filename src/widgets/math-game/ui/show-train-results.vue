@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { formatTime } from '@/features/timer';
 import { EXERCISES_COUNT } from '../config';
 import type { ExerciseWithSolution } from '../model';
-import MathGameResults from './math-game-results.vue';
+import ExerciseResults from './exercise-results.vue';
 
 interface Props {
   time: number;
@@ -42,7 +42,7 @@ const mistakeSolutionsPercent = computed(() => Math.floor(mistakeSolutionsCount.
       </p>
     </q-card-section>
     <q-card-section>
-      <MathGameResults :results="results" />
+      <ExerciseResults :results="results" />
     </q-card-section>
     <q-card-actions
       align="stretch"
