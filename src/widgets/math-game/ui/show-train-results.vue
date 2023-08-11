@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import { formatTime } from '@/features/timer';
 import { EXERCISES_COUNT } from '../config';
 import type { ExerciseWithSolution } from '../model';
+import MathGameResults from './math-game-results.vue';
 
 interface Props {
   time: number;
@@ -15,6 +16,7 @@ type Emits = (event: 'restart') => void
 
 const emit = defineEmits<Emits>();
 
+/* @duplicate */
 function isInvalidResult(exerciseWithSolution: ExerciseWithSolution) {
   return exerciseWithSolution.solution !== exerciseWithSolution.result;
 }
@@ -40,32 +42,7 @@ const mistakeSolutionsPercent = computed(() => Math.floor(mistakeSolutionsCount.
       </p>
     </q-card-section>
     <q-card-section>
-      <q-expansion-item
-        label="Full results"
-        class="shadow-1 overflow-hidden bg-blue-grey-1"
-        header-class="text-bold"
-        style="border-radius: 30px"
-      >
-        <q-card>
-          <q-card-section>
-            <div class="fit row wrap justify-start items-center content-center q-gutter-md">
-              <p
-                v-for="(result, index) in results"
-                :key="result.id"
-              >
-                <b>{{ index + 1 }}.</b>
-                {{ result.label }}
-                <q-badge
-                  rounded
-                  :color="isInvalidResult(result) ? 'red' : 'green'"
-                >
-                  {{ result.solution }}
-                </q-badge>
-              </p>
-            </div>
-          </q-card-section>
-        </q-card>
-      </q-expansion-item>
+      <MathGameResults :results="results" />
     </q-card-section>
     <q-card-actions
       align="stretch"
