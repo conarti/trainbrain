@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { formatTime } from '@/features/timer';
 import { EXERCISES_COUNT } from '../config';
 import type { ExerciseWithSolution } from '../model';
-import ExerciseResults from './exercise-results.vue';
+import ExerciseSolutions from './exercise-solutions.vue';
 
 interface Props {
   time: number;
@@ -16,11 +16,12 @@ type Emits = (event: 'restart') => void
 
 const emit = defineEmits<Emits>();
 
-/* @duplicate */
+/* @duplicate exercise-solutions + results-page */
 function isInvalidResult(exerciseWithSolution: ExerciseWithSolution) {
   return exerciseWithSolution.solution !== exerciseWithSolution.result;
 }
 
+/* @duplicate at results-page */
 const mistakeSolutionsCount = computed(() => props.results.filter(isInvalidResult).length);
 const mistakeSolutionsPercent = computed(() => Math.floor(mistakeSolutionsCount.value / EXERCISES_COUNT * 100));
 </script>
@@ -42,7 +43,7 @@ const mistakeSolutionsPercent = computed(() => Math.floor(mistakeSolutionsCount.
       </p>
     </q-card-section>
     <q-card-section>
-      <ExerciseResults :results="results" />
+      <ExerciseSolutions :solutions="results" />
     </q-card-section>
     <q-card-actions
       align="stretch"
