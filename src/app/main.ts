@@ -10,7 +10,7 @@ const app = createApp(App);
 
 app.use(Quasar, {
   config: {
-    dark: true,
+    dark: 'auto',
   },
 });
 app.use(createPinia());
