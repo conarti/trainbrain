@@ -7,6 +7,10 @@ interface Props {
 }
 
 defineProps<Props>();
+
+function isInvalidResult(exerciseWithSolutin: ExerciseWithSolution) {
+  return exerciseWithSolutin.solution !== exerciseWithSolutin.result;
+}
 </script>
 
 <template>
@@ -21,7 +25,13 @@ defineProps<Props>();
         v-for="result in results"
         :key="result.id"
       >
-        {{ result.label }} {{ result.solution }} ({{ result.result }})
+        {{ result.label }}
+        <q-badge
+          rounded
+          :color="isInvalidResult(result) ? 'red' : 'green'"
+        >
+          {{ result.solution }}
+        </q-badge>
       </p>
     </q-card-section>
   </q-card>
