@@ -7,7 +7,7 @@ import TheHeader from './the-header.vue';
 </script>
 
 <template>
-  <q-layout>
+  <q-layout view="hHh lpR fFf">
     <TheHeader />
     <q-page-container>
       <router-view />

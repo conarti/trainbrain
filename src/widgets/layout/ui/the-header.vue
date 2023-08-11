@@ -5,18 +5,20 @@ const APP_TITLE = 'TrainBrain';
 </script>
 
 <template>
-  <q-toolbar>
-    <q-toolbar-title>
-      {{ APP_TITLE }}
-    </q-toolbar-title>
+  <q-header class="bg-blue-grey-8">
+    <q-toolbar>
+      <q-toolbar-title>
+        {{ APP_TITLE }}
+      </q-toolbar-title>
 
-    <q-space />
+      <q-space />
 
-    <q-tabs shrink>
-      <q-route-tab
-        :to="{ name: RouteNames.Train }"
-        label="Train"
-      />
-    </q-tabs>
-  </q-toolbar>
+      <q-tabs shrink>
+        <q-route-tab
+          :to="{ name: RouteNames.Train }"
+          label="Train"
+        />
+      </q-tabs>
+    </q-toolbar>
+  </q-header>
 </template>
