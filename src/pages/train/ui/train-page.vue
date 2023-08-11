@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { QPage } from 'quasar';
+import { MathGame } from '@/widgets/math-game';
 </script>
 
 <template>
   <q-page padding>
-    <h1>
-      train page
-    </h1>
+    <MathGame />
   </q-page>
 </template>
