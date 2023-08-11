@@ -11,7 +11,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-type Emits = (event: 'restart') => void
+type Emits = (event: 'restart', exerciseCount: number) => void
 
 const emit = defineEmits<Emits>();
 
@@ -24,6 +24,10 @@ function isInvalidResult(exerciseWithSolution: ExerciseWithSolution) {
 const mistakeSolutionsCount = computed(() => props.results.filter(isInvalidResult).length);
 const exercisesCount = computed(() => props.results.length);
 const mistakeSolutionsPercent = computed(() => Math.floor(mistakeSolutionsCount.value / exercisesCount.value * 100));
+
+function restart() {
+  emit('restart', exercisesCount.value);
+}
 </script>
 
 <template>
@@ -53,7 +57,7 @@ const mistakeSolutionsPercent = computed(() => Math.floor(mistakeSolutionsCount.
         label="Try again"
         push
         color="primary"
-        @click="emit('restart')"
+        @click="restart"
       />
     </q-card-actions>
   </q-card>
