@@ -1,3 +1,4 @@
+import sortBy from 'lodash/sortBy';
 import { LocalStorage } from 'quasar';
 import {
   onMounted,
@@ -21,7 +22,7 @@ function useLocalStorageResults() {
       return [];
     }
 
-    return [...savedResults].sort((a, b) => b.time - a.time);
+    return sortBy(savedResults, (result) => -result.date);
   }
 
   function save(results: MathGameResult[]) {
