@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useQuasar } from 'quasar';
 import type { ExerciseWithSolution } from '../model';
 
 interface Props {
@@ -6,6 +7,8 @@ interface Props {
 }
 
 defineProps<Props>();
+
+const q = useQuasar();
 
 /* @duplicate results-page + show-train-results */
 function isInvalidResult(exerciseWithSolution: ExerciseWithSolution) {
@@ -16,9 +19,12 @@ function isInvalidResult(exerciseWithSolution: ExerciseWithSolution) {
 <template>
   <q-expansion-item
     label="Exercise solutions"
-    class="shadow-1 overflow-hidden bg-blue-grey-1"
+    class="shadow-1 overflow-hidden rounded-borders"
+    :class="{
+      'bg-blue-grey-1': !q.dark.isActive,
+      'bg-grey-14': q.dark.isActive,
+    }"
     header-class="text-bold"
-    style="border-radius: 30px"
   >
     <q-card>
       <q-card-section>
