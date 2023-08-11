@@ -4,7 +4,7 @@ import { EXERCISES_COUNT } from '../config';
 
 export function useExercisesTrainer() {
   const {
-    formattedTime: gameTime,
+    time: gameTime,
     start: startTimer,
     stop: stopTimer,
     reset: resetTimer,

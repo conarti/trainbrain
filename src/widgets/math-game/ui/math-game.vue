@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useUserGamesResults } from '@/features/user-games-results';
 import {
   toExercisesWithSolutionsAdapter,
   useExercisesTrainer,
@@ -37,7 +38,8 @@ function start() {
 
 function showResults(solutions: number[]) {
   stopExerciseTrainer();
-  updateResults(toExercisesWithSolutionsAdapter(solutions, exercises.value), gameTime.value);
+  const exerciseWithSolution = toExercisesWithSolutionsAdapter(solutions, exercises.value);
+  updateResults(exerciseWithSolution, gameTime.value);
   setProgressShowingResults();
 }
 </script>

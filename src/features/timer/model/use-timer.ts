@@ -11,7 +11,7 @@ function withZero(time: number): string {
   return time.toString().padStart(2, '0');
 }
 
-function formatTime(timeInSeconds: number): string {
+export function formatTime(timeInSeconds: number): string {
   const minutes = Math.floor(timeInSeconds / 60);
   const seconds = timeInSeconds % 60;;
   return `${withZero(minutes)}:${withZero(seconds)}`;

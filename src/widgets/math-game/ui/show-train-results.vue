@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { formatTime } from '@/features/timer';
 import { EXERCISES_COUNT } from '../config';
 import type { ExerciseWithSolution } from '../model';
 
 interface Props {
-  time: string;
+  time: number;
   results: ExerciseWithSolution[]
 }
 
@@ -14,8 +15,8 @@ type Emits = (event: 'restart') => void
 
 const emit = defineEmits<Emits>();
 
-function isInvalidResult(exerciseWithSolutin: ExerciseWithSolution) {
-  return exerciseWithSolutin.solution !== exerciseWithSolutin.result;
+function isInvalidResult(exerciseWithSolution: ExerciseWithSolution) {
+  return exerciseWithSolution.solution !== exerciseWithSolution.result;
 }
 
 const mistakeSolutionsCount = computed(() => props.results.filter(isInvalidResult).length);
@@ -29,7 +30,7 @@ const mistakeSolutionsPercent = computed(() => Math.floor(mistakeSolutionsCount.
         Elapsed time:
       </h6>
       <p class="text-center text-h5">
-        {{ time }}
+        {{ formatTime(time) }}
       </p>
       <h6 class="q-ma-none text-center">
         Mistakes made:

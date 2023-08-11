@@ -28,13 +28,13 @@ export function useUserGamesResults() {
   const localStorageResults = useLocalStorageResults();
   const results = ref<MathGameResult[]>(localStorageResults.get() || []);
 
-  function saveResults(result: MathGameResult) {
+  function saveResult(result: MathGameResult) {
     results.value.push(result);
     localStorageResults.save(results.value);
   }
 
   return {
     results,
-    saveResults,
+    saveResult,
   };
 }

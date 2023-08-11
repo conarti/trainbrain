@@ -4,6 +4,7 @@ import {
   ref,
 } from 'vue';
 import type { Exercise } from '@/features/generate-exercises';
+import { formatTime } from '@/features/timer';
 import { EXERCISES_COUNT } from '../config';
 
 function isEmpty(value: unknown): value is null | undefined | '' {
@@ -16,7 +17,7 @@ const emit = defineEmits<Emits>();
 
 interface Props {
   exercises: Exercise[];
-  time: string;
+  time: number;
 }
 
 const props = defineProps<Props>();
@@ -64,7 +65,7 @@ function saveCurrentSolution() {
     </h6>
     <q-card-section>
       <h4 class="q-ma-none text-center">
-        {{ time }}
+        {{ formatTime(time) }}
       </h4>
     </q-card-section>
     <q-card-section>
