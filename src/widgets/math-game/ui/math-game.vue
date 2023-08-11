@@ -57,5 +57,6 @@ function showResults(solutions: number[]) {
     v-else-if="isShowingResults"
     :results="results"
     :time="resultTime"
+    @restart="start"
   />
 </template>

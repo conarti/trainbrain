@@ -7,6 +7,7 @@ export function useExercisesTrainer() {
     formattedTime: gameTime,
     start: startTimer,
     stop: stopTimer,
+    reset: resetTimer,
   } = useTimer();
 
   const {
@@ -16,6 +17,7 @@ export function useExercisesTrainer() {
 
   function start() {
     updateExercises();
+    resetTimer();
     startTimer();
   }
 
