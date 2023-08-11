@@ -5,7 +5,7 @@ import {
 } from 'vue';
 import type { Exercise } from '@/features/generate-exercises';
 import { formatTime } from '@/features/timer';
-import { EXERCISES_COUNT } from '../config';
+import { EXERCISES_DEFAULT_COUNT } from '../config';
 
 function isEmpty(value: unknown): value is null | undefined | '' {
   return value === null || value === '' || value === undefined;
@@ -33,9 +33,10 @@ const solutions = ref<number[]>([]);
 
 const currentExerciseSolution = ref<number | null>(null);
 
+const exercisesCount = computed(() => props.exercises.length);
 const solvedExercisesCount = computed(() => solutions.value.length);
 const currentExercise = computed(() => props.exercises[solvedExercisesCount.value]);
-const solvedProgress = computed(() => solvedExercisesCount.value / EXERCISES_COUNT);
+const solvedProgress = computed(() => solvedExercisesCount.value / exercisesCount.value);
 
 function saveCurrentSolution() {
   if (isEmpty(currentExerciseSolution.value)) {
@@ -45,7 +46,7 @@ function saveCurrentSolution() {
   solutions.value.push(currentExerciseSolution.value);
   currentExerciseSolution.value = null;
 
-  const isAllSolved = solvedExercisesCount.value === EXERCISES_COUNT;
+  const isAllSolved = solvedExercisesCount.value === exercisesCount.value;
   if (isAllSolved) {
     emit('solved', solutions.value);
   }
@@ -61,7 +62,7 @@ function saveCurrentSolution() {
       size="10"
     />
     <h6 class="q-ma-none q-mb-md text-center">
-      Progress: {{ solvedExercisesCount }}/{{ EXERCISES_COUNT }}
+      Progress: {{ solvedExercisesCount }}/{{ exercisesCount }}
     </h6>
     <q-card-section>
       <h4 class="q-ma-none text-center">

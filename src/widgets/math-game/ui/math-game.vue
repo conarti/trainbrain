@@ -31,9 +31,9 @@ const {
   updateResults,
 } = useResults();
 
-function start() {
+function start(exercisesCount: number) {
   setProgressStarted();
-  startExerciseTrainer();
+  startExerciseTrainer(exercisesCount);
 }
 
 function showResults(solutions: number[]) {

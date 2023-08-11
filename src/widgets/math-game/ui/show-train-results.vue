@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { formatTime } from '@/features/timer';
-import { EXERCISES_COUNT } from '../config';
 import type { ExerciseWithSolution } from '../model';
 import ExerciseSolutions from './exercise-solutions.vue';
 
@@ -23,7 +22,8 @@ function isInvalidResult(exerciseWithSolution: ExerciseWithSolution) {
 
 /* @duplicate at results-page */
 const mistakeSolutionsCount = computed(() => props.results.filter(isInvalidResult).length);
-const mistakeSolutionsPercent = computed(() => Math.floor(mistakeSolutionsCount.value / EXERCISES_COUNT * 100));
+const exercisesCount = computed(() => props.results.length);
+const mistakeSolutionsPercent = computed(() => Math.floor(mistakeSolutionsCount.value / exercisesCount.value * 100));
 </script>
 
 <template>

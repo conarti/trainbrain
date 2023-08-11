@@ -1,6 +1,5 @@
 import { useExercises } from '@/features/generate-exercises';
 import { useTimer } from '@/features/timer';
-import { EXERCISES_COUNT } from '../config';
 
 export function useExercisesTrainer() {
   const {
@@ -13,10 +12,10 @@ export function useExercisesTrainer() {
   const {
     exercises,
     updateExercises,
-  } = useExercises(EXERCISES_COUNT);
+  } = useExercises();
 
-  function start() {
-    updateExercises();
+  function start(exercisesCount: number) {
+    updateExercises(exercisesCount);
     resetTimer();
     startTimer();
   }

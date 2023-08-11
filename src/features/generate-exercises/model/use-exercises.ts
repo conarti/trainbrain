@@ -1,13 +1,13 @@
 import { ref } from 'vue';
 import {
   type Exercise,
-  generateExercises, 
+  generateExercises,
 } from './generate-exercises';
 
-export function useExercises(countForGenerate: number) {
+export function useExercises() {
   const exercises = ref<Exercise[]>([]);
 
-  function updateExercises() {
+  function updateExercises(countForGenerate: number) {
     exercises.value = generateExercises(countForGenerate);
   }
 

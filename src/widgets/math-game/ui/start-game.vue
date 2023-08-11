@@ -1,19 +1,49 @@
 <script setup lang="ts">
-type Emits = (event: 'start') => void;
+import isNumber from 'lodash/isNumber';
+import { ref } from 'vue';
+import { EXERCISES_DEFAULT_COUNT } from '../config';
+
+type Emits = (event: 'start', exercisesCount: number) => void;
 
 const emit = defineEmits<Emits>();
 
-function handleStartClick() {
-  emit('start');
+const exercisesCount = ref<number>(EXERCISES_DEFAULT_COUNT);
+const exercisesCountRef = ref();
+
+function start() {
+  emit('start', exercisesCount.value);
+}
+
+function handleStart() {
+  exercisesCountRef.value?.validate();
+
+  if (exercisesCountRef.value?.hasError) {
+    return;
+  }
+
+  start();
 }
 </script>
 
 <template>
-  <q-card flat>
+  <q-card
+    flat
+    tag="form"
+    @submit.prevent.stop="handleStart"
+  >
     <q-card-section>
-      <h6 class="q-ma-none">
-        Press 'Start' to play daily session
-      </h6>
+      <h5 class="q-ma-none text-center">
+        Welcome to Math Game
+      </h5>
+    </q-card-section>
+    <q-card-section>
+      <q-input
+        ref="exercisesCountRef"
+        v-model.number="exercisesCount"
+        label="Exercises count"
+        type="number"
+        :rules="[(value) => isNumber(value) || 'Please write valid number']"
+      />
     </q-card-section>
     <q-card-actions
       align="stretch"
@@ -23,7 +53,7 @@ function handleStartClick() {
         label="Start"
         push
         color="primary"
-        @click="handleStartClick"
+        type="submit"
       />
     </q-card-actions>
   </q-card>
