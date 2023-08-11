@@ -1,8 +1,12 @@
 import { LocalStorage } from 'quasar';
-import { ref } from 'vue';
+import {
+  onMounted,
+  ref,
+} from 'vue';
 import type { ExerciseWithSolution } from '@/widgets/math-game';
 
-interface MathGameResult {
+export interface MathGameResult {
+  date: number;
   time: number;
   solutions: ExerciseWithSolution[]
 }
@@ -11,7 +15,13 @@ function useLocalStorageResults() {
   const LOCALSTORAGE_RESULTS_KEY = 'trainbrain-results';
 
   function get() {
-    return LocalStorage.getItem<MathGameResult[]>(LOCALSTORAGE_RESULTS_KEY);
+    const savedResults = LocalStorage.getItem<MathGameResult[]>(LOCALSTORAGE_RESULTS_KEY);
+
+    if (!Array.isArray(savedResults)) {
+      return [];
+    }
+
+    return [...savedResults].sort((a, b) => b.time - a.time);
   }
 
   function save(results: MathGameResult[]) {
@@ -26,15 +36,19 @@ function useLocalStorageResults() {
 
 export function useUserGamesResults() {
   const localStorageResults = useLocalStorageResults();
-  const results = ref<MathGameResult[]>(localStorageResults.get() || []);
+  const results = ref<MathGameResult[]>([]);
 
-  function saveResult(result: MathGameResult) {
+  onMounted(() => {
+    results.value = localStorageResults.get();
+  });
+
+  function saveUserGameResult(result: MathGameResult) {
     results.value.push(result);
     localStorageResults.save(results.value);
   }
 
   return {
     results,
-    saveResult,
+    saveUserGameResult,
   };
 }
