@@ -1,3 +1,4 @@
+import isNil from 'lodash/isNil';
 import sortBy from 'lodash/sortBy';
 import { LocalStorage } from 'quasar';
 import {
@@ -9,24 +10,30 @@ import type { ExerciseWithSolution } from '@/widgets/math-game';
 export interface MathGameResult {
   date: number;
   time: number;
-  solutions: ExerciseWithSolution[]
+  solutions: ExerciseWithSolution[];
 }
 
-function useLocalStorageResults() {
+interface StorageStrategy {
+  get: () => Promise<MathGameResult[]>;
+  save: (result: MathGameResult) => Promise<void>;
+}
+
+function useLocalStorageResults(): StorageStrategy {
   const LOCALSTORAGE_RESULTS_KEY = 'trainbrain-results';
 
-  function get() {
+  async function get() {
     const savedResults = LocalStorage.getItem<MathGameResult[]>(LOCALSTORAGE_RESULTS_KEY);
 
-    if (!Array.isArray(savedResults)) {
+    if (isNil(savedResults)) {
       return [];
     }
 
-    return sortBy(savedResults, (result) => -result.date);
+    return sortBy(savedResults, (result) => -result.date); /* sorted by date descending (first is the closest date) */
   }
 
-  function save(results: MathGameResult[]) {
-    LocalStorage.set(LOCALSTORAGE_RESULTS_KEY, results);
+  async function save(result: MathGameResult) {
+    const savedResults = await get();
+    LocalStorage.set(LOCALSTORAGE_RESULTS_KEY, [...savedResults, result]);
   }
 
   return {
@@ -36,16 +43,16 @@ function useLocalStorageResults() {
 }
 
 export function useUserGamesResults() {
-  const localStorageResults = useLocalStorageResults();
+  const storage = useLocalStorageResults();
   const results = ref<MathGameResult[]>([]);
 
-  onMounted(() => {
-    results.value = localStorageResults.get();
+  onMounted(async () => {
+    results.value = await storage.get();
   });
 
-  function saveUserGameResult(result: MathGameResult) {
+  async function saveUserGameResult(result: MathGameResult) {
+    await storage.save(result);
     results.value.push(result);
-    localStorageResults.save(results.value);
   }
 
   return {

@@ -16,10 +16,10 @@ export function useResults() {
 
   const { saveUserGameResult } = useUserGamesResults();
 
-  function updateResults(solutions: ExerciseWithSolution[], time: number) {
+  async function updateResults(solutions: ExerciseWithSolution[], time: number) {
     resultTime.value = time;
     results.value = solutions;
-    saveUserGameResult(toMathGameUserSavedResult(solutions, time));
+    await saveUserGameResult(toMathGameUserSavedResult(solutions, time));
   }
 
   return {
