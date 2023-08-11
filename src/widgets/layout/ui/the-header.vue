@@ -18,6 +18,10 @@ const APP_TITLE = 'TrainBrain';
           :to="{ name: RouteNames.Train }"
           label="Train"
         />
+        <q-route-tab
+          :to="{ name: RouteNames.Results }"
+          label="Results"
+        />
       </q-tabs>
     </q-toolbar>
   </q-header>
