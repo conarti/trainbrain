@@ -63,34 +63,32 @@ function getMistakeSolutionsPercent(mistakeSolutionsCount: number, totalSolution
             {{ day }}
           </q-item-label>
 
-          <template
+          <q-item
             v-for="(result, index) in dayResults"
             :key="index"
           >
-            <q-item>
-              <q-item-section>
-                <q-item-label>
-                  Time: {{ formatTime(result.time) }}
-                </q-item-label>
-                <q-item-label caption>
-                  Mistakes:
-                  <span class="text-red">{{
-                    getMistakeSolutionsCount(result.solutions)
-                  }}</span>/{{ result.solutions.length }} ({{
-                    getMistakeSolutionsPercent(getMistakeSolutionsCount(result.solutions), result.solutions.length)
-                  }}%)
-                </q-item-label>
-              </q-item-section>
-              <q-item-section
-                side
-                top
-              >
-                <q-item-label caption>
-                  {{ date.formatDate(result.date, DATE_WITH_TIME_UI_FORMAT) }}
-                </q-item-label>
-              </q-item-section>
-            </q-item>
-          </template>
+            <q-item-section>
+              <q-item-label>
+                Time: {{ formatTime(result.time) }}
+              </q-item-label>
+              <q-item-label caption>
+                Mistakes:
+                <span class="text-red">{{
+                  getMistakeSolutionsCount(result.solutions)
+                }}</span>/{{ result.solutions.length }} ({{
+                  getMistakeSolutionsPercent(getMistakeSolutionsCount(result.solutions), result.solutions.length)
+                }}%)
+              </q-item-label>
+            </q-item-section>
+            <q-item-section
+              side
+              top
+            >
+              <q-item-label caption>
+                {{ date.formatDate(result.date, DATE_WITH_TIME_UI_FORMAT) }}
+              </q-item-label>
+            </q-item-section>
+          </q-item>
         </template>
       </q-list>
     </template>
