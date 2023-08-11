@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useUserGamesResults } from '@/features/user-games-results';
 import {
   toExercisesWithSolutionsAdapter,
   useExercisesTrainer,

@@ -1,4 +1,3 @@
-export { useMathGame } from './use-math-game';
 export { useGameProgress } from './use-game-progress';
 export { useResults } from './use-results';
 export { useExercisesTrainer } from './use-exercises-trainer';
