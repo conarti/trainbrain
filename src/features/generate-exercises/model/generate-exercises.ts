@@ -19,7 +19,7 @@ interface DecOperator {
 
 type Operator = IncOperator | DecOperator
 
-interface Exercise {
+export interface Exercise {
 	id: string;
 	label: string;
 	result: number;
@@ -83,7 +83,8 @@ function generateExample(): Exercise {
 
     if (isCorrectOperands) {
       return {
-        result, operands, 
+        result,
+        operands,
       };
     }
     return generateOperandsAndGetResult(generatedOperators);
@@ -91,7 +92,8 @@ function generateExample(): Exercise {
 
   const operators = generateOperators();
   const {
-    result, operands, 
+    result,
+    operands,
   } = generateOperandsAndGetResult(operators);
   const [x, y, z] = operands;
 
