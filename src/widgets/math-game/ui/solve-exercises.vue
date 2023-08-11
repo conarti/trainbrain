@@ -5,7 +5,6 @@ import {
 } from 'vue';
 import type { Exercise } from '@/features/generate-exercises';
 import { formatTime } from '@/features/timer';
-import { EXERCISES_DEFAULT_COUNT } from '../config';
 
 function isEmpty(value: unknown): value is null | undefined | '' {
   return value === null || value === '' || value === undefined;
@@ -57,19 +56,26 @@ function saveCurrentSolution() {
   <q-card flat>
     <q-linear-progress
       :value="solvedProgress"
-      stripe
-      animation-speed="100"
-      size="10"
-    />
-    <h6 class="q-ma-none q-mb-md text-center">
-      Progress: {{ solvedExercisesCount }}/{{ exercisesCount }}
-    </h6>
+      animation-speed="500"
+      size="26px"
+    >
+      <div class="absolute-full flex flex-center">
+        <q-chip
+          disable
+          dense
+          color="transparent"
+          size="12px"
+        >
+          <b>
+            Progress: {{ solvedExercisesCount }}/{{ exercisesCount }}
+          </b>
+        </q-chip>
+      </div>
+    </q-linear-progress>
     <q-card-section>
-      <h4 class="q-ma-none text-center">
+      <h4 class="q-ma-none q-mb-md text-center">
         {{ formatTime(time) }}
       </h4>
-    </q-card-section>
-    <q-card-section>
       <h3 class="q-ma-none q-mb-md text-center">
         {{ currentExercise?.label }}
       </h3>
