@@ -88,16 +88,19 @@ function saveCurrentSolution() {
         dense
         autofocus
         outlined
+        rounded
+        prefix="="
         mask="###"
         type="number"
         @keydown.enter="saveCurrentSolution"
       >
-        <template #after>
+        <template #append>
           <q-btn
+            flat
             round
             dense
-            flat
-            icon="send"
+            color="primary"
+            icon="sym_r_done"
             @click="handleClick"
           />
         </template>
