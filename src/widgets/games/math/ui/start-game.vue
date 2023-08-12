@@ -34,7 +34,7 @@ function handleStart() {
     @submit.prevent.stop="handleStart"
   >
     <q-card-section>
-      <div class="flex flex-center">
+      <div class="flex flex-center q-mb-sm">
         <q-icon
           class="q-mr-sm"
           size="sm"
@@ -44,6 +44,15 @@ function handleStart() {
           Math Game
         </h5>
       </div>
+      <p class="text-subtitle2 text-center">
+        Solve simple math exercises against the clock.
+      </p>
+      <p class="text-center q-mb-none">
+        Recommended exercises count is 50.
+        <br>
+        Play this game every day at same time.
+        (I recommend do it after breakfast for better results)
+      </p>
     </q-card-section>
     <q-card-actions>
       <q-btn
