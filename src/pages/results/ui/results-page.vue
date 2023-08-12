@@ -2,7 +2,7 @@
 import groupBy from 'lodash/groupBy';
 import { date } from 'quasar';
 import { computed } from 'vue';
-import type { ExerciseWithSolution } from '@/widgets/math-game';
+import type { ExerciseWithSolution } from '@/widgets/games/math';
 import { formatTime } from '@/features/timer';
 import {
   type MathGameResult,

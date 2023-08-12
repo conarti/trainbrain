@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MathGame } from '@/widgets/math-game';
+import { MathGame } from '@/widgets/games/math';
 </script>
 
 <template>

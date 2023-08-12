@@ -5,7 +5,7 @@ import {
   onMounted,
   ref,
 } from 'vue';
-import type { ExerciseWithSolution } from '@/widgets/math-game';
+import type { ExerciseWithSolution } from '@/widgets/games/math';
 
 export interface MathGameResult {
   date: number;
