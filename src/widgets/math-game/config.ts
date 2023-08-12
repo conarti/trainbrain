@@ -1,1 +1,1 @@
-export const EXERCISES_DEFAULT_COUNT = 25;
+export const EXERCISES_COUNT_DEFAULT = 25;

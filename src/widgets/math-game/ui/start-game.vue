@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import isNumber from 'lodash/isNumber';
 import { ref } from 'vue';
-import { EXERCISES_DEFAULT_COUNT } from '../config';
+import { EXERCISES_COUNT_DEFAULT } from '../config';
 
 type Emits = (event: 'start', exercisesCount: number) => void;
 
 const emit = defineEmits<Emits>();
 
-const exercisesCount = ref<number>(EXERCISES_DEFAULT_COUNT);
+const exercisesCount = ref<number>(EXERCISES_COUNT_DEFAULT);
 const exercisesCountRef = ref();
 
 function start() {
