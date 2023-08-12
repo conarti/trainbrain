@@ -14,13 +14,14 @@ const DATE_UI_FORMAT = 'D MMM YYYY';
 
 const { results } = useUserStats();
 
-const resultsGroupedByDay = computed(() => {
-  return groupBy(results.value, (mathGameResult: MathGameResult) => {
+const mathResults = computed(() => results.value.math);
+const mathResultsGroupedByDay = computed(() => {
+  return groupBy(mathResults.value, (mathGameResult: MathGameResult) => {
     return date.formatDate(mathGameResult.date, DATE_UI_FORMAT);
   });
 });
 
-const hasNoResults = computed(() => results.value.length === 0);
+const hasNoResults = computed(() => mathResults.value.length === 0);
 
 /* @duplicate show-train-results + exercise-solutions */
 function isInvalidResult(exerciseWithSolution: ExerciseWithSolution) {
@@ -53,7 +54,7 @@ function getMistakeSolutionsPercent(mistakeSolutionsCount: number, totalSolution
         padding
       >
         <template
-          v-for="(dayResults, day) in resultsGroupedByDay"
+          v-for="(dayResults, day) in mathResultsGroupedByDay"
           :key="day"
         >
           <q-item-label
