@@ -53,7 +53,10 @@ function saveCurrentSolution() {
 </script>
 
 <template>
-  <q-card flat>
+  <q-card
+    flat
+    bordered
+  >
     <q-linear-progress
       :value="solvedProgress"
       animation-speed="500"

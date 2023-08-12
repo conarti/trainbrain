@@ -31,7 +31,10 @@ function restart() {
 </script>
 
 <template>
-  <q-card flat>
+  <q-card
+    flat
+    bordered
+  >
     <q-card-section>
       <h6 class="q-ma-none text-center">
         Elapsed time:

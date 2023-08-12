@@ -28,6 +28,7 @@ function handleStart() {
 <template>
   <q-card
     flat
+    bordered
     tag="form"
     @submit.prevent.stop="handleStart"
   >
