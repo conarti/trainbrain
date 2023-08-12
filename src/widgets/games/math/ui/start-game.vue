@@ -33,9 +33,16 @@ function handleStart() {
     @submit.prevent.stop="handleStart"
   >
     <q-card-section>
-      <h5 class="q-ma-none text-center">
-        Welcome to Math Game
-      </h5>
+      <div class="flex flex-center">
+        <q-icon
+          class="q-mr-sm"
+          size="sm"
+          name="sym_r_calculate"
+        />
+        <h5 class="q-ma-none text-center">
+          Math Game
+        </h5>
+      </div>
     </q-card-section>
     <q-card-section>
       <q-input
