@@ -5,7 +5,7 @@ import {
 import type { MathGameResult } from './types';
 import { useLocalStorageResults } from './use-local-storage-results';
 
-export function useUserGamesResults() {
+export function useUserStats() {
   const storage = useLocalStorageResults();
   const results = ref<MathGameResult[]>([]);
 
@@ -13,13 +13,13 @@ export function useUserGamesResults() {
     results.value = await storage.get();
   });
 
-  async function saveUserGameResult(result: MathGameResult) {
+  async function saveGameResult(result: MathGameResult) {
     await storage.save(result);
     results.value.push(result);
   }
 
   return {
     results,
-    saveUserGameResult,
+    saveGameResult,
   };
 }

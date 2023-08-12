@@ -6,13 +6,13 @@ import type { ExerciseWithSolution } from '@/widgets/games/math';
 import { formatTime } from '@/features/timer';
 import {
   type MathGameResult,
-  useUserGamesResults,
-} from '@/features/user-games-results';
+  useUserStats,
+} from 'src/features/user-stats';
 
 const DATE_WITH_TIME_UI_FORMAT = 'D MMM YYYY / HH:mm';
 const DATE_UI_FORMAT = 'D MMM YYYY';
 
-const { results } = useUserGamesResults();
+const { results } = useUserStats();
 
 const resultsGroupedByDay = computed(() => {
   return groupBy(results.value, (mathGameResult: MathGameResult) => {
