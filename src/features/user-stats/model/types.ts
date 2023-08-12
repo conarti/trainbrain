@@ -6,7 +6,11 @@ export interface MathGameResult {
   solutions: ExerciseWithSolution[];
 }
 
+export type SavedGameName = 'math';
+export type SavedGameResult = MathGameResult;
+export type SavedGames = Record<SavedGameName, SavedGameResult[]>
+
 export interface StorageStrategy {
-  get: () => Promise<MathGameResult[]>;
-  save: (result: MathGameResult) => Promise<void>;
+  get: () => Promise<SavedGames>;
+  save: (game: SavedGameName, result: SavedGameResult) => Promise<void>;
 }

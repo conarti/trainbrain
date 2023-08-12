@@ -1,28 +1,41 @@
 import isNil from 'lodash/isNil';
 import sortBy from 'lodash/sortBy';
 import { LocalStorage } from 'quasar';
+import { EmptySavedGames } from './empty-saved-games';
 import type {
   MathGameResult,
+  SavedGameName,
+  SavedGameResult,
+  SavedGames,
   StorageStrategy,
 } from './types';
 
 const LOCALSTORAGE_RESULTS_KEY = 'trainbrain-results';
 
 export function useLocalStorageResults(): StorageStrategy {
-
-  async function get() {
-    const savedResults = LocalStorage.getItem<MathGameResult[]>(LOCALSTORAGE_RESULTS_KEY);
+  async function get(): Promise<SavedGames> {
+    const savedResults = LocalStorage.getItem<SavedGames>(LOCALSTORAGE_RESULTS_KEY);
 
     if (isNil(savedResults)) {
-      return [];
+      return new EmptySavedGames();
     }
 
-    return sortBy(savedResults, (result) => -result.date); /* sorted by date descending (first is the closest date) */
+    function sortMathResults(results: MathGameResult[]): MathGameResult[] {
+      return sortBy(results, (result) => -result.date);
+    }
+
+    /* sorted by date descending (first is the closest date) */
+    const withSortedMathGame: SavedGames = { math: sortMathResults(savedResults.math) };
+    return withSortedMathGame;
   }
 
-  async function save(result: MathGameResult) {
+  async function save(game: SavedGameName, result: SavedGameResult) {
     const savedResults = await get();
-    LocalStorage.set(LOCALSTORAGE_RESULTS_KEY, [...savedResults, result]);
+    const updatedSavedGames: SavedGames = {
+      ...savedResults,
+      [game]: [...savedResults[game], result],
+    };
+    LocalStorage.set(LOCALSTORAGE_RESULTS_KEY, updatedSavedGames);
   }
 
   return {
