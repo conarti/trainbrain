@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouteNames } from '@/shared/config/route-names';
+import { BrandLogo } from '@/shared/ui/brand-logo';
 
 const APP_TITLE = 'TrainBrain';
 </script>
@@ -7,7 +8,8 @@ const APP_TITLE = 'TrainBrain';
 <template>
   <q-header class="bg-blue-grey-8">
     <q-toolbar>
-      <q-toolbar-title>
+      <BrandLogo size="32" />
+      <q-toolbar-title shrink>
         {{ APP_TITLE }}
       </q-toolbar-title>
 
