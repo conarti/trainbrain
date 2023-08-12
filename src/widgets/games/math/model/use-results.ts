@@ -1,8 +1,11 @@
 import { ref } from 'vue';
-import { useUserGamesResults } from '@/features/user-games-results';
+import {
+  type MathGameResult,
+  useUserGamesResults, 
+} from '@/features/user-games-results';
 import type { ExerciseWithSolution } from './types';
 
-function toMathGameUserSavedResult(solutions: ExerciseWithSolution[], time: number) {
+function toMathGameUserSavedResult(solutions: ExerciseWithSolution[], time: number): MathGameResult {
   return {
     date: Date.now(),
     solutions,
