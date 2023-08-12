@@ -21,14 +21,20 @@ const APP_TITLE = 'TrainBrain';
     </q-page-container>
 
     <q-footer>
-      <q-tabs>
+      <q-tabs
+        dense
+        narrow-indicator
+        no-caps
+      >
         <q-route-tab
           :to="{ name: RouteNames.Train }"
           label="Train"
+          icon="sym_r_psychology"
         />
         <q-route-tab
           :to="{ name: RouteNames.Results }"
-          label="Results"
+          label="Stats"
+          icon="sym_r_bar_chart_4_bars"
         />
       </q-tabs>
     </q-footer>
