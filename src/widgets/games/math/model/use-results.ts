@@ -22,7 +22,7 @@ export function useResults() {
   async function updateResults(solutions: ExerciseWithSolution[], time: number) {
     resultTime.value = time;
     results.value = solutions;
-    await saveGameResult(toMathGameUserSavedResult(solutions, time));
+    await saveGameResult('math', toMathGameUserSavedResult(solutions, time));
   }
 
   return {
