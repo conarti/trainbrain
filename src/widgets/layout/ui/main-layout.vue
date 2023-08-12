@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import {
-  QLayout,
-  QPageContainer,
-} from 'quasar';
 import { RouteNames } from '@/shared/config/route-names';
 import { BrandLogo } from '@/shared/ui/brand-logo';
 

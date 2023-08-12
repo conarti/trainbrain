@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { QPage } from 'quasar';
 import { MathGame } from '@/widgets/math-game';
 </script>
 
