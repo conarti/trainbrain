@@ -7,7 +7,7 @@ import { formatTime } from '@/features/timer';
 import {
   type MathGameResult,
   useUserStats,
-} from 'src/features/user-stats';
+} from '@/features/user-stats';
 
 const DATE_WITH_TIME_UI_FORMAT = 'D MMM YYYY / HH:mm';
 const DATE_UI_FORMAT = 'D MMM YYYY';
