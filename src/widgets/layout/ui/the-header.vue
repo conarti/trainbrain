@@ -6,25 +6,24 @@ const APP_TITLE = 'TrainBrain';
 </script>
 
 <template>
-  <q-header class="bg-blue-grey-8">
+  <q-header>
     <q-toolbar>
       <BrandLogo size="32" />
       <q-toolbar-title shrink>
         {{ APP_TITLE }}
       </q-toolbar-title>
-
-      <q-space />
-
-      <q-tabs shrink>
-        <q-route-tab
-          :to="{ name: RouteNames.Train }"
-          label="Train"
-        />
-        <q-route-tab
-          :to="{ name: RouteNames.Results }"
-          label="Results"
-        />
-      </q-tabs>
     </q-toolbar>
   </q-header>
+  <q-footer>
+    <q-tabs>
+      <q-route-tab
+        :to="{ name: RouteNames.Train }"
+        label="Train"
+      />
+      <q-route-tab
+        :to="{ name: RouteNames.Results }"
+        label="Results"
+      />
+    </q-tabs>
+  </q-footer>
 </template>
