@@ -1,9 +1,9 @@
 import {
   describe,
   expect,
-  it, 
+  it,
 } from 'vitest';
-import { generateExercises } from './index';
+import { generateExercises } from './generate-exercises';
 
 const EXERCISES_COUNT = 5;
 

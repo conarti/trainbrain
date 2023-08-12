@@ -1,8 +1,6 @@
 import { ref } from 'vue';
-import {
-  type Exercise,
-  generateExercises,
-} from './generate-exercises';
+import { generateExercises } from './generate-exercises';
+import type { Exercise } from './types';
 
 export function useExercises() {
   const exercises = ref<Exercise[]>([]);

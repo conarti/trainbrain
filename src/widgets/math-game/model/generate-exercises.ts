@@ -2,6 +2,7 @@ import { generateArray } from '@/shared/lib/generate-array';
 import { getRandomIntegerInclusive } from '@/shared/lib/get-random-integer-inclusive';
 import { shuffle } from '@/shared/lib/shuffle';
 import { uniqueId } from '@/shared/lib/unique-id';
+import type { Exercise } from './types';
 
 const EXERCISE_ID_PREFIX = 'exx';
 
@@ -18,12 +19,6 @@ interface DecOperator {
 }
 
 type Operator = IncOperator | DecOperator
-
-export interface Exercise {
-	id: string;
-	label: string;
-	result: number;
-}
 
 function generateOperators(): [Operator, Operator] {
   const operators: [IncOperator, DecOperator] = [

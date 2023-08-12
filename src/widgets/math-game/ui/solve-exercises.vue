@@ -3,8 +3,8 @@ import {
   computed,
   ref,
 } from 'vue';
-import type { Exercise } from '@/features/generate-exercises';
 import { formatTime } from '@/features/timer';
+import type { Exercise } from '../model';
 
 function isEmpty(value: unknown): value is null | undefined | '' {
   return value === null || value === '' || value === undefined;

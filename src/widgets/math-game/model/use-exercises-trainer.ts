@@ -1,5 +1,5 @@
-import { useExercises } from '@/features/generate-exercises';
 import { useTimer } from '@/features/timer';
+import { useExercises } from './use-exercises';
 
 export function useExercisesTrainer() {
   const {
