@@ -1,4 +1,2 @@
-export {
-  useUserGamesResults,
-  type MathGameResult,
-} from './use-user-games-results';
+export { useUserGamesResults } from './use-user-games-results';
+export type { MathGameResult } from './types';

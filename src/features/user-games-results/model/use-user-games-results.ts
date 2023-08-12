@@ -5,18 +5,10 @@ import {
   onMounted,
   ref,
 } from 'vue';
-import type { ExerciseWithSolution } from '@/widgets/games/math';
-
-export interface MathGameResult {
-  date: number;
-  time: number;
-  solutions: ExerciseWithSolution[];
-}
-
-interface StorageStrategy {
-  get: () => Promise<MathGameResult[]>;
-  save: (result: MathGameResult) => Promise<void>;
-}
+import type {
+  MathGameResult,
+  StorageStrategy,
+} from './types';
 
 function useLocalStorageResults(): StorageStrategy {
   const LOCALSTORAGE_RESULTS_KEY = 'trainbrain-results';
