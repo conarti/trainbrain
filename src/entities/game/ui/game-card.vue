@@ -1,5 +1,11 @@
 <script setup lang="ts">
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+}
 
+defineProps<Props>();
 </script>
 
 <template>
@@ -13,20 +19,16 @@
         <q-icon
           class="q-mr-sm"
           size="sm"
-          name="sym_r_123"
+          :name="icon"
         />
         <h5 class="q-ma-none text-center">
-          Speed Counting Game
+          {{ title }}
         </h5>
       </div>
       <p class="text-subtitle2 text-center">
-        Count out loud from 1 to 120 as fast as you can.
+        {{ description }}
       </p>
-      <p class="text-center q-mb-none">
-        Be sure to pronounce each number clearly.
-        <br>
-        Press "DONE!" when you have finished the counting.
-      </p>
+      <slot name="additional-info" />
     </q-card-section>
     <q-card-actions>
       <q-btn
