@@ -1,4 +1,3 @@
-import isArray from 'lodash/isArray';
 import isNil from 'lodash/isNil';
 import sortBy from 'lodash/sortBy';
 import { LocalStorage } from 'quasar';
@@ -16,22 +15,6 @@ const LOCALSTORAGE_RESULTS_KEY = 'trainbrain-results';
 export function useLocalStorageResults(): StorageStrategy {
   async function get(): Promise<SavedGames> {
     const savedResults = LocalStorage.getItem<SavedGames>(LOCALSTORAGE_RESULTS_KEY);
-
-    /** Temporary logic for an automatic migrating old saved game type to new without lost saved data before.
-     * TODO: delete this */
-    const needMigrateResultsToNewType = isArray(savedResults);
-    if (needMigrateResultsToNewType) {
-      // eslint-disable-next-line no-inner-declarations
-      function toNewSavedGames(oldMathSavedResults: any): SavedGames {
-        return {
-          math: oldMathSavedResults,
-        };
-      }
-
-      const newSavedGames = toNewSavedGames(savedResults);
-      LocalStorage.set(LOCALSTORAGE_RESULTS_KEY, newSavedGames);
-      return get();
-    }
 
     if (isNil(savedResults)) {
       return new EmptySavedGames();
