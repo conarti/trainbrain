@@ -3,6 +3,7 @@ import {
   formatTime,
   useStopwatch,
 } from '@/features/stopwatch';
+import { useUserStats } from '@/features/user-stats';
 import {
   GameCard,
   useGameStore,
@@ -15,6 +16,7 @@ const {
   stop: stopStopwatch,
   reset: resetStopwatch,
 } = useStopwatch();
+const { saveGameResult } = useUserStats();
 
 function handleStartGame() {
   gameStore.start();
@@ -25,6 +27,10 @@ function handleStartGame() {
 function handleFinishGame() {
   gameStore.finish();
   stopStopwatch();
+  saveGameResult('speedCounting', {
+    date: Date.now(),
+    time: gameTime.value,
+  });
 }
 </script>
 
