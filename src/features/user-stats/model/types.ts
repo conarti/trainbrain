@@ -11,11 +11,15 @@ export interface SpeedCountingGameResult {
   time: number;
 }
 
-export type SavedGameName = 'math' | 'speedCounting';
-export type SavedGameResult = MathGameResult | SpeedCountingGameResult;
-export type SavedGames = Record<SavedGameName, SavedGameResult[]>
+export interface SavedGames {
+  math: MathGameResult[];
+  speedCounting: SpeedCountingGameResult[];
+}
+
+export type SavedGameName = keyof SavedGames;
+export type SavedGameResult<T extends SavedGameName> = SavedGames[T][number];
 
 export interface StorageStrategy {
   get: () => Promise<SavedGames>;
-  save: (game: SavedGameName, result: SavedGameResult) => Promise<void>;
+  save: <T extends SavedGameName>(game: T, result: SavedGameResult<T>) => Promise<void>;
 }

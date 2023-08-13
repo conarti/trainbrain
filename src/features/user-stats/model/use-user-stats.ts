@@ -18,8 +18,9 @@ export function useUserStats() {
     results.value = await storage.get();
   });
 
-  async function saveGameResult(game: SavedGameName, result: SavedGameResult) {
+  async function saveGameResult<T extends SavedGameName>(game: T, result: SavedGameResult<T>) {
     await storage.save(game, result);
+    // @ts-ignore IDK why typescript merges all types here
     results.value[game].push(result);
   }
 
