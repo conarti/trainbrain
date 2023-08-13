@@ -6,8 +6,14 @@ export interface MathGameResult {
   solutions: ExerciseWithSolution[];
 }
 
+export interface SpeedCountingGameResult {
+  date: number;
+  time: number;
+}
+
 export interface SavedGames {
   math: MathGameResult[];
+  speedCounting: SpeedCountingGameResult[];
 }
 
 export type SavedGameName = keyof SavedGames;
