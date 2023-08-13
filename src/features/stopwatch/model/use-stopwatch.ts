@@ -1,11 +1,13 @@
 import {
   computed,
+  onBeforeUnmount,
+  onMounted,
   ref,
 } from 'vue';
-
-type TimeInSeconds = number;
-
-const TIMER_UPDATE_TIME_IN_MS = 1000;
+import {
+  Stopwatch,
+  type TimeInSeconds,
+} from './stopwatch';
 
 function withZero(time: number): string {
   return time.toString().padStart(2, '0');
@@ -21,27 +23,35 @@ export function useStopwatch() {
   const time = ref<TimeInSeconds>(0);
   const formattedTime = computed(() => formatTime(time.value));
 
-  const intervalId = ref<ReturnType<typeof setInterval>>();
+  const stopwatch = new Stopwatch();
 
-  function incrementByOneSecond() {
-    time.value += 1;
+  function handleStopwatchUpdate() {
+    time.value = stopwatch.seconds;
   }
 
   function start() {
-    intervalId.value = setInterval(incrementByOneSecond, TIMER_UPDATE_TIME_IN_MS);
+    stopwatch.start();
   }
+
   function stop() {
-    clearInterval(intervalId.value);
-    intervalId.value = undefined;
+    stopwatch.stop();
   }
+
   function reset() {
-    time.value = 0;
+    stopwatch.reset();
   }
+
   function restart() {
-    stop();
-    reset();
-    start();
+    stopwatch.restart();
   }
+
+  onMounted(() => {
+    stopwatch.init(handleStopwatchUpdate);
+  });
+
+  onBeforeUnmount(() => {
+    stopwatch.destroy();
+  });
 
   return {
     time,
