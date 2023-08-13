@@ -41,6 +41,11 @@ function showResults(solutions: number[]) {
   updateResults(exerciseWithSolution, gameTime.value);
   setProgressShowingResults();
 }
+
+function handleRestart() {
+  const solvedExercisesCount = exercises.value.length;
+  start(solvedExercisesCount);
+}
 </script>
 
 <template>
@@ -58,6 +63,6 @@ function showResults(solutions: number[]) {
     v-else-if="isShowingResults"
     :results="results"
     :time="resultTime"
-    @restart="start"
+    @restart="handleRestart"
   />
 </template>

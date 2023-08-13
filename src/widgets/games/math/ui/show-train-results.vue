@@ -11,7 +11,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
-type Emits = (event: 'restart', exerciseCount: number) => void
+type Emits = (event: 'restart') => void
 
 const emit = defineEmits<Emits>();
 
@@ -26,7 +26,7 @@ const exercisesCount = computed(() => props.results.length);
 const mistakeSolutionsPercent = computed(() => Math.floor(mistakeSolutionsCount.value / exercisesCount.value * 100));
 
 function restart() {
-  emit('restart', exercisesCount.value);
+  emit('restart');
 }
 </script>
 
