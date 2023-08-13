@@ -4,7 +4,10 @@ import { SpeedCountingGame } from '@/widgets/games/speed-counting';
 </script>
 
 <template>
-  <q-page padding>
+  <q-page
+    class="q-gutter-sm"
+    padding
+  >
     <MathGame />
     <SpeedCountingGame />
   </q-page>
