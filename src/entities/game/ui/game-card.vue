@@ -7,12 +7,12 @@ interface Props {
 
 defineProps<Props>();
 
-type Emits = (event: 'submit') => void;
+type Emits = (event: 'start') => void;
 
 const emit = defineEmits<Emits>();
 
-function handleFormSubmit() {
-  emit('submit');
+function handleStartClick() {
+  emit('start');
 }
 </script>
 
@@ -20,8 +20,6 @@ function handleFormSubmit() {
   <q-card
     flat
     bordered
-    tag="form"
-    @submit.prevent.stop="handleFormSubmit"
   >
     <q-card-section>
       <div class="flex flex-center q-mb-sm">
@@ -45,7 +43,7 @@ function handleFormSubmit() {
         label="Start"
         push
         color="primary"
-        type="submit"
+        @click="handleStartClick"
       />
     </q-card-actions>
   </q-card>

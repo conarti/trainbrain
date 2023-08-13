@@ -12,7 +12,7 @@ const { start } = useGameStore();
     title="Speed Counting Game"
     description="Count out loud from 1 to 120 as fast as you can."
     icon="sym_r_123"
-    @submit="start"
+    @start="start"
   >
     <template #additional-info>
       <p class="text-center q-mb-none">
