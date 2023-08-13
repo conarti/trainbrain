@@ -14,20 +14,28 @@ const LOCALSTORAGE_RESULTS_KEY = 'trainbrain-results';
 
 export function useLocalStorageResults(): StorageStrategy {
   async function get(): Promise<SavedGames> {
-    const savedResults = LocalStorage.getItem<SavedGames>(LOCALSTORAGE_RESULTS_KEY);
+    const savedResults = LocalStorage.getItem<Partial<SavedGames>>(LOCALSTORAGE_RESULTS_KEY);
+
+    const emptySavedGames = new EmptySavedGames();
 
     if (isNil(savedResults)) {
-      return new EmptySavedGames();
+      return emptySavedGames;
     }
 
     function sortMathResults(results: MathGameResult[]): MathGameResult[] {
       return sortBy(results, (result) => -result.date);
     }
 
+    /* need to replace undefined after adding new games to SavedGames */
+    const withoutUndefinedResults: SavedGames = { // TODO use function
+      math: savedResults.math || emptySavedGames.math,
+      speedCounting: savedResults.speedCounting || emptySavedGames.speedCounting,
+    };
+
     /* sorted by date descending (first is the closest date) */
     const withSortedMathGame: SavedGames = {
-      ...savedResults,
-      math: sortMathResults(savedResults.math),
+      ...withoutUndefinedResults,
+      math: sortMathResults(withoutUndefinedResults.math),
     };
     return withSortedMathGame;
   }
