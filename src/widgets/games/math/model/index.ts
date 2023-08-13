@@ -6,3 +6,8 @@ export {
   type Exercise,
 } from './types';
 export { toExercisesWithSolutionsAdapter } from './to-exercises-with-solutions-adapter';
+export {
+  isInvalidResult,
+  getMistakeSolutionsCount,
+  getMistakeSolutionsPercent,
+} from './exercises';

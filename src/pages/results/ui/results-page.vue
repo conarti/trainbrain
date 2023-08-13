@@ -2,7 +2,10 @@
 import groupBy from 'lodash/groupBy';
 import { date } from 'quasar';
 import { computed } from 'vue';
-import type { ExerciseWithSolution } from '@/widgets/games/math';
+import {
+  getMistakeSolutionsCount,
+  getMistakeSolutionsPercent,
+} from '@/widgets/games/math';
 import { formatTime } from '@/features/stopwatch';
 import {
   type MathGameResult,
@@ -22,19 +25,6 @@ const mathResultsGroupedByDay = computed(() => {
 });
 
 const hasNoResults = computed(() => mathResults.value.length === 0);
-
-/* @duplicate show-train-results + exercise-solutions */
-function isInvalidResult(exerciseWithSolution: ExerciseWithSolution) {
-  return exerciseWithSolution.solution !== exerciseWithSolution.result;
-}
-
-/* @duplicate show-train-results */
-function getMistakeSolutionsCount(solutions: ExerciseWithSolution[]): number {
-  return solutions.filter(isInvalidResult).length;
-}
-function getMistakeSolutionsPercent(mistakeSolutionsCount: number, totalSolutionsCount: number): number {
-  return Math.floor(mistakeSolutionsCount / totalSolutionsCount * 100);
-}
 </script>
 
 <template>
@@ -77,7 +67,7 @@ function getMistakeSolutionsPercent(mistakeSolutionsCount: number, totalSolution
                 <span class="text-red">{{
                   getMistakeSolutionsCount(result.solutions)
                 }}</span>/{{ result.solutions.length }} ({{
-                  getMistakeSolutionsPercent(getMistakeSolutionsCount(result.solutions), result.solutions.length)
+                  getMistakeSolutionsPercent(result.solutions)
                 }}%)
               </q-item-label>
             </q-item-section>

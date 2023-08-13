@@ -2,7 +2,7 @@ import { generateArray } from '@/shared/lib/generate-array';
 import { getRandomIntegerInclusive } from '@/shared/lib/get-random-integer-inclusive';
 import { shuffle } from '@/shared/lib/shuffle';
 import { uniqueId } from '@/shared/lib/unique-id';
-import type { Exercise } from './types';
+import type { Exercise } from '../types';
 
 const EXERCISE_ID_PREFIX = 'exx';
 

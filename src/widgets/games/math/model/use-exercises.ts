@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { generateExercises } from './generate-exercises';
+import { generateExercises } from './exercises';
 import type { Exercise } from './types';
 
 export function useExercises() {

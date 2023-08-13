@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
-import type { ExerciseWithSolution } from '../model';
+import {
+  isInvalidResult,
+  type ExerciseWithSolution,
+} from '../model';
 
 interface Props {
   solutions: ExerciseWithSolution[]
@@ -9,11 +12,6 @@ interface Props {
 defineProps<Props>();
 
 const q = useQuasar();
-
-/* @duplicate results-page + show-train-results */
-function isInvalidResult(exerciseWithSolution: ExerciseWithSolution) {
-  return exerciseWithSolution.solution !== exerciseWithSolution.result;
-}
 </script>
 
 <template>
