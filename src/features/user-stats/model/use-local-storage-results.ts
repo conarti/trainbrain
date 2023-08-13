@@ -25,11 +25,14 @@ export function useLocalStorageResults(): StorageStrategy {
     }
 
     /* sorted by date descending (first is the closest date) */
-    const withSortedMathGame: SavedGames = { math: sortMathResults(savedResults.math) };
+    const withSortedMathGame: SavedGames = {
+      ...savedResults,
+      math: sortMathResults(savedResults.math),
+    };
     return withSortedMathGame;
   }
 
-  async function save(game: SavedGameName, result: SavedGameResult) {
+  async function save<T extends SavedGameName>(game: T, result: SavedGameResult<T>) {
     const savedResults = await get();
     const updatedSavedGames: SavedGames = {
       ...savedResults,
