@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import {
+  GameCard,
+  useGameStore,
+} from '@/entities/game';
 
-import { GameCard } from '@/entities/game';
+const { start } = useGameStore();
 </script>
 
 <template>
@@ -8,6 +12,7 @@ import { GameCard } from '@/entities/game';
     title="Speed Counting Game"
     description="Count out loud from 1 to 120 as fast as you can."
     icon="sym_r_123"
+    @submit="start"
   >
     <template #additional-info>
       <p class="text-center q-mb-none">
@@ -18,4 +23,3 @@ import { GameCard } from '@/entities/game';
     </template>
   </GameCard>
 </template>
-
