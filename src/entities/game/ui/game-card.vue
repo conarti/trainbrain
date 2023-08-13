@@ -6,6 +6,14 @@ interface Props {
 }
 
 defineProps<Props>();
+
+type Emits = (event: 'submit') => void;
+
+const emit = defineEmits<Emits>();
+
+function handleFormSubmit() {
+  emit('submit');
+}
 </script>
 
 <template>
@@ -13,6 +21,7 @@ defineProps<Props>();
     flat
     bordered
     tag="form"
+    @submit.prevent.stop="handleFormSubmit"
   >
     <q-card-section>
       <div class="flex flex-center q-mb-sm">
