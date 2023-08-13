@@ -13,11 +13,11 @@ function withZero(time: number): string {
 
 export function formatTime(timeInSeconds: number): string {
   const minutes = Math.floor(timeInSeconds / 60);
-  const seconds = timeInSeconds % 60;;
+  const seconds = timeInSeconds % 60;
   return `${withZero(minutes)}:${withZero(seconds)}`;
 }
 
-export function useTimer() {
+export function useStopwatch() {
   const time = ref<TimeInSeconds>(0);
   const formattedTime = computed(() => formatTime(time.value));
 

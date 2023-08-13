@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { formatTime } from '@/features/timer';
+import { formatTime } from '@/features/stopwatch';
 import type { ExerciseWithSolution } from '../model';
 import ExerciseSolutions from './exercise-solutions.vue';
 

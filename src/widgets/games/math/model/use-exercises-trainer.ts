@@ -1,4 +1,4 @@
-import { useTimer } from '@/features/timer';
+import { useStopwatch } from '@/features/stopwatch';
 import { useExercises } from './use-exercises';
 
 export function useExercisesTrainer() {
@@ -7,7 +7,7 @@ export function useExercisesTrainer() {
     start: startTimer,
     stop: stopTimer,
     reset: resetTimer,
-  } = useTimer();
+  } = useStopwatch();
 
   const {
     exercises,

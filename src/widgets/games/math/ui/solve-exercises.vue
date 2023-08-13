@@ -3,7 +3,7 @@ import {
   computed,
   ref,
 } from 'vue';
-import { formatTime } from '@/features/timer';
+import { formatTime } from '@/features/stopwatch';
 import type { Exercise } from '../model';
 
 function isEmpty(value: unknown): value is null | undefined | '' {
