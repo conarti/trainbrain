@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import isNumber from 'lodash/isNumber';
 import { ref } from 'vue';
+import { VALIDATION_RULES } from '@/shared/constants/validation-rules';
 import { EXERCISES_COUNT_DEFAULT } from '../config';
 
 type Emits = (event: 'start', exercisesCount: number) => void;
@@ -80,7 +80,7 @@ function handleStart() {
             v-model.number="exercisesCount"
             label="Exercises count"
             type="number"
-            :rules="[(value) => isNumber(value) || 'Please write valid number']"
+            :rules="[VALIDATION_RULES.number]"
           />
         </q-card-section>
       </div>
