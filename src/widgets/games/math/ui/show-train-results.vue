@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { formatTime } from '@/features/stopwatch';
-import type { ExerciseWithSolution } from '../model';
+import {
+  type ExerciseWithSolution,
+  getMistakeSolutionsCount,
+  getMistakeSolutionsPercent,
+} from '../model';
 import ExerciseSolutions from './exercise-solutions.vue';
 
 interface Props {
@@ -11,22 +15,15 @@ interface Props {
 
 const props = defineProps<Props>();
 
-type Emits = (event: 'restart', exerciseCount: number) => void
+type Emits = (event: 'restart') => void
 
 const emit = defineEmits<Emits>();
 
-/* @duplicate exercise-solutions + results-page */
-function isInvalidResult(exerciseWithSolution: ExerciseWithSolution) {
-  return exerciseWithSolution.solution !== exerciseWithSolution.result;
-}
-
-/* @duplicate at results-page */
-const mistakeSolutionsCount = computed(() => props.results.filter(isInvalidResult).length);
-const exercisesCount = computed(() => props.results.length);
-const mistakeSolutionsPercent = computed(() => Math.floor(mistakeSolutionsCount.value / exercisesCount.value * 100));
+const mistakeSolutionsCount = computed(() => getMistakeSolutionsCount(props.results));
+const mistakeSolutionsPercent = computed(() => getMistakeSolutionsPercent(props.results));
 
 function restart() {
-  emit('restart', exercisesCount.value);
+  emit('restart');
 }
 </script>
 
