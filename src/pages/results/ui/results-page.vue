@@ -53,6 +53,7 @@ const hasNoResults = computed(() => mathResults.value.length === 0);
           >
             {{ day }}
           </q-item-label>
+          class="rounded-borders"
 
           <q-item
             v-for="(result, index) in dayResults"
