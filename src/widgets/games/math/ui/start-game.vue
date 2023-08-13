@@ -15,10 +15,13 @@ function start() {
   emit('start', exercisesCount.value);
 }
 
-function handleStart() {
+function hasInvalidSettings() {
   exercisesCountRef.value?.validate();
+  return exercisesCountRef.value?.hasError;
+}
 
-  if (exercisesCountRef.value?.hasError) {
+function handleStart() {
+  if (hasInvalidSettings()) {
     return;
   }
 
