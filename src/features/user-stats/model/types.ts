@@ -6,8 +6,13 @@ export interface MathGameResult {
   solutions: ExerciseWithSolution[];
 }
 
-export type SavedGameName = 'math';
-export type SavedGameResult = MathGameResult;
+export interface SpeedCountingGameResult {
+  date: number;
+  time: number;
+}
+
+export type SavedGameName = 'math' | 'speedCounting';
+export type SavedGameResult = MathGameResult | SpeedCountingGameResult;
 export type SavedGames = Record<SavedGameName, SavedGameResult[]>
 
 export interface StorageStrategy {

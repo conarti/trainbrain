@@ -25,7 +25,11 @@ export function useLocalStorageResults(): StorageStrategy {
     }
 
     /* sorted by date descending (first is the closest date) */
-    const withSortedMathGame: SavedGames = { math: sortMathResults(savedResults.math) };
+    const withSortedMathGame: SavedGames = {
+      ...savedResults,
+      // @ts-ignore FIXME fix type
+      math: sortMathResults(savedResults.math),
+    };
     return withSortedMathGame;
   }
 
