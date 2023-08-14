@@ -20,7 +20,7 @@ export function useUserStats() {
 
   async function saveGameResult<T extends SavedGameName>(game: T, result: SavedGameResult<T>) {
     await storage.save(game, result);
-    // @ts-ignore IDK why typescript merges all types here
+    // @ts-expect-error ts is not understand dynamic types ¯\_(ツ)_/¯
     results.value[game].push(result);
   }
 
