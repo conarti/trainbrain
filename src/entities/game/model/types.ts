@@ -4,3 +4,8 @@ export enum GAME_STATUS {
   PAUSED = 'paused',
   FINISHED = 'finished',
 }
+
+export enum GAME_NAMES {
+  MATH = 'math',
+  SPEED_COUNTING = 'speed-counting',
+}
