@@ -32,6 +32,11 @@ const APP_TITLE = 'TrainBrain';
           icon="sym_r_psychology"
         />
         <q-route-tab
+          :to="{ name: RouteNames.Games }"
+          label="Games"
+          icon="sym_r_category"
+        />
+        <q-route-tab
           :to="{ name: RouteNames.Results }"
           label="Stats"
           icon="sym_r_bar_chart_4_bars"
