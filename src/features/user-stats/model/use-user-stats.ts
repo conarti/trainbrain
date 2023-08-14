@@ -2,16 +2,16 @@ import {
   onMounted,
   ref,
 } from 'vue';
+import { chooseStorageStrategy } from './choose-storage-strategy';
 import { EmptySavedGames } from './empty-saved-games';
 import type {
   SavedGameName,
   SavedGameResult,
   SavedGames,
 } from './types';
-import { useLocalStorageSavedGames } from './use-local-storage-saved-games';
 
 export function useUserStats() {
-  const storage = useLocalStorageSavedGames();
+  const storage = chooseStorageStrategy();
   const results = ref<SavedGames>(new EmptySavedGames());
 
   onMounted(async () => {
