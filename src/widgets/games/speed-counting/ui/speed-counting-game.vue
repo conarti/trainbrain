@@ -39,7 +39,7 @@ function handleFinishGame() {
     v-if="gameStore.isGameNotStarted"
     title="Speed Counting Game"
     description="Count out loud from 1 to 120 as fast as you can."
-    icon="sym_r_123"
+    icon="sym_r_record_voice_over"
     @start="handleStartGame"
   >
     <template #additional-info>
