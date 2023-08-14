@@ -5,7 +5,7 @@ import {
   useStopwatch,
 } from '@/features/stopwatch';
 import {
-  GameCard,
+  StartGameCard,
   useGameStore,
 } from '@/entities/game';
 
@@ -35,7 +35,7 @@ function handleFinishGame() {
 </script>
 
 <template>
-  <GameCard
+  <StartGameCard
     v-if="gameStore.isGameNotStarted"
     title="Speed Counting Game"
     description="Count out loud from 1 to 120 as fast as you can."
@@ -49,7 +49,7 @@ function handleFinishGame() {
         Press "DONE!" when you have finished the counting.
       </p>
     </template>
-  </GameCard>
+  </StartGameCard>
   <q-card
     v-else-if="gameStore.isGameInProgress"
     flat
