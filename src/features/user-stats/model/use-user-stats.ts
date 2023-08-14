@@ -8,10 +8,10 @@ import type {
   SavedGameResult,
   SavedGames,
 } from './types';
-import { useLocalStorageResults } from './use-local-storage-results';
+import { useLocalStorageSavedGames } from './use-local-storage-saved-games';
 
 export function useUserStats() {
-  const storage = useLocalStorageResults();
+  const storage = useLocalStorageSavedGames();
   const results = ref<SavedGames>(new EmptySavedGames());
 
   onMounted(async () => {

@@ -51,7 +51,7 @@ function toLocalStorageSavedGames<T extends SavedGameName>(
   };
 }
 
-export function useLocalStorageResults(): StorageStrategy {
+export function useLocalStorageSavedGames(): StorageStrategy {
   async function get(): Promise<SavedGames> {
     const savedResults = LocalStorage.getItem<Exclude<LocalStorageSavedGames, null>>(LOCALSTORAGE_RESULTS_KEY);
     return toSavedGames(savedResults);
