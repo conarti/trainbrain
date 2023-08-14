@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { useSavedGames } from '@/features/saved-games';
 import {
   formatTime,
   useStopwatch,
 } from '@/features/stopwatch';
-import { useSavedGames } from '@/features/user-stats';
 import {
   GameCard,
   useGameStore,

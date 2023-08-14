@@ -6,12 +6,12 @@ import {
   getMistakeSolutionsCount,
   getMistakeSolutionsPercent,
 } from '@/widgets/games/math';
-import { formatTime } from '@/features/stopwatch';
 import {
   type MathGameResult,
   type SpeedCountingGameResult,
   useSavedGames,
-} from '@/features/user-stats';
+} from '@/features/saved-games';
+import { formatTime } from '@/features/stopwatch';
 
 const DATE_WITH_TIME_UI_FORMAT = 'D MMM YYYY / HH:mm';
 const DATE_UI_FORMAT = 'D MMM YYYY';

@@ -2,7 +2,7 @@ import { ref } from 'vue';
 import {
   type MathGameResult,
   useSavedGames,
-} from '@/features/user-stats';
+} from '@/features/saved-games';
 import type { ExerciseWithSolution } from './types';
 
 function toMathGameUserSavedResult(solutions: ExerciseWithSolution[], time: number): MathGameResult {
