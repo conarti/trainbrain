@@ -15,7 +15,7 @@ export const checkGameName = (to: RouteLocationNormalized,
   from: RouteLocationNormalized,
   next: NavigationGuardNext) => {
   if (isGameNameExist(to.params)) {
-    return next({ name: RouteNames.Train });
+    return next({ name: RouteNames.Games });
   }
 
   return next();
