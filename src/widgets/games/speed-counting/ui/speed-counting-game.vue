@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { useSavedGames } from '@/features/saved-games';
 import {
   formatTime,
   useStopwatch,
 } from '@/features/stopwatch';
-import { useUserStats } from '@/features/user-stats';
 import {
   GameCard,
   useGameStore,
@@ -16,7 +16,7 @@ const {
   stop: stopStopwatch,
   reset: resetStopwatch,
 } = useStopwatch();
-const { saveGameResult } = useUserStats();
+const { save } = useSavedGames();
 
 function handleStartGame() {
   gameStore.start();
@@ -27,7 +27,7 @@ function handleStartGame() {
 function handleFinishGame() {
   gameStore.finish();
   stopStopwatch();
-  saveGameResult('speedCounting', {
+  save('speedCounting', {
     date: Date.now(),
     time: gameTime.value,
   });

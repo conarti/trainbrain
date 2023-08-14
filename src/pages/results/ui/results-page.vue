@@ -6,20 +6,20 @@ import {
   getMistakeSolutionsCount,
   getMistakeSolutionsPercent,
 } from '@/widgets/games/math';
-import { formatTime } from '@/features/stopwatch';
 import {
   type MathGameResult,
   type SpeedCountingGameResult,
-  useUserStats,
-} from '@/features/user-stats';
+  useSavedGames,
+} from '@/features/saved-games';
+import { formatTime } from '@/features/stopwatch';
 
 const DATE_WITH_TIME_UI_FORMAT = 'D MMM YYYY / HH:mm';
 const DATE_UI_FORMAT = 'D MMM YYYY';
 
-const { results } = useUserStats();
+const { savedGames } = useSavedGames();
 
-const mathResults = computed(() => results.value.math);
-const speedCountingResults = computed(() => results.value.speedCounting);
+const mathResults = computed(() => savedGames.value.math);
+const speedCountingResults = computed(() => savedGames.value.speedCounting);
 const mathResultsGroupedByDay = computed(() => {
   return groupBy(mathResults.value, (mathGameResult: MathGameResult) => {
     return date.formatDate(mathGameResult.date, DATE_UI_FORMAT);
