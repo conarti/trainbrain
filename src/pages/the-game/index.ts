@@ -1,0 +1,1 @@
+export { TheGamePage } from './ui';
