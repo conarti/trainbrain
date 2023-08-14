@@ -1,5 +1,5 @@
-export { useUserStats } from './use-user-stats';
+export { useSavedGames } from './use-saved-games';
 export type {
   MathGameResult,
-  SpeedCountingGameResult, 
+  SpeedCountingGameResult,
 } from './types';

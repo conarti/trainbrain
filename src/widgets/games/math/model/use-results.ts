@@ -1,7 +1,7 @@
 import { ref } from 'vue';
 import {
   type MathGameResult,
-  useUserStats,
+  useSavedGames,
 } from '@/features/user-stats';
 import type { ExerciseWithSolution } from './types';
 
@@ -17,7 +17,7 @@ export function useResults() {
   const resultTime = ref<number>(-1);
   const results = ref<ExerciseWithSolution[]>([]);
 
-  const { saveGameResult } = useUserStats();
+  const { saveGameResult } = useSavedGames();
 
   async function updateResults(solutions: ExerciseWithSolution[], time: number) {
     resultTime.value = time;

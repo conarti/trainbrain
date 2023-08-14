@@ -3,7 +3,7 @@ import {
   formatTime,
   useStopwatch,
 } from '@/features/stopwatch';
-import { useUserStats } from '@/features/user-stats';
+import { useSavedGames } from '@/features/user-stats';
 import {
   GameCard,
   useGameStore,
@@ -16,7 +16,7 @@ const {
   stop: stopStopwatch,
   reset: resetStopwatch,
 } = useStopwatch();
-const { saveGameResult } = useUserStats();
+const { saveGameResult } = useSavedGames();
 
 function handleStartGame() {
   gameStore.start();

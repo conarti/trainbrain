@@ -10,13 +10,13 @@ import { formatTime } from '@/features/stopwatch';
 import {
   type MathGameResult,
   type SpeedCountingGameResult,
-  useUserStats,
+  useSavedGames,
 } from '@/features/user-stats';
 
 const DATE_WITH_TIME_UI_FORMAT = 'D MMM YYYY / HH:mm';
 const DATE_UI_FORMAT = 'D MMM YYYY';
 
-const { results } = useUserStats();
+const { results } = useSavedGames();
 
 const mathResults = computed(() => results.value.math);
 const speedCountingResults = computed(() => results.value.speedCounting);

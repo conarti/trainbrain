@@ -10,7 +10,7 @@ import type {
   SavedGames,
 } from './types';
 
-export function useUserStats() {
+export function useSavedGames() {
   const storage = chooseStorageStrategy();
   const results = ref<SavedGames>(new EmptySavedGames());
 
