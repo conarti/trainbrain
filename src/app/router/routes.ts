@@ -1,3 +1,4 @@
+import { GamesPage } from '@/pages/games';
 import { ResultsPage } from '@/pages/results';
 import { TheGamePage } from '@/pages/the-game';
 import { TrainPage } from '@/pages/train';
@@ -19,6 +20,11 @@ export const routes = [
         path: 'results',
         name: RouteNames.Results,
         component: ResultsPage,
+      },
+      {
+        path: 'games',
+        name: RouteNames.Games,
+        component: GamesPage,
       },
       {
         path: 'games/:name',
