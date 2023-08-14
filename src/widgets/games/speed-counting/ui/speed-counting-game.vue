@@ -16,7 +16,7 @@ const {
   stop: stopStopwatch,
   reset: resetStopwatch,
 } = useStopwatch();
-const { saveGameResult } = useSavedGames();
+const { save } = useSavedGames();
 
 function handleStartGame() {
   gameStore.start();
@@ -27,7 +27,7 @@ function handleStartGame() {
 function handleFinishGame() {
   gameStore.finish();
   stopStopwatch();
-  saveGameResult('speedCounting', {
+  save('speedCounting', {
     date: Date.now(),
     time: gameTime.value,
   });

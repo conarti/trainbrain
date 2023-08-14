@@ -17,12 +17,12 @@ export function useResults() {
   const resultTime = ref<number>(-1);
   const results = ref<ExerciseWithSolution[]>([]);
 
-  const { saveGameResult } = useSavedGames();
+  const { save } = useSavedGames();
 
   async function updateResults(solutions: ExerciseWithSolution[], time: number) {
     resultTime.value = time;
     results.value = solutions;
-    await saveGameResult('math', toMathGameUserSavedResult(solutions, time));
+    await save('math', toMathGameUserSavedResult(solutions, time));
   }
 
   return {

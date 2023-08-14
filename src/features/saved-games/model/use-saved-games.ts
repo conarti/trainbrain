@@ -12,20 +12,20 @@ import type {
 
 export function useSavedGames() {
   const storage = chooseStorageStrategy();
-  const results = ref<SavedGames>(new EmptySavedGames());
+  const savedGames = ref<SavedGames>(new EmptySavedGames());
 
   onMounted(async () => {
-    results.value = await storage.get();
+    savedGames.value = await storage.get();
   });
 
-  async function saveGameResult<T extends SavedGameName>(game: T, result: SavedGameResult<T>) {
+  async function save<T extends SavedGameName>(game: T, result: SavedGameResult<T>) {
     await storage.save(game, result);
     // @ts-expect-error ts is not understand dynamic types ¯\_(ツ)_/¯
-    results.value[game].push(result);
+    savedGames.value[game].push(result);
   }
 
   return {
-    results,
-    saveGameResult,
+    savedGames,
+    save,
   };
 }
