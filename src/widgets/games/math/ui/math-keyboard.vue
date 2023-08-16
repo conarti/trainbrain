@@ -33,6 +33,12 @@ const innerModelValue = computed({
   },
 });
 
+const isEmptyInput = computed(() => innerModelValue.value === null);
+
+function isDoneKey(key: MathKeyboardKey): key is 'done' {
+  return key === 'done';
+}
+
 function addToInput(number: number, toInput: number | null): number {
   if (isNull(toInput)) {
     return number;
@@ -86,6 +92,7 @@ function handleKeyPress(keyValue: MathKeyboardKey) {
         <MathKeyboardButton
           class="col-grow"
           :value="key"
+          :disable="isEmptyInput && isDoneKey(key)"
           @press="handleKeyPress"
         />
       </div>
