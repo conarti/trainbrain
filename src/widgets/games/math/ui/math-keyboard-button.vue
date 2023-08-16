@@ -52,6 +52,7 @@ function handleClick() {
   <q-btn
     :color="chooseColor(value)"
     push
+    size="lg"
     :icon="chooseIcon(value)"
     :disable="disable"
     :label="createLabel(value)"
