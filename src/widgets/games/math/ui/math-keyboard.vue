@@ -39,7 +39,7 @@ function isDoneKey(key: MathKeyboardKey): key is 'done' {
   return key === 'done';
 }
 
-function addToInput(number: number, toInput: number | null): number {
+function concatenate(number: number, toInput: number | null): number {
   if (isNull(toInput)) {
     return number;
   }
@@ -47,7 +47,7 @@ function addToInput(number: number, toInput: number | null): number {
   return toNumber(`${toInput}${number}`);
 }
 
-function eraseFromInput(input: number | null): number | null {
+function erase(input: number | null): number | null {
   if (isNull(input)) {
     return null;
   }
@@ -70,13 +70,13 @@ function done() {
 function handleKeyPress(keyValue: MathKeyboardKey) {
   switch (keyValue) {
   case 'reset':
-    innerModelValue.value = eraseFromInput(innerModelValue.value);
+    innerModelValue.value = erase(innerModelValue.value);
     break;
   case 'done':
     done();
     break;
   default:
-    innerModelValue.value = addToInput(keyValue, innerModelValue.value);
+    innerModelValue.value = concatenate(keyValue, innerModelValue.value);
   }
 }
 </script>
