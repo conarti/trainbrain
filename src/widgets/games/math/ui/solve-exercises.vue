@@ -5,6 +5,7 @@ import {
 } from 'vue';
 import { formatTime } from '@/features/stopwatch';
 import type { Exercise } from '../model';
+import MathKeyboard from './math-keyboard.vue';
 
 function isEmpty(value: unknown): value is null | undefined | '' {
   return value === null || value === '' || value === undefined;
@@ -21,11 +22,8 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const input = ref();
-
-function handleClick() {
+function handleDone() {
   saveCurrentSolution();
-  input.value?.focus();
 }
 
 const solutions = ref<number[]>([]);
@@ -81,30 +79,12 @@ function saveCurrentSolution() {
       </h4>
       <h3 class="q-ma-none q-mb-md text-center">
         {{ currentExercise?.label }}
+        {{ currentExerciseSolution }}
       </h3>
-      <q-input
-        ref="input"
-        v-model.number="currentExerciseSolution"
-        dense
-        autofocus
-        outlined
-        rounded
-        prefix="="
-        mask="###"
-        type="number"
-        @keydown.enter="saveCurrentSolution"
-      >
-        <template #append>
-          <q-btn
-            flat
-            round
-            dense
-            color="primary"
-            icon="sym_r_done"
-            @click="handleClick"
-          />
-        </template>
-      </q-input>
+      <math-keyboard
+        v-model="currentExerciseSolution"
+        @done="handleDone"
+      />
     </q-card-section>
   </q-card>
 </template>
