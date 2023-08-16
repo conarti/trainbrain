@@ -79,8 +79,14 @@ function saveCurrentSolution() {
       </h4>
       <h3 class="q-ma-none q-mb-md text-center">
         {{ currentExercise?.label }}
-        {{ currentExerciseSolution }}
       </h3>
+      <q-input
+        v-model="currentExerciseSolution"
+        class="q-mb-sm"
+        input-class="text-center text-h4"
+        standout
+        readonly
+      />
       <math-keyboard
         v-model="currentExerciseSolution"
         @done="handleDone"
