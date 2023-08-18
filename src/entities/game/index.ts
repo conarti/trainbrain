@@ -1,8 +1,9 @@
 export {
   StartGameCard,
-  GameCard, 
+  GameCard,
 } from './ui';
 export {
   useGameStore,
   GAME_NAMES,
+  GAME_CARDS_LIST,
 } from './model';
