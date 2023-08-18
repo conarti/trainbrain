@@ -1,14 +1,8 @@
 <script setup lang="ts">
 import { RouteNames } from '@/shared/config/route-names';
-import type { GAME_NAMES } from '../model';
+import type { GAME_CARD } from '../model';
 
-interface Props {
-  label: string,
-  routeName: GAME_NAMES,
-  icon: string,
-}
-
-defineProps<Props>();
+defineProps<GAME_CARD>();
 </script>
 
 <template>
