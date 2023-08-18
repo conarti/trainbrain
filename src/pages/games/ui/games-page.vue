@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import {
-  GAME_NAMES,
-  GameCard,
-} from '@/entities/game';
+import { GameCard } from '@/entities/game';
+import { GAME_CARDS_LIST } from '@/entities/game';
 </script>
 
 <template>
@@ -11,16 +9,12 @@ import {
     padding
   >
     <GameCard
+      v-for="(card, idx) in GAME_CARDS_LIST"
+      :key="idx"
       class="col-10 col-sm"
-      :route-name="GAME_NAMES.MATH"
-      label="Math"
-      icon="sym_r_calculate"
-    />
-    <GameCard
-      class="col-10 col-sm"
-      :route-name="GAME_NAMES.SPEED_COUNTING"
-      label="Speed Counting"
-      icon="sym_r_record_voice_over"
+      :route-name="card.routeName"
+      :label="card.label"
+      :icon="card.icon"
     />
   </q-page>
 </template>
