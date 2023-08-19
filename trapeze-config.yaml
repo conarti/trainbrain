@@ -1,0 +1,7 @@
+vars:
+  VERSION:
+
+platforms:
+  android:
+    incrementVersionCode: true
+    versionName: $VERSION
