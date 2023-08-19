@@ -6,6 +6,12 @@ const config: CapacitorConfig = {
   webDir: 'dist',
   server: {
     androidScheme: 'https',
+    /**
+     * Uncomment to enable live reload.
+     * Don't commit these lines because it forces to enable server at all build types.
+     */
+    // cleartext: true,
+    // url: 'http://192.168.8.123:5173/',
   },
 };
 
