@@ -26,6 +26,7 @@
   "devDependencies": {
     "@babel/core": "^7.22.10",
     "@babel/eslint-parser": "^7.22.10",
+    "@capacitor/assets": "^2.0.4",
     "@capacitor/cli": "^5.2.3",
     "@conarti/eslint-plugin-feature-sliced": "^1.0.5",
     "@quasar/vite-plugin": "^1.4.1",
