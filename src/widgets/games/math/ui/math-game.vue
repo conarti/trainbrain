@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { useGameProgress } from '@/entities/game';
 import {
   toExercisesWithSolutionsAdapter,
   useExercisesTrainer,
-  useGameProgress,
   useResults,
 } from '../model';
 import ShowTrainResults from './show-train-results.vue';
