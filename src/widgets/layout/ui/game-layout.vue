@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouteNames } from '@/shared/config/route-names';
 import { BrandLogo } from '@/shared/ui/brand-logo';
-const APP_TITLE = 'TrainBrain';
+import { APP_TITLE } from '../model';
 </script>
 
 <template>
