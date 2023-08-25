@@ -7,9 +7,13 @@ import { APP_TITLE } from '../model';
 const {
   isStarted,
   isNotStarted,
+  isPaused,
+  isResumed,
   isShowingResults,
   setProgressStarted,
   setProgressShowingResults,
+  setProgressPaused,
+  setProgressResumed,
 } = useGameProgress();
 </script>
 
@@ -25,17 +29,39 @@ const {
     </q-header>
     <q-page-container>
       <q-page padding>
-        <q-btn
-          class="q-mb-md"
-          :to="{ name: RouteNames.Games }"
-          icon="arrow_back"
-          round
-          color="primary"
-          outline
-        />
+        <div class="row justify-between">
+          <q-btn
+            class="q-mb-md"
+            :to="{ name: RouteNames.Games }"
+            icon="arrow_back"
+            round
+            color="primary"
+            outline
+          />
+          <q-btn
+            v-if="isStarted || isResumed"
+            class="q-mb-md"
+            icon="pause"
+            round
+            color="primary"
+            outline
+            @click="setProgressPaused"
+          />
+          <q-btn
+            v-else-if="isPaused"
+            class="q-mb-md"
+            icon="play_arrow"
+            round
+            color="primary"
+            outline
+            @click="setProgressResumed"
+          />
+        </div>
         <router-view
           :is-not-started="isNotStarted"
           :is-started="isStarted"
+          :is-paused="isPaused"
+          :is-resumed="isResumed"
           :is-showing-results="isShowingResults"
           @start="setProgressStarted"
           @show-result="setProgressShowingResults"
