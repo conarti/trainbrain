@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { RouteNames } from '@/shared/config/route-names';
 import type { GAME_CARD } from '../model';
 
 defineProps<GAME_CARD>();
@@ -8,7 +7,7 @@ defineProps<GAME_CARD>();
 <template>
   <router-link
     class="text-black"
-    :to="{ name: RouteNames.Game, params: { name: routeName }}"
+    :to="{ name: routeName }"
   >
     <q-card
       class="game-card"
