@@ -36,7 +36,6 @@ export const routes = [
   },
   {
     path: '/games',
-    name: RouteNames.Game,
     component: GameLayout,
     children: [
       {
