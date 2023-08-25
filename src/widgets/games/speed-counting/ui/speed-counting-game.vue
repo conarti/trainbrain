@@ -5,7 +5,7 @@ import {
   formatTime,
   useStopwatch,
 } from '@/features/stopwatch';
-import { StartGameCard } from '@/entities/game';
+import StartGame from './start-game.vue';
 
 interface Props {
   isNotStarted: boolean;
@@ -51,21 +51,10 @@ function handleFinishGame() {
 </script>
 
 <template>
-  <StartGameCard
+  <StartGame
     v-if="isNotStarted"
-    title="Speed Counting Game"
-    description="Count out loud from 1 to 120 as fast as you can."
-    icon="sym_r_record_voice_over"
     @start="handleStartGame"
-  >
-    <template #additional-info>
-      <p class="text-center q-mb-none">
-        Be sure to pronounce each number clearly.
-        <br>
-        Press "DONE!" when you have finished the counting.
-      </p>
-    </template>
-  </StartGameCard>
+  />
   <q-card
     v-else-if="isStarted || isPaused || isResumed"
     flat
