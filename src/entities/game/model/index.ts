@@ -1,4 +1,3 @@
-export { useGameStore } from './store';
 export {
   GAME_NAMES,
   type GAME_CARD,
