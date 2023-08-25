@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useGameProgress } from '@/entities/game';
-import { RouteNames } from '@/shared/config/route-names';
 import { BrandLogo } from '@/shared/ui/brand-logo';
 import { APP_TITLE } from '../model';
+import GameLayoutActions from './game-layout-actions.vue';
 
 const {
   isStarted,
@@ -15,6 +16,8 @@ const {
   setProgressPaused,
   setProgressResumed,
 } = useGameProgress();
+
+const isInProgress = computed(() => isStarted.value || isResumed.value);
 </script>
 
 <template>
@@ -29,34 +32,12 @@ const {
     </q-header>
     <q-page-container>
       <q-page padding>
-        <div class="row justify-between">
-          <q-btn
-            class="q-mb-md"
-            :to="{ name: RouteNames.Games }"
-            icon="arrow_back"
-            round
-            color="primary"
-            outline
-          />
-          <q-btn
-            v-if="isStarted || isResumed"
-            class="q-mb-md"
-            icon="pause"
-            round
-            color="primary"
-            outline
-            @click="setProgressPaused"
-          />
-          <q-btn
-            v-else-if="isPaused"
-            class="q-mb-md"
-            icon="play_arrow"
-            round
-            color="primary"
-            outline
-            @click="setProgressResumed"
-          />
-        </div>
+        <game-layout-actions
+          :is-in-progress="isInProgress"
+          :is-paused="isPaused"
+          @pause="setProgressPaused"
+          @resume="setProgressResumed"
+        />
         <router-view
           :is-not-started="isNotStarted"
           :is-started="isStarted"
