@@ -6,10 +6,16 @@ import {
 } from '@/features/stopwatch';
 import {
   StartGameCard,
-  useGameStore,
+  useGameProgress,
 } from '@/entities/game';
 
-const gameStore = useGameStore();
+const {
+  isNotStarted,
+  isStarted,
+  isShowingResults,
+  setProgressStarted,
+  setProgressShowingResults,
+} = useGameProgress();
 const {
   time: gameTime,
   start: startStopwatch,
@@ -19,13 +25,13 @@ const {
 const { save } = useSavedGames();
 
 function handleStartGame() {
-  gameStore.start();
+  setProgressStarted();
   resetStopwatch();
   startStopwatch();
 }
 
 function handleFinishGame() {
-  gameStore.finish();
+  setProgressShowingResults();
   stopStopwatch();
   save('speedCounting', {
     date: Date.now(),
@@ -36,7 +42,7 @@ function handleFinishGame() {
 
 <template>
   <StartGameCard
-    v-if="gameStore.isGameNotStarted"
+    v-if="isNotStarted"
     title="Speed Counting Game"
     description="Count out loud from 1 to 120 as fast as you can."
     icon="sym_r_record_voice_over"
@@ -51,7 +57,7 @@ function handleFinishGame() {
     </template>
   </StartGameCard>
   <q-card
-    v-else-if="gameStore.isGameInProgress"
+    v-else-if="isStarted"
     flat
     bordered
   >
@@ -71,7 +77,7 @@ function handleFinishGame() {
     </q-card-actions>
   </q-card>
   <q-card
-    v-else-if="gameStore.isGameFinished"
+    v-else-if="isShowingResults"
     flat
     bordered
   >
