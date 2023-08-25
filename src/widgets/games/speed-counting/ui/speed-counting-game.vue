@@ -4,18 +4,18 @@ import {
   formatTime,
   useStopwatch,
 } from '@/features/stopwatch';
-import {
-  StartGameCard,
-  useGameProgress,
-} from '@/entities/game';
+import { StartGameCard } from '@/entities/game';
 
-const {
-  isNotStarted,
-  isStarted,
-  isShowingResults,
-  setProgressStarted,
-  setProgressShowingResults,
-} = useGameProgress();
+interface Props {
+  isNotStarted: boolean;
+  isStarted: boolean;
+  isShowingResults: boolean;
+}
+type Emits = (event: 'start' | 'showResult') => void;
+
+defineProps<Props>();
+const emit = defineEmits<Emits>();
+
 const {
   time: gameTime,
   start: startStopwatch,
@@ -25,13 +25,13 @@ const {
 const { save } = useSavedGames();
 
 function handleStartGame() {
-  setProgressStarted();
+  emit('start');
   resetStopwatch();
   startStopwatch();
 }
 
 function handleFinishGame() {
-  setProgressShowingResults();
+  emit('showResult');
   stopStopwatch();
   save('speedCounting', {
     date: Date.now(),
