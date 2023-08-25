@@ -44,7 +44,7 @@ export const routes = [
         component: MathGame,
       },
       {
-        path: 'math',
+        path: 'speed-counting',
         name: RouteNames.SpeedCounting,
         component: SpeedCountingGame,
       },
