@@ -10,6 +10,7 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "android:update-version": "VERSION=1.0 npx trapeze run trapeze-config.yaml",
+    "android:generate-icons": "npx @capacitor/assets generate --iconBackgroundColor #f5f4f6 --iconBackgroundColorDark #242430 --splashBackgroundColor #f5f4f6 --splashBackgroundColorDark #242430 --assetPath \"./src/shared/assets\" --android",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
