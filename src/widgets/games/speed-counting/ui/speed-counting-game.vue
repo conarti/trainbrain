@@ -5,6 +5,7 @@ import {
   formatTime,
   useStopwatch,
 } from '@/features/stopwatch';
+import GameResults from './game-results.vue';
 import PlayGame from './play-game.vue';
 import StartGame from './start-game.vue';
 
@@ -61,24 +62,9 @@ function handleFinishGame() {
     :time="formatTime(gameTime)"
     @finish="handleFinishGame"
   />
-  <q-card
+  <GameResults
     v-else-if="isShowingResults"
-    flat
-    bordered
-  >
-    <q-card-section>
-      <h6 class="q-ma-none q-mb-md text-center">
-        Your time is {{ formatTime(gameTime) }}
-      </h6>
-    </q-card-section>
-    <q-card-actions>
-      <q-btn
-        class="col"
-        label="Try again"
-        push
-        color="primary"
-        @click="handleStartGame"
-      />
-    </q-card-actions>
-  </q-card>
+    :time="formatTime(gameTime)"
+    @restart="handleStartGame"
+  />
 </template>
