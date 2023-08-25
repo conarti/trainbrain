@@ -20,6 +20,10 @@ export function useExercisesTrainer() {
     startTimer();
   }
 
+  function resume() {
+    startTimer();
+  }
+
   function stop() {
     stopTimer();
   }
@@ -28,6 +32,7 @@ export function useExercisesTrainer() {
     gameTime,
     exercises,
     start,
+    resume,
     stop,
   };
 }
