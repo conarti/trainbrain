@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { watchEffect } from 'vue';
 import { useSavedGames } from '@/features/saved-games';
 import {
   formatTime,
@@ -9,12 +10,21 @@ import { StartGameCard } from '@/entities/game';
 interface Props {
   isNotStarted: boolean;
   isStarted: boolean;
+  isPaused: boolean;
+  isResumed: boolean;
   isShowingResults: boolean;
 }
 type Emits = (event: 'start' | 'showResult') => void;
 
-defineProps<Props>();
+const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
+watchEffect(() => {
+  if (props.isPaused) {
+    stopStopwatch();
+  } else if (props.isResumed) {
+    startStopwatch();
+  }
+});
 
 const {
   time: gameTime,
@@ -57,7 +67,7 @@ function handleFinishGame() {
     </template>
   </StartGameCard>
   <q-card
-    v-else-if="isStarted"
+    v-else-if="isStarted || isPaused || isResumed"
     flat
     bordered
   >

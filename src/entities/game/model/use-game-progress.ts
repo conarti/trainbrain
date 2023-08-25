@@ -3,13 +3,15 @@ import {
   ref,
 } from 'vue';
 
-type GameProgress = 'not-started' | 'started' | 'showing-results' | 'ended';
+type GameProgress = 'not-started' | 'started' | 'paused' | 'resumed' | 'showing-results' | 'ended';
 
 export function useGameProgress() {
   const progress = ref<GameProgress>('not-started');
 
   const isNotStarted = computed(() => progress.value === 'not-started');
   const isStarted = computed(() => progress.value === 'started');
+  const isPaused = computed(() => progress.value === 'paused');
+  const isResumed = computed(() => progress.value === 'resumed');
   const isShowingResults = computed(() => progress.value === 'showing-results');
   const isEnded = computed(() => progress.value === 'ended');
 
@@ -18,6 +20,14 @@ export function useGameProgress() {
   }
   function setProgressStarted() {
     progress.value = 'started';
+  }
+
+  function setProgressPaused() {
+    progress.value = 'paused';
+  }
+
+  function setProgressResumed() {
+    progress.value = 'resumed';
   }
   function setProgressShowingResults() {
     progress.value = 'showing-results';
@@ -30,10 +40,14 @@ export function useGameProgress() {
     progress,
     isNotStarted,
     isStarted,
+    isPaused,
     isShowingResults,
     isEnded,
+    isResumed,
     setProgressNotStarted,
     setProgressStarted,
+    setProgressPaused,
+    setProgressResumed,
     setProgressShowingResults,
     setProgressEnded,
   };
