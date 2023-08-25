@@ -38,7 +38,14 @@ const isPlaying = computed(() => isStarted.value || isResumed.value);
           @pause="setProgressPaused"
           @resume="setProgressResumed"
         />
+        <h6
+          v-show="isPaused"
+          class="text-center"
+        >
+          The game is paused!
+        </h6>
         <router-view
+          v-show="!isPaused"
           :is-not-started="isNotStarted"
           :is-started="isStarted"
           :is-paused="isPaused"
