@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { watchEffect } from 'vue';
+import {
+  computed,
+  watchEffect,
+} from 'vue';
 import { useSavedGames } from '@/features/saved-games';
 import {
   formatTime,
@@ -27,6 +30,8 @@ watchEffect(() => {
     startStopwatch();
   }
 });
+
+const isInProgress = computed(() => props.isStarted || props.isPaused || props.isResumed);
 
 const {
   time: gameTime,
@@ -58,7 +63,7 @@ function handleFinishGame() {
     @start="handleStartGame"
   />
   <PlayGame
-    v-else-if="isStarted || isPaused || isResumed"
+    v-else-if="isInProgress"
     :time="formatTime(gameTime)"
     @finish="handleFinishGame"
   />
