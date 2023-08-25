@@ -17,7 +17,7 @@ const {
   setProgressResumed,
 } = useGameProgress();
 
-const isInProgress = computed(() => isStarted.value || isResumed.value);
+const isPlaying = computed(() => isStarted.value || isResumed.value);
 </script>
 
 <template>
@@ -33,7 +33,7 @@ const isInProgress = computed(() => isStarted.value || isResumed.value);
     <q-page-container>
       <q-page padding>
         <game-layout-actions
-          :is-in-progress="isInProgress"
+          :is-in-progress="isPlaying"
           :is-paused="isPaused"
           @pause="setProgressPaused"
           @resume="setProgressResumed"
