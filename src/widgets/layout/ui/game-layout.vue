@@ -1,7 +1,16 @@
 <script setup lang="ts">
+import { useGameProgress } from '@/entities/game';
 import { RouteNames } from '@/shared/config/route-names';
 import { BrandLogo } from '@/shared/ui/brand-logo';
 import { APP_TITLE } from '../model';
+
+const {
+  isStarted,
+  isNotStarted,
+  isShowingResults,
+  setProgressStarted,
+  setProgressShowingResults,
+} = useGameProgress();
 </script>
 
 <template>
@@ -24,7 +33,13 @@ import { APP_TITLE } from '../model';
           color="primary"
           outline
         />
-        <router-view />
+        <router-view
+          :is-not-started="isNotStarted"
+          :is-started="isStarted"
+          :is-showing-results="isShowingResults"
+          @start="setProgressStarted"
+          @show-result="setProgressShowingResults"
+        />
       </q-page>
     </q-page-container>
   </q-layout>
