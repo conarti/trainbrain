@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { useGameProgress } from '@/entities/game';
+import {
+  computed,
+  watchEffect,
+} from 'vue';
 import {
   toExercisesWithSolutionsAdapter,
   useExercisesTrainer,
@@ -9,18 +12,33 @@ import ShowTrainResults from './show-train-results.vue';
 import SolveExercises from './solve-exercises.vue';
 import StartGame from './start-game.vue';
 
-const {
-  isNotStarted,
-  isStarted,
-  isShowingResults,
-  setProgressStarted,
-  setProgressShowingResults,
-} = useGameProgress();
+interface Props {
+  isNotStarted: boolean;
+  isStarted: boolean;
+  isPaused: boolean;
+  isResumed: boolean;
+  isShowingResults: boolean;
+}
+type Emits = (event: 'start' | 'showResult') => void;
+
+const props = defineProps<Props>();
+const emit = defineEmits<Emits>();
+
+watchEffect(() => {
+  if (props.isPaused) {
+    stopExerciseTrainer();
+  } else if (props.isResumed) {
+    resumeExerciseTrainer();
+  }
+});
+
+const isInProgress = computed(() => props.isStarted || props.isPaused || props.isResumed);
 
 const {
   gameTime,
   exercises,
   start: startExerciseTrainer,
+  resume: resumeExerciseTrainer,
   stop: stopExerciseTrainer,
 } = useExercisesTrainer();
 
@@ -31,7 +49,7 @@ const {
 } = useResults();
 
 function start(exercisesCount: number) {
-  setProgressStarted();
+  emit('start');
   startExerciseTrainer(exercisesCount);
 }
 
@@ -39,7 +57,7 @@ function showResults(solutions: number[]) {
   stopExerciseTrainer();
   const exerciseWithSolution = toExercisesWithSolutionsAdapter(solutions, exercises.value);
   updateResults(exerciseWithSolution, gameTime.value);
-  setProgressShowingResults();
+  emit('showResult');
 }
 
 function handleRestart() {
@@ -54,7 +72,7 @@ function handleRestart() {
     @start="start"
   />
   <SolveExercises
-    v-else-if="isStarted"
+    v-else-if="isInProgress"
     :time="gameTime"
     :exercises="exercises"
     @solved="showResults"
