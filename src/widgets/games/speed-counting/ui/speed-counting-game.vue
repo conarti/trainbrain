@@ -5,6 +5,7 @@ import {
   formatTime,
   useStopwatch,
 } from '@/features/stopwatch';
+import PlayGame from './play-game.vue';
 import StartGame from './start-game.vue';
 
 interface Props {
@@ -55,26 +56,11 @@ function handleFinishGame() {
     v-if="isNotStarted"
     @start="handleStartGame"
   />
-  <q-card
+  <PlayGame
     v-else-if="isStarted || isPaused || isResumed"
-    flat
-    bordered
-  >
-    <q-card-section>
-      <h4 class="q-ma-none q-mb-md text-center">
-        {{ formatTime(gameTime) }}
-      </h4>
-    </q-card-section>
-    <q-card-actions>
-      <q-btn
-        class="col"
-        label="Done"
-        push
-        color="primary"
-        @click="handleFinishGame"
-      />
-    </q-card-actions>
-  </q-card>
+    :time="formatTime(gameTime)"
+    @finish="handleFinishGame"
+  />
   <q-card
     v-else-if="isShowingResults"
     flat
