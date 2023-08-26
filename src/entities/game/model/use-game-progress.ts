@@ -3,37 +3,44 @@ import {
   ref,
 } from 'vue';
 
-type GameProgress = 'not-started' | 'started' | 'paused' | 'resumed' | 'showing-results' | 'ended';
+export enum GameProgress {
+  'NotStarted',
+  'Started',
+  'Paused',
+  'Resumed',
+  'ShowingResults',
+  'Ended',
+}
 
 export function useGameProgress() {
-  const progress = ref<GameProgress>('not-started');
+  const progress = ref<GameProgress>(GameProgress.NotStarted);
 
-  const isNotStarted = computed(() => progress.value === 'not-started');
-  const isStarted = computed(() => progress.value === 'started');
-  const isPaused = computed(() => progress.value === 'paused');
-  const isResumed = computed(() => progress.value === 'resumed');
-  const isShowingResults = computed(() => progress.value === 'showing-results');
-  const isEnded = computed(() => progress.value === 'ended');
+  const isNotStarted = computed(() => progress.value === GameProgress.NotStarted);
+  const isStarted = computed(() => progress.value === GameProgress.Started);
+  const isPaused = computed(() => progress.value === GameProgress.Paused);
+  const isResumed = computed(() => progress.value === GameProgress.Resumed);
+  const isShowingResults = computed(() => progress.value === GameProgress.ShowingResults);
+  const isEnded = computed(() => progress.value === GameProgress.Ended);
 
   function setProgressNotStarted() {
-    progress.value = 'not-started';
+    progress.value = GameProgress.NotStarted;
   }
   function setProgressStarted() {
-    progress.value = 'started';
+    progress.value = GameProgress.Started;
   }
 
   function setProgressPaused() {
-    progress.value = 'paused';
+    progress.value = GameProgress.Paused;
   }
 
   function setProgressResumed() {
-    progress.value = 'resumed';
+    progress.value = GameProgress.Resumed;
   }
   function setProgressShowingResults() {
-    progress.value = 'showing-results';
+    progress.value = GameProgress.ShowingResults;
   }
   function setProgressEnded() {
-    progress.value = 'ended';
+    progress.value = GameProgress.Ended;
   }
 
   return {
