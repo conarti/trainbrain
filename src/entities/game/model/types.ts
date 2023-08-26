@@ -1,4 +1,4 @@
-export enum GAME_NAMES {
+export const enum GAME_NAMES {
   MATH = 'math',
   SPEED_COUNTING = 'speed-counting',
 }
