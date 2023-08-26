@@ -1,12 +1,12 @@
 import { RouteNames } from '@/shared/config/route-names';
 
-export interface GAME_CARD {
+export interface GameCard {
   label: string,
   routeName: RouteNames,
   icon: string,
 }
 
-export const GAME_CARDS_LIST: GAME_CARD[] = [
+export const GAME_CARDS_LIST: GameCard[] = [
   {
     label: 'Math',
     routeName: RouteNames.MathGame,
