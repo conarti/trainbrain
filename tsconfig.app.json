@@ -24,7 +24,7 @@
     "noPropertyAccessFromIndexSignature": true,
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": false,
+    "noUnusedParameters": true,
 
     "esModuleInterop": true,
     "skipLibCheck": true,
