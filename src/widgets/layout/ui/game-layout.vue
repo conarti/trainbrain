@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import {
-  computed,
-  ref,
-} from 'vue';
+import { ref } from 'vue';
 import {
   GameProgress,
   useGameProgress,
@@ -17,8 +14,6 @@ const {
   setProgressShowingResults,
   setProgressPaused,
 } = useGameProgress();
-
-const isPlaying = computed(() => progress.value === GameProgress.Started);
 
 const game = ref<{ pause: () => void, play: () => void }>();
 
@@ -46,7 +41,7 @@ function handleResume() {
     <q-page-container>
       <q-page padding>
         <game-layout-actions
-          :is-in-progress="isPlaying"
+          :is-in-progress="progress === GameProgress.Started"
           :is-paused="progress === GameProgress.Paused"
           @pause="handlePause"
           @resume="handleResume"
