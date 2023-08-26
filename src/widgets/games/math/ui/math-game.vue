@@ -3,6 +3,7 @@ import {
   computed,
   watchEffect,
 } from 'vue';
+import { GameProgress } from '@/entities/game';
 import {
   toExercisesWithSolutionsAdapter,
   useExercisesTrainer,
@@ -13,11 +14,7 @@ import SolveExercises from './solve-exercises.vue';
 import StartGame from './start-game.vue';
 
 interface Props {
-  isNotStarted: boolean;
-  isStarted: boolean;
-  isPaused: boolean;
-  isResumed: boolean;
-  isShowingResults: boolean;
+  progress: GameProgress;
 }
 type Emits = (event: 'start' | 'showResult') => void;
 
@@ -25,14 +22,17 @@ const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
 watchEffect(() => {
-  if (props.isPaused) {
+  if (props.progress === GameProgress.Paused) {
     stopExerciseTrainer();
-  } else if (props.isResumed) {
+  } else if (props.progress === GameProgress.Resumed) {
     resumeExerciseTrainer();
   }
 });
 
-const isInProgress = computed(() => props.isStarted || props.isPaused || props.isResumed);
+const isInProgress = computed(() => props.progress === GameProgress.Started
+    || props.progress === GameProgress.Paused
+    || props.progress === GameProgress.Resumed,
+);
 
 const {
   gameTime,
@@ -68,7 +68,7 @@ function handleRestart() {
 
 <template>
   <StartGame
-    v-if="isNotStarted"
+    v-if="progress === GameProgress.NotStarted"
     @start="start"
   />
   <SolveExercises
@@ -78,7 +78,7 @@ function handleRestart() {
     @solved="showResults"
   />
   <ShowTrainResults
-    v-else-if="isShowingResults"
+    v-else-if="progress === GameProgress.ShowingResults"
     :results="results"
     :time="resultTime"
     @restart="handleRestart"

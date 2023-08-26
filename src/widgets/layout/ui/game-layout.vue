@@ -45,11 +45,7 @@ const isPlaying = computed(() => progress.value === GameProgress.Started || prog
         </h6>
         <router-view
           v-show="progress !== GameProgress.Paused"
-          :is-not-started="progress !== GameProgress.NotStarted"
-          :is-started="progress !== GameProgress.Started"
-          :is-paused="progress !== GameProgress.Paused"
-          :is-resumed="progress !== GameProgress.Resumed"
-          :is-showing-results="progress !== GameProgress.ShowingResults"
+          :progress="progress"
           @start="setProgressStarted"
           @show-result="setProgressShowingResults"
         />

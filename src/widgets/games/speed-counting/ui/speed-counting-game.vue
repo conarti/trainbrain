@@ -8,30 +8,30 @@ import {
   formatTime,
   useStopwatch,
 } from '@/features/stopwatch';
+import { GameProgress } from '@/entities/game';
 import GameResults from './game-results.vue';
 import PlayGame from './play-game.vue';
 import StartGame from './start-game.vue';
 
 interface Props {
-  isNotStarted: boolean;
-  isStarted: boolean;
-  isPaused: boolean;
-  isResumed: boolean;
-  isShowingResults: boolean;
+  progress: GameProgress;
 }
 type Emits = (event: 'start' | 'showResult') => void;
 
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
 watchEffect(() => {
-  if (props.isPaused) {
+  if (props.progress === GameProgress.Paused) {
     stopStopwatch();
-  } else if (props.isResumed) {
+  } else if (props.progress === GameProgress.Resumed) {
     startStopwatch();
   }
 });
 
-const isInProgress = computed(() => props.isStarted || props.isPaused || props.isResumed);
+const isInProgress = computed(() => props.progress === GameProgress.Started
+    || props.progress === GameProgress.Paused
+    || props.progress === GameProgress.Resumed,
+);
 
 const {
   time: gameTime,
@@ -59,7 +59,7 @@ function handleFinishGame() {
 
 <template>
   <StartGame
-    v-if="isNotStarted"
+    v-if="progress === GameProgress.NotStarted"
     @start="handleStartGame"
   />
   <PlayGame
@@ -68,7 +68,7 @@ function handleFinishGame() {
     @finish="handleFinishGame"
   />
   <GameResults
-    v-else-if="isShowingResults"
+    v-else-if="progress === GameProgress.ShowingResults"
     :time="formatTime(gameTime)"
     @restart="handleStartGame"
   />
