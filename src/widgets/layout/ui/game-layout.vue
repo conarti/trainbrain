@@ -41,8 +41,7 @@ function handleResume() {
     <q-page-container>
       <q-page padding>
         <game-layout-actions
-          :is-in-progress="progress === GameProgress.Started"
-          :is-paused="progress === GameProgress.Paused"
+          :progress="progress"
           @pause="handlePause"
           @resume="handleResume"
         />

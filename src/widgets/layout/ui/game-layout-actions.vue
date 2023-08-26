@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { GameProgress } from '@/entities/game';
 import { RouteNames } from '@/shared/config/route-names';
 
 interface Props {
-  isInProgress: boolean;
-  isPaused: boolean;
+  progress: GameProgress;
 }
 type Emits = (event: 'pause' | 'resume') => void;
 defineProps<Props>();
@@ -21,7 +21,7 @@ const emit = defineEmits<Emits>();
       outline
     />
     <q-btn
-      v-if="isInProgress"
+      v-if="progress === GameProgress.Started"
       class="q-mb-md"
       icon="pause"
       round
@@ -30,7 +30,7 @@ const emit = defineEmits<Emits>();
       @click="emit('pause')"
     />
     <q-btn
-      v-else-if="isPaused"
+      v-else-if="progress === GameProgress.Paused"
       class="q-mb-md"
       icon="play_arrow"
       round
