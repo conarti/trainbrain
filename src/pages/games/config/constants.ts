@@ -1,7 +1,7 @@
 import {
   GAME_NAMES,
   type GAME_CARD,
-} from '@/entities/game';
+} from './types';
 
 export const GAME_CARDS_LIST: GAME_CARD[] = [
   {
