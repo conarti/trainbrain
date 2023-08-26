@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useSavedGames } from '@/features/saved-games';
 import {
   formatTime,
@@ -15,10 +14,8 @@ interface Props {
 }
 type Emits = (event: 'start' | 'showResult') => void;
 
-const props = defineProps<Props>();
+defineProps<Props>();
 const emit = defineEmits<Emits>();
-
-const isInProgress = computed(() => props.progress === GameProgress.Started || props.progress === GameProgress.Paused);
 
 const {
   time: gameTime,
@@ -55,7 +52,7 @@ defineExpose({
     @start="handleStartGame"
   />
   <PlayGame
-    v-else-if="isInProgress"
+    v-else-if="progress === GameProgress.Started"
     :time="formatTime(gameTime)"
     @finish="handleFinishGame"
   />
