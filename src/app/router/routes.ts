@@ -24,13 +24,8 @@ export const routes = [
       },
       {
         path: 'games',
-        children: [
-          {
-            path: '',
-            name: RouteNames.Games,
-            component: GamesPage,
-          },
-        ],
+        name: RouteNames.Games,
+        component: GamesPage,
       },
     ],
   },
