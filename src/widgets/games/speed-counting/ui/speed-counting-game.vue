@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import {
-  computed,
-  watchEffect,
-} from 'vue';
+import { computed } from 'vue';
 import { useSavedGames } from '@/features/saved-games';
 import {
   formatTime,
@@ -20,13 +17,6 @@ type Emits = (event: 'start' | 'showResult') => void;
 
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
-watchEffect(() => {
-  if (props.progress === GameProgress.Paused) {
-    stopStopwatch();
-  } else if (props.progress === GameProgress.Resumed) {
-    startStopwatch();
-  }
-});
 
 const isInProgress = computed(() => props.progress === GameProgress.Started
     || props.progress === GameProgress.Paused
@@ -55,6 +45,11 @@ function handleFinishGame() {
     time: gameTime.value,
   });
 }
+
+defineExpose({
+  play: startStopwatch,
+  pause: stopStopwatch,
+});
 </script>
 
 <template>

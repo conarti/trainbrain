@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import {
-  computed,
-  watchEffect,
-} from 'vue';
+import { computed } from 'vue';
 import { GameProgress } from '@/entities/game';
 import {
   toExercisesWithSolutionsAdapter,
@@ -20,14 +17,6 @@ type Emits = (event: 'start' | 'showResult') => void;
 
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
-
-watchEffect(() => {
-  if (props.progress === GameProgress.Paused) {
-    stopExerciseTrainer();
-  } else if (props.progress === GameProgress.Resumed) {
-    resumeExerciseTrainer();
-  }
-});
 
 const isInProgress = computed(() => props.progress === GameProgress.Started
     || props.progress === GameProgress.Paused
@@ -64,6 +53,11 @@ function handleRestart() {
   const solvedExercisesCount = exercises.value.length;
   start(solvedExercisesCount);
 }
+
+defineExpose({
+  play: resumeExerciseTrainer,
+  pause: stopExerciseTrainer,
+});
 </script>
 
 <template>

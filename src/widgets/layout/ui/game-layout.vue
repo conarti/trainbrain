@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import {
+  computed,
+  ref,
+} from 'vue';
 import {
   GameProgress,
   useGameProgress,
@@ -17,6 +20,18 @@ const {
 } = useGameProgress();
 
 const isPlaying = computed(() => progress.value === GameProgress.Started || progress.value === GameProgress.Resumed);
+
+const game = ref<{ pause: () => void, play: () => void }>();
+
+function handlePause() {
+  setProgressPaused();
+  game.value?.pause();
+}
+
+function handleResume() {
+  setProgressResumed();
+  game.value?.play();
+}
 </script>
 
 <template>
@@ -34,8 +49,8 @@ const isPlaying = computed(() => progress.value === GameProgress.Started || prog
         <game-layout-actions
           :is-in-progress="isPlaying"
           :is-paused="progress === GameProgress.Paused"
-          @pause="setProgressPaused"
-          @resume="setProgressResumed"
+          @pause="handlePause"
+          @resume="handleResume"
         />
         <h6
           v-show="progress === GameProgress.Paused"
@@ -45,10 +60,16 @@ const isPlaying = computed(() => progress.value === GameProgress.Started || prog
         </h6>
         <router-view
           v-show="progress !== GameProgress.Paused"
+          v-slot="{ Component }"
           :progress="progress"
           @start="setProgressStarted"
           @show-result="setProgressShowingResults"
-        />
+        >
+          <component
+            :is="Component"
+            ref="game"
+          />
+        </router-view>
       </q-page>
     </q-page-container>
   </q-layout>
