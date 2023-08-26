@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { StartGameCard } from '@/entities/game';
+
 type Emits = (event: 'start') => void;
 const emit = defineEmits<Emits>();
 
