@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import type { GAME_CARD } from '../model';
+interface Props {
+  label: string,
+  routeName: string,
+  icon: string,
+}
 
-defineProps<GAME_CARD>();
+defineProps<Props>();
 </script>
 
 <template>
