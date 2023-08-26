@@ -5,8 +5,11 @@ import { RouteNames } from '@/shared/config/route-names';
 interface Props {
   progress: GameProgress;
 }
-type Emits = (event: 'pause' | 'play') => void;
+
 defineProps<Props>();
+
+type Emits = (event: 'pause' | 'play') => void;
+
 const emit = defineEmits<Emits>();
 </script>
 

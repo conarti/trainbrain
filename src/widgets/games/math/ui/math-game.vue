@@ -12,9 +12,11 @@ import StartGame from './start-game.vue';
 interface Props {
   progress: GameProgress;
 }
-type Emits = (event: 'start' | 'showResult') => void;
 
 defineProps<Props>();
+
+type Emits = (event: 'start' | 'showResult') => void;
+
 const emit = defineEmits<Emits>();
 
 const {

@@ -2,9 +2,11 @@
 interface Props {
   time: string;
 }
-type Emits = (event: 'restart') => void;
 
 defineProps<Props>();
+
+type Emits = (event: 'restart') => void;
+
 const emit = defineEmits<Emits>();
 
 function restart() {
