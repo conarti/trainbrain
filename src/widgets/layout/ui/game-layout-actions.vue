@@ -11,6 +11,14 @@ defineProps<Props>();
 type Emits = (event: 'pause' | 'play') => void;
 
 const emit = defineEmits<Emits>();
+
+function pause() {
+  emit('pause');
+}
+
+function play() {
+  emit('play');
+}
 </script>
 
 <template>
@@ -30,7 +38,7 @@ const emit = defineEmits<Emits>();
       round
       color="primary"
       outline
-      @click="emit('pause')"
+      @click="pause"
     />
     <q-btn
       v-else-if="progress === GameProgress.Paused"
@@ -39,7 +47,7 @@ const emit = defineEmits<Emits>();
       round
       color="primary"
       outline
-      @click="emit('play')"
+      @click="play"
     />
   </div>
 </template>
