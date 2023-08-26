@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { useGameProgress } from '@/entities/game';
 import { BrandLogo } from '@/shared/ui/brand-logo';
-import { APP_TITLE } from '../model';
+import { APP_TITLE } from '../config';
 import GameLayoutActions from './game-layout-actions.vue';
 
 const {

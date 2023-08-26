@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouteNames } from '@/shared/config/route-names';
 import { BrandLogo } from '@/shared/ui/brand-logo';
-import { APP_TITLE } from '../model';
+import { APP_TITLE } from '../config';
 </script>
 
 <template>
