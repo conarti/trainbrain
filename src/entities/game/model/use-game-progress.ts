@@ -1,9 +1,6 @@
-import {
-  computed,
-  ref,
-} from 'vue';
+import { ref } from 'vue';
 
-export enum GameProgress {
+export const enum GameProgress {
   'NotStarted',
   'Started',
   'Paused',
@@ -14,13 +11,6 @@ export enum GameProgress {
 
 export function useGameProgress() {
   const progress = ref<GameProgress>(GameProgress.NotStarted);
-
-  const isNotStarted = computed(() => progress.value === GameProgress.NotStarted);
-  const isStarted = computed(() => progress.value === GameProgress.Started);
-  const isPaused = computed(() => progress.value === GameProgress.Paused);
-  const isResumed = computed(() => progress.value === GameProgress.Resumed);
-  const isShowingResults = computed(() => progress.value === GameProgress.ShowingResults);
-  const isEnded = computed(() => progress.value === GameProgress.Ended);
 
   function setProgressNotStarted() {
     progress.value = GameProgress.NotStarted;
@@ -45,12 +35,6 @@ export function useGameProgress() {
 
   return {
     progress,
-    isNotStarted,
-    isStarted,
-    isPaused,
-    isShowingResults,
-    isEnded,
-    isResumed,
     setProgressNotStarted,
     setProgressStarted,
     setProgressPaused,

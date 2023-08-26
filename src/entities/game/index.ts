@@ -2,4 +2,7 @@ export {
   StartGameCard,
   GameCard,
 } from './ui';
-export { useGameProgress } from './model';
+export {
+  useGameProgress,
+  GameProgress,
+} from './model';

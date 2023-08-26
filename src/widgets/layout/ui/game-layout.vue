@@ -1,23 +1,22 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useGameProgress } from '@/entities/game';
+import {
+  GameProgress,
+  useGameProgress,
+} from '@/entities/game';
 import { BrandLogo } from '@/shared/ui/brand-logo';
 import { APP_TITLE } from '../config';
 import GameLayoutActions from './game-layout-actions.vue';
 
 const {
-  isStarted,
-  isNotStarted,
-  isPaused,
-  isResumed,
-  isShowingResults,
+  progress,
   setProgressStarted,
   setProgressShowingResults,
   setProgressPaused,
   setProgressResumed,
 } = useGameProgress();
 
-const isPlaying = computed(() => isStarted.value || isResumed.value);
+const isPlaying = computed(() => progress.value === GameProgress.Started || progress.value === GameProgress.Resumed);
 </script>
 
 <template>
@@ -34,23 +33,23 @@ const isPlaying = computed(() => isStarted.value || isResumed.value);
       <q-page padding>
         <game-layout-actions
           :is-in-progress="isPlaying"
-          :is-paused="isPaused"
+          :is-paused="progress === GameProgress.Paused"
           @pause="setProgressPaused"
           @resume="setProgressResumed"
         />
         <h6
-          v-show="isPaused"
+          v-show="progress === GameProgress.Paused"
           class="text-center"
         >
           The game is paused!
         </h6>
         <router-view
-          v-show="!isPaused"
-          :is-not-started="isNotStarted"
-          :is-started="isStarted"
-          :is-paused="isPaused"
-          :is-resumed="isResumed"
-          :is-showing-results="isShowingResults"
+          v-show="progress !== GameProgress.Paused"
+          :is-not-started="progress !== GameProgress.NotStarted"
+          :is-started="progress !== GameProgress.Started"
+          :is-paused="progress !== GameProgress.Paused"
+          :is-resumed="progress !== GameProgress.Resumed"
+          :is-showing-results="progress !== GameProgress.ShowingResults"
           @start="setProgressStarted"
           @show-result="setProgressShowingResults"
         />

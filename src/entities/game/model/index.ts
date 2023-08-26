@@ -1,1 +1,4 @@
-export { useGameProgress } from './use-game-progress';
+export {
+  useGameProgress,
+  GameProgress,
+} from './use-game-progress';
