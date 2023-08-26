@@ -10,7 +10,7 @@ defineProps<Props>();
 
 <template>
   <router-link
-    class="text-black"
+    class="text-black no-underline"
     :to="{ name: routeName }"
   >
     <q-card
