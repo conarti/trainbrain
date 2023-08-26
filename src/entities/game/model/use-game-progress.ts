@@ -1,11 +1,11 @@
 import { ref } from 'vue';
 
 export const enum GameProgress {
-  'NotStarted',
-  'Started',
-  'Paused',
-  'ShowingResults',
-  'Ended',
+  NotStarted,
+  Started,
+  Paused,
+  ShowingResults,
+  Ended,
 }
 
 export function useGameProgress() {
