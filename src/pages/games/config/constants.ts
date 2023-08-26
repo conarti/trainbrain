@@ -1,5 +1,10 @@
 import { RouteNames } from '@/shared/config/route-names';
-import type { GAME_CARD } from './types';
+
+export interface GAME_CARD {
+  label: string,
+  routeName: RouteNames,
+  icon: string,
+}
 
 export const GAME_CARDS_LIST: GAME_CARD[] = [
   {
