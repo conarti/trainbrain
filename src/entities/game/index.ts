@@ -4,6 +4,6 @@ export {
 } from './ui';
 export {
   GAME_NAMES,
-  GAME_CARDS_LIST,
   useGameProgress,
+  type GAME_CARD,
 } from './model';

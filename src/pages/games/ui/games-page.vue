@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { GameCard } from '@/entities/game';
-import { GAME_CARDS_LIST } from '@/entities/game';
+import { GAME_CARDS_LIST } from '../config';
 </script>
 
 <template>
