@@ -5,7 +5,7 @@ import { RouteNames } from '@/shared/config/route-names';
 interface Props {
   progress: GameProgress;
 }
-type Emits = (event: 'pause' | 'resume') => void;
+type Emits = (event: 'pause' | 'play') => void;
 defineProps<Props>();
 const emit = defineEmits<Emits>();
 </script>
@@ -36,7 +36,7 @@ const emit = defineEmits<Emits>();
       round
       color="primary"
       outline
-      @click="emit('resume')"
+      @click="emit('play')"
     />
   </div>
 </template>

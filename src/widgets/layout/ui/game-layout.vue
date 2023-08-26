@@ -22,7 +22,7 @@ function handlePause() {
   game.value?.pause();
 }
 
-function handleResume() {
+function handlePlay() {
   setProgressStarted();
   game.value?.play();
 }
@@ -43,7 +43,7 @@ function handleResume() {
         <game-layout-actions
           :progress="progress"
           @pause="handlePause"
-          @resume="handleResume"
+          @play="handlePlay"
         />
         <h6
           v-show="progress === GameProgress.Paused"
