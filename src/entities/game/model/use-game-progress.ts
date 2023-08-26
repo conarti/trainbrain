@@ -4,7 +4,6 @@ export const enum GameProgress {
   'NotStarted',
   'Started',
   'Paused',
-  'Resumed',
   'ShowingResults',
   'Ended',
 }
@@ -23,9 +22,6 @@ export function useGameProgress() {
     progress.value = GameProgress.Paused;
   }
 
-  function setProgressResumed() {
-    progress.value = GameProgress.Resumed;
-  }
   function setProgressShowingResults() {
     progress.value = GameProgress.ShowingResults;
   }
@@ -38,7 +34,6 @@ export function useGameProgress() {
     setProgressNotStarted,
     setProgressStarted,
     setProgressPaused,
-    setProgressResumed,
     setProgressShowingResults,
     setProgressEnded,
   };

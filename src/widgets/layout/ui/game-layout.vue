@@ -16,10 +16,9 @@ const {
   setProgressStarted,
   setProgressShowingResults,
   setProgressPaused,
-  setProgressResumed,
 } = useGameProgress();
 
-const isPlaying = computed(() => progress.value === GameProgress.Started || progress.value === GameProgress.Resumed);
+const isPlaying = computed(() => progress.value === GameProgress.Started);
 
 const game = ref<{ pause: () => void, play: () => void }>();
 
@@ -29,7 +28,7 @@ function handlePause() {
 }
 
 function handleResume() {
-  setProgressResumed();
+  setProgressStarted();
   game.value?.play();
 }
 </script>

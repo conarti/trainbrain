@@ -18,10 +18,7 @@ type Emits = (event: 'start' | 'showResult') => void;
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
-const isInProgress = computed(() => props.progress === GameProgress.Started
-    || props.progress === GameProgress.Paused
-    || props.progress === GameProgress.Resumed,
-);
+const isInProgress = computed(() => props.progress === GameProgress.Started || props.progress === GameProgress.Paused);
 
 const {
   gameTime,
