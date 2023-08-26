@@ -1,50 +1,38 @@
 <script setup lang="ts">
 interface Props {
-  title: string;
-  description: string;
-  icon: string;
+  label: string,
+  routeName: string,
+  icon: string,
 }
 
 defineProps<Props>();
-
-type Emits = (event: 'start') => void;
-
-const emit = defineEmits<Emits>();
-
-function handleStartClick() {
-  emit('start');
-}
 </script>
 
 <template>
-  <q-card
-    flat
-    bordered
+  <router-link
+    class="text-black no-underline"
+    :to="{ name: routeName }"
   >
-    <q-card-section>
-      <div class="flex flex-center q-mb-sm">
+    <q-card
+      class="game-card"
+      flat
+      bordered
+    >
+      <q-card-section class="flex column flex-center full-height">
+        <h6 class="q-mt-none q-mb-md text-center">
+          {{ label }}
+        </h6>
         <q-icon
-          class="q-mr-sm"
-          size="sm"
+          size="xl"
           :name="icon"
         />
-        <h5 class="q-ma-none text-center">
-          {{ title }}
-        </h5>
-      </div>
-      <p class="text-subtitle2 text-center">
-        {{ description }}
-      </p>
-      <slot name="additional-info" />
-    </q-card-section>
-    <q-card-actions>
-      <q-btn
-        class="col"
-        label="Start"
-        push
-        color="primary"
-        @click="handleStartClick"
-      />
-    </q-card-actions>
-  </q-card>
+      </q-card-section>
+    </q-card>
+  </router-link>
 </template>
+
+<style lang="scss" scoped>
+.game-card {
+  height: 200px;
+}
+</style>

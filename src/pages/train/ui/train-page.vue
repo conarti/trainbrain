@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { MathGame } from '@/widgets/games/math';
-import { SpeedCountingGame } from '@/widgets/games/speed-counting';
+const INFO_TEXT = 'Coming soon!';
 </script>
 
 <template>
@@ -8,7 +7,8 @@ import { SpeedCountingGame } from '@/widgets/games/speed-counting';
     class="q-gutter-sm"
     padding
   >
-    <MathGame />
-    <SpeedCountingGame />
+    <h3 class="text-center">
+      {{ INFO_TEXT }}
+    </h3>
   </q-page>
 </template>

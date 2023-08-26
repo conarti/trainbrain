@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { RouteNames } from '@/shared/config/route-names';
 import { BrandLogo } from '@/shared/ui/brand-logo';
-
-const APP_TITLE = 'TrainBrain';
+import { APP_TITLE } from '../config';
 </script>
 
 <template>
@@ -30,6 +29,11 @@ const APP_TITLE = 'TrainBrain';
           :to="{ name: RouteNames.Train }"
           label="Train"
           icon="sym_r_psychology"
+        />
+        <q-route-tab
+          :to="{ name: RouteNames.Games }"
+          label="Games"
+          icon="sym_r_category"
         />
         <q-route-tab
           :to="{ name: RouteNames.Results }"

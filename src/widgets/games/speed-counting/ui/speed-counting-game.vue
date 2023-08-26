@@ -4,12 +4,21 @@ import {
   formatTime,
   useStopwatch,
 } from '@/features/stopwatch';
-import {
-  GameCard,
-  useGameStore,
-} from '@/entities/game';
+import { GameProgress } from '@/entities/game';
+import GameResults from './game-results.vue';
+import PlayGame from './play-game.vue';
+import StartGame from './start-game.vue';
 
-const gameStore = useGameStore();
+interface Props {
+  progress: GameProgress;
+}
+
+defineProps<Props>();
+
+type Emits = (event: 'start' | 'showResult') => void;
+
+const emit = defineEmits<Emits>();
+
 const {
   time: gameTime,
   start: startStopwatch,
@@ -19,75 +28,39 @@ const {
 const { save } = useSavedGames();
 
 function handleStartGame() {
-  gameStore.start();
+  emit('start');
   resetStopwatch();
   startStopwatch();
 }
 
 function handleFinishGame() {
-  gameStore.finish();
+  emit('showResult');
   stopStopwatch();
   save('speedCounting', {
     date: Date.now(),
     time: gameTime.value,
   });
 }
+
+defineExpose({
+  play: startStopwatch,
+  pause: stopStopwatch,
+});
 </script>
 
 <template>
-  <GameCard
-    v-if="gameStore.isGameNotStarted"
-    title="Speed Counting Game"
-    description="Count out loud from 1 to 120 as fast as you can."
-    icon="sym_r_123"
+  <StartGame
+    v-if="progress === GameProgress.NotStarted"
     @start="handleStartGame"
-  >
-    <template #additional-info>
-      <p class="text-center q-mb-none">
-        Be sure to pronounce each number clearly.
-        <br>
-        Press "DONE!" when you have finished the counting.
-      </p>
-    </template>
-  </GameCard>
-  <q-card
-    v-else-if="gameStore.isGameInProgress"
-    flat
-    bordered
-  >
-    <q-card-section>
-      <h4 class="q-ma-none q-mb-md text-center">
-        {{ formatTime(gameTime) }}
-      </h4>
-    </q-card-section>
-    <q-card-actions>
-      <q-btn
-        class="col"
-        label="Done"
-        push
-        color="primary"
-        @click="handleFinishGame"
-      />
-    </q-card-actions>
-  </q-card>
-  <q-card
-    v-else-if="gameStore.isGameFinished"
-    flat
-    bordered
-  >
-    <q-card-section>
-      <h6 class="q-ma-none q-mb-md text-center">
-        Your time is {{ formatTime(gameTime) }}
-      </h6>
-    </q-card-section>
-    <q-card-actions>
-      <q-btn
-        class="col"
-        label="Try again"
-        push
-        color="primary"
-        @click="handleStartGame"
-      />
-    </q-card-actions>
-  </q-card>
+  />
+  <PlayGame
+    v-else-if="progress === GameProgress.Started"
+    :time="formatTime(gameTime)"
+    @finish="handleFinishGame"
+  />
+  <GameResults
+    v-else-if="progress === GameProgress.ShowingResults"
+    :time="formatTime(gameTime)"
+    @restart="handleStartGame"
+  />
 </template>

@@ -1,1 +1,4 @@
-export { useGameStore } from './store';
+export {
+  useGameProgress,
+  GameProgress,
+} from './use-game-progress';

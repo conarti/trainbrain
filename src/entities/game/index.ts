@@ -1,2 +1,8 @@
-export { GameCard } from './ui';
-export { useGameStore } from './model';
+export {
+  StartGameCard,
+  GameCard,
+} from './ui';
+export {
+  useGameProgress,
+  GameProgress,
+} from './model';
