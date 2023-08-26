@@ -1,1 +1,1 @@
-export { default as GamesPage } from './games-page.vue';
+export const GamesPage = () => import('./games-page.vue');
