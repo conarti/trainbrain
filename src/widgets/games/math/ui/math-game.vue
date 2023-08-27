@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { GameProgress } from '@/entities/game';
 import {
   toExercisesWithSolutionsAdapter,
@@ -13,11 +14,13 @@ interface Props {
   progress: GameProgress;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 type Emits = (event: 'start' | 'showResult') => void;
 
 const emit = defineEmits<Emits>();
+
+const isInProgress = computed(() => props.progress === GameProgress.Started || props.progress === GameProgress.Paused);
 
 const {
   gameTime,
@@ -62,7 +65,7 @@ defineExpose({
     @start="start"
   />
   <SolveExercises
-    v-else-if="progress === GameProgress.Started"
+    v-else-if="isInProgress"
     :time="gameTime"
     :exercises="exercises"
     @solved="showResults"
