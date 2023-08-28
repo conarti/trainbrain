@@ -9,7 +9,7 @@ interface Props {
 
 defineProps<Props>();
 
-function handleHide() {
+function play() {
   emit('play');
 }
 </script>
@@ -18,7 +18,7 @@ function handleHide() {
   <q-dialog
     :model-value="isVisible"
     full-width
-    @hide="handleHide"
+    @hide="play"
   >
     <q-card>
       <q-card-section class="row items-center">
