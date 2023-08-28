@@ -4,7 +4,7 @@ type Emits = (event: 'play') => void
 const emit = defineEmits<Emits>();
 
 interface Props {
-	isPaused: boolean
+	isVisible: boolean
 }
 
 defineProps<Props>();
@@ -16,7 +16,7 @@ function handleHide() {
 
 <template>
   <q-dialog
-    :model-value="isPaused"
+    :model-value="isVisible"
     full-width
     @hide="handleHide"
   >

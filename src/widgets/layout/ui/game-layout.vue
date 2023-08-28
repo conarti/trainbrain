@@ -51,7 +51,7 @@ function handlePlay() {
           @play="handlePlay"
         />
         <game-layout-pause
-          :is-paused="progress === GameProgress.Paused"
+          :is-visible="progress === GameProgress.Paused"
           @play="handlePlay"
         />
         <router-view
