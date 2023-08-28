@@ -7,6 +7,7 @@ import {
 import { BrandLogo } from '@/shared/ui/brand-logo';
 import { APP_TITLE } from '../config';
 import GameLayoutActions from './game-layout-actions.vue';
+import GameLayoutPause from './game-layout-pause.vue';
 
 const {
   progress,
@@ -45,14 +46,11 @@ function handlePlay() {
           @pause="handlePause"
           @play="handlePlay"
         />
-        <h6
-          v-show="progress === GameProgress.Paused"
-          class="text-center"
-        >
-          The game is paused!
-        </h6>
+        <game-layout-pause
+          :is-paused="progress === GameProgress.Paused"
+          @play="handlePlay"
+        />
         <router-view
-          v-show="progress !== GameProgress.Paused"
           v-slot="{ Component }"
           :progress="progress"
           @start="setProgressStarted"
