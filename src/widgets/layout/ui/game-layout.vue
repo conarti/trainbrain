@@ -4,9 +4,9 @@ import {
   GameProgress,
   useGameProgress,
 } from '@/entities/game';
-import { BrandLogo } from '@/shared/ui/brand-logo';
-import { APP_TITLE } from '../config';
 import GameLayoutActions from './game-layout-actions.vue';
+import GameLayoutPause from './game-layout-pause.vue';
+import TheHeader from './the-header.vue';
 
 const {
   progress,
@@ -15,7 +15,11 @@ const {
   setProgressPaused,
 } = useGameProgress();
 
-const game = ref<{ pause: () => void, play: () => void }>();
+interface Game {
+	pause: () => void;
+	play: () => void;
+}
+const game = ref<Game>();
 
 function handlePause() {
   setProgressPaused();
@@ -30,14 +34,8 @@ function handlePlay() {
 
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header>
-      <q-toolbar>
-        <BrandLogo size="32" />
-        <q-toolbar-title shrink>
-          {{ APP_TITLE }}
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-header>
+    <TheHeader />
+
     <q-page-container>
       <q-page padding>
         <game-layout-actions
@@ -45,14 +43,11 @@ function handlePlay() {
           @pause="handlePause"
           @play="handlePlay"
         />
-        <h6
-          v-show="progress === GameProgress.Paused"
-          class="text-center"
-        >
-          The game is paused!
-        </h6>
+        <game-layout-pause
+          :is-visible="progress === GameProgress.Paused"
+          @play="handlePlay"
+        />
         <router-view
-          v-show="progress !== GameProgress.Paused"
           v-slot="{ Component }"
           :progress="progress"
           @start="setProgressStarted"

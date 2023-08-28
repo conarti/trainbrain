@@ -1,19 +1,11 @@
 <script setup lang="ts">
 import { RouteNames } from '@/shared/config/route-names';
-import { BrandLogo } from '@/shared/ui/brand-logo';
-import { APP_TITLE } from '../config';
+import TheHeader from './the-header.vue';
 </script>
 
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header>
-      <q-toolbar>
-        <BrandLogo size="32" />
-        <q-toolbar-title shrink>
-          {{ APP_TITLE }}
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-header>
+    <TheHeader />
 
     <q-page-container>
       <router-view />
