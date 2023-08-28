@@ -4,10 +4,9 @@ import {
   GameProgress,
   useGameProgress,
 } from '@/entities/game';
-import { BrandLogo } from '@/shared/ui/brand-logo';
-import { APP_TITLE } from '../config';
 import GameLayoutActions from './game-layout-actions.vue';
 import GameLayoutPause from './game-layout-pause.vue';
+import TheHeader from './the-header.vue';
 
 const {
   progress,
@@ -35,14 +34,8 @@ function handlePlay() {
 
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header>
-      <q-toolbar>
-        <BrandLogo size="32" />
-        <q-toolbar-title shrink>
-          {{ APP_TITLE }}
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-header>
+    <TheHeader />
+
     <q-page-container>
       <q-page padding>
         <game-layout-actions
