@@ -16,7 +16,11 @@ const {
   setProgressPaused,
 } = useGameProgress();
 
-const game = ref<{ pause: () => void, play: () => void }>();
+interface Game {
+	pause: () => void;
+	play: () => void;
+}
+const game = ref<Game>();
 
 function handlePause() {
   setProgressPaused();
