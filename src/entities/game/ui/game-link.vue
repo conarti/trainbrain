@@ -18,18 +18,22 @@ defineProps<Props>();
       class="cursor-pointer"
       flat
       bordered
+      v-bind="$attrs"
       @click="navigate"
     >
-      <q-card-section>
-        <div class="q-pa-md column flex-center">
-          <h6 class="q-mt-none q-mb-md text-center">
-            {{ label }}
-          </h6>
+      <q-card-section class="q-pa-lg column flex-center full-height">
+        <h6 class="q-mt-none q-mb-md text-center">
+          {{ label }}
+        </h6>
+        <q-card-section
+          class="justify-center"
+          horizontal
+        >
           <q-icon
             size="xl"
             :name="icon"
           />
-        </div>
+        </q-card-section>
       </q-card-section>
     </q-card>
   </router-link>
