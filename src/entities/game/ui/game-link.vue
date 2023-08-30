@@ -22,7 +22,7 @@ defineProps<Props>();
     >
       <q-card-section>
         <div class="q-pa-md column flex-center">
-          <h6 class="q-mt-none q-mb-md">
+          <h6 class="q-mt-none q-mb-md text-center">
             {{ label }}
           </h6>
           <q-icon
