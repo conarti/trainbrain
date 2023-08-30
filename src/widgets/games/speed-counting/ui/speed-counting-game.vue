@@ -53,14 +53,14 @@ defineExpose({
     v-if="progress === GameProgress.NotStarted"
     @start="handleStartGame"
   />
-  <PlayGame
-    v-else-if="progress === GameProgress.Started"
-    :time="formatTime(gameTime)"
-    @finish="handleFinishGame"
-  />
   <GameResults
     v-else-if="progress === GameProgress.ShowingResults"
     :time="formatTime(gameTime)"
     @restart="handleStartGame"
+  />
+  <PlayGame
+    v-else
+    :time="formatTime(gameTime)"
+    @finish="handleFinishGame"
   />
 </template>
