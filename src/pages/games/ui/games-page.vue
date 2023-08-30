@@ -5,16 +5,19 @@ import { GAME_CARDS_LIST } from '../config';
 
 <template>
   <q-page
-    class="row flex-center q-gutter-md"
+    class="row justify-center content-start q-gutter-md q-pa-md"
     padding
   >
-    <GameCard
+    <div
       v-for="(card, idx) in GAME_CARDS_LIST"
       :key="idx"
-      class="col-10 col-sm"
-      :route-name="card.routeName"
-      :label="card.label"
-      :icon="card.icon"
-    />
+      class="col-all"
+    >
+      <GameCard
+        :route-name="card.routeName"
+        :label="card.label"
+        :icon="card.icon"
+      />
+    </div>
   </q-page>
 </template>

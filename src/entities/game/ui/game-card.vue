@@ -10,29 +10,27 @@ defineProps<Props>();
 
 <template>
   <router-link
-    class="text-black no-underline"
+    v-slot="{ navigate }"
     :to="{ name: routeName }"
+    custom
   >
     <q-card
-      class="game-card"
+      class="cursor-pointer"
       flat
       bordered
+      @click="navigate"
     >
-      <q-card-section class="flex column flex-center full-height">
-        <h6 class="q-mt-none q-mb-md text-center">
-          {{ label }}
-        </h6>
-        <q-icon
-          size="xl"
-          :name="icon"
-        />
+      <q-card-section>
+        <div class="q-pa-md column flex-center">
+          <h6 class="q-mt-none q-mb-md">
+            {{ label }}
+          </h6>
+          <q-icon
+            size="xl"
+            :name="icon"
+          />
+        </div>
       </q-card-section>
     </q-card>
   </router-link>
 </template>
-
-<style lang="scss" scoped>
-.game-card {
-  height: 200px;
-}
-</style>
