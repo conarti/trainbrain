@@ -1,6 +1,6 @@
 export {
   StartGameCard,
-  GameCard,
+  GameLink,
 } from './ui';
 export {
   useGameProgress,

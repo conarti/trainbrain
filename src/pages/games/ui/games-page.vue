@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { GameCard } from '@/entities/game';
+import { GameLink } from '@/entities/game';
 import { GAME_CARDS_LIST } from '../config';
 </script>
 
@@ -13,7 +13,7 @@ import { GAME_CARDS_LIST } from '../config';
       :key="idx"
       class="col-all"
     >
-      <GameCard
+      <GameLink
         :route-name="card.routeName"
         :label="card.label"
         :icon="card.icon"
