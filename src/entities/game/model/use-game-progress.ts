@@ -14,6 +14,7 @@ export function useGameProgress() {
   function setProgressNotStarted() {
     progress.value = GameProgress.NotStarted;
   }
+
   function setProgressStarted() {
     progress.value = GameProgress.Started;
   }
@@ -25,6 +26,7 @@ export function useGameProgress() {
   function setProgressShowingResults() {
     progress.value = GameProgress.ShowingResults;
   }
+
   function setProgressEnded() {
     progress.value = GameProgress.Ended;
   }
