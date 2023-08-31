@@ -2,6 +2,7 @@
 import groupBy from 'lodash/groupBy';
 import { date } from 'quasar';
 import { computed } from 'vue';
+import EmptyResults from '@/pages/results/ui/empty-results.vue';
 import {
   getMistakeSolutionsCount,
   getMistakeSolutionsPercent,
@@ -38,12 +39,7 @@ const hasNoResults = computed(() => !hasMathResults.value && !hasSpeedCountingRe
 
 <template>
   <q-page padding>
-    <h5
-      v-if="hasNoResults"
-      class="text-center"
-    >
-      No results
-    </h5>
+    <EmptyResults v-if="hasNoResults" />
     <template v-else>
       <!--   TODO @refactor - extract to components   -->
       <template v-if="hasMathResults">
