@@ -40,97 +40,94 @@ const hasNoResults = computed(() => !hasMathResults.value && !hasSpeedCountingRe
 <template>
   <q-page padding>
     <EmptyResults v-if="hasNoResults" />
-    <template v-else>
-      <!--   TODO @refactor - extract to components   -->
-      <template v-if="hasMathResults">
-        <h6 class="q-ma-sm">
-          Math Game
-        </h6>
-        <q-list
-          class="rounded-borders"
-          bordered
-          padding
+    <template v-if="hasMathResults">
+      <h6 class="q-ma-sm">
+        Math Game
+      </h6>
+      <q-list
+        class="rounded-borders"
+        bordered
+        padding
+      >
+        <template
+          v-for="(dayResults, day) in mathResultsGroupedByDay"
+          :key="day"
         >
-          <template
-            v-for="(dayResults, day) in mathResultsGroupedByDay"
-            :key="day"
+          <q-item-label
+            header
+            caption
           >
-            <q-item-label
-              header
-              caption
-            >
-              {{ day }}
-            </q-item-label>
+            {{ day }}
+          </q-item-label>
 
-            <q-item
-              v-for="(result, index) in dayResults"
-              :key="index"
-            >
-              <q-item-section>
-                <q-item-label>
-                  Time: {{ formatTime(result.time) }}
-                </q-item-label>
-                <q-item-label caption>
-                  Mistakes:
-                  <span class="text-red">{{
-                    getMistakeSolutionsCount(result.solutions)
-                  }}</span>/{{ result.solutions.length }} ({{
-                    getMistakeSolutionsPercent(result.solutions)
-                  }}%)
-                </q-item-label>
-              </q-item-section>
-              <q-item-section
-                side
-                top
-              >
-                <q-item-label caption>
-                  {{ date.formatDate(result.date, DATE_WITH_TIME_UI_FORMAT) }}
-                </q-item-label>
-              </q-item-section>
-            </q-item>
-          </template>
-        </q-list>
-      </template>
-      <template v-if="hasSpeedCountingResults">
-        <h6 class="q-ma-sm">
-          Speed Counting Game
-        </h6>
-        <q-list
-          class="rounded-borders"
-          bordered
-          padding
-        >
-          <template
-            v-for="(dayResults, day) in speedCountingResultsGroupedByDay"
-            :key="day"
+          <q-item
+            v-for="(result, index) in dayResults"
+            :key="index"
           >
-            <q-item-label
-              header
-              caption
+            <q-item-section>
+              <q-item-label>
+                Time: {{ formatTime(result.time) }}
+              </q-item-label>
+              <q-item-label caption>
+                Mistakes:
+                <span class="text-red">{{
+                  getMistakeSolutionsCount(result.solutions)
+                }}</span>/{{ result.solutions.length }} ({{
+                  getMistakeSolutionsPercent(result.solutions)
+                }}%)
+              </q-item-label>
+            </q-item-section>
+            <q-item-section
+              side
+              top
             >
-              {{ day }}
-            </q-item-label>
-            <q-item
-              v-for="(result, index) in dayResults"
-              :key="index"
+              <q-item-label caption>
+                {{ date.formatDate(result.date, DATE_WITH_TIME_UI_FORMAT) }}
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+        </template>
+      </q-list>
+    </template>
+    <template v-if="hasSpeedCountingResults">
+      <h6 class="q-ma-sm">
+        Speed Counting Game
+      </h6>
+      <q-list
+        class="rounded-borders"
+        bordered
+        padding
+      >
+        <template
+          v-for="(dayResults, day) in speedCountingResultsGroupedByDay"
+          :key="day"
+        >
+          <q-item-label
+            header
+            caption
+          >
+            {{ day }}
+          </q-item-label>
+          <q-item
+            v-for="(result, index) in dayResults"
+            :key="index"
+          >
+            <q-item-section>
+              <q-item-label>
+                Time: {{ formatTime(result.time) }}
+              </q-item-label>
+            </q-item-section>
+            <q-item-section
+              side
+              top
             >
-              <q-item-section>
-                <q-item-label>
-                  Time: {{ formatTime(result.time) }}
-                </q-item-label>
-              </q-item-section>
-              <q-item-section
-                side
-                top
-              >
-                <q-item-label caption>
-                  {{ date.formatDate(result.date, DATE_WITH_TIME_UI_FORMAT) }}
-                </q-item-label>
-              </q-item-section>
-            </q-item>
-          </template>
-        </q-list>
-      </template>
+              <q-item-label caption>
+                {{ date.formatDate(result.date, DATE_WITH_TIME_UI_FORMAT) }}
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+        </template>
+      </q-list>
     </template>
   </q-page>
 </template>
