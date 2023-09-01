@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import {
-  Haptics,
-  ImpactStyle,
-} from '@capacitor/haptics';
 import isNull from 'lodash/isNull';
 import toNumber from 'lodash/toNumber';
 import { computed } from 'vue';
+import {
+  doImpact,
+  ImpactStyle,
+} from '@/features/haptic-feedback';
 import type { MathKeyboardKey } from '../model';
 import MathKeyboardButton from './math-keyboard-button.vue';
 
@@ -74,7 +74,7 @@ function done() {
 async function doHapticFeedback(keyValue: MathKeyboardKey) {
   switch (keyValue) {
   default:
-    await Haptics.impact({ style: ImpactStyle.Light });
+    await doImpact(ImpactStyle.Light);
   }
 }
 
