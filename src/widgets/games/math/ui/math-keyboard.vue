@@ -3,7 +3,7 @@ import {
   Haptics,
   ImpactStyle,
 } from '@capacitor/haptics';
-import { isNull } from 'lodash';
+import isNull from 'lodash/isNull';
 import toNumber from 'lodash/toNumber';
 import { computed } from 'vue';
 import type { MathKeyboardKey } from '../model';
