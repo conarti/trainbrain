@@ -9,14 +9,22 @@ import SpeedCountingGameResults from './speed-counting-game-results.vue';
 const { savedGames } = useSavedGames();
 
 const mathResults = computed(() => savedGames.value.math);
+const hasMathResults = computed(() => !isEmpty(mathResults.value));
 const speedCountingResults = computed(() => savedGames.value.speedCounting);
-const hasNoResults = computed(() => isEmpty(mathResults) && isEmpty(speedCountingResults));
+const hasSpeedCountingResults = computed(() => !isEmpty(speedCountingResults.value));
+const hasNoResults = computed(() => !hasMathResults.value && !hasSpeedCountingResults.value);
 </script>
 
 <template>
   <q-page padding>
     <EmptyResults v-if="hasNoResults" />
-    <MathGameResults :results="mathResults" />
-    <SpeedCountingGameResults :results="speedCountingResults" />
+    <MathGameResults
+      v-if="hasMathResults"
+      :results="mathResults"
+    />
+    <SpeedCountingGameResults
+      v-if="hasSpeedCountingResults"
+      :results="speedCountingResults"
+    />
   </q-page>
 </template>
