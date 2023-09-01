@@ -1,23 +1,22 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends BaseGameResult">
 import groupBy from 'lodash/groupBy';
 import isEmpty from 'lodash/isEmpty';
 import { date } from 'quasar';
 import { computed } from 'vue';
-import type { SavedGameResult } from '@/features/saved-games';
-import { formatTime } from '@/features/stopwatch';
+import type { BaseGameResult } from '@/features/saved-games';
 
 const DATE_WITH_TIME_UI_FORMAT = 'D MMM YYYY / HH:mm';
 const DATE_UI_FORMAT = 'D MMM YYYY';
 
 interface Props {
 	title: string;
-	results: SavedGameResult<unknown>;
+	results: T[];
 }
 
 const props = defineProps<Props>();
 
 const hasResults = computed(() => !isEmpty(props.results));
-const resultsGroupedByDay = computed(() => groupBy(props.results, (gameResult: SavedGameResult<unknown>) => {
+const resultsGroupedByDay = computed(() => groupBy(props.results, (gameResult: T) => {
   return date.formatDate(gameResult.date, DATE_UI_FORMAT);
 }));
 </script>
@@ -48,15 +47,10 @@ const resultsGroupedByDay = computed(() => groupBy(props.results, (gameResult: S
           :key="index"
         >
           <q-item-section>
-            <q-item-label>
-              Time: {{ formatTime(result.time) }}
-            </q-item-label>
-            <q-item-label caption>
-              <slot
-                name="result-body"
-                :value="result"
-              />
-            </q-item-label>
+            <slot
+              name="result-body"
+              :value="result"
+            />
           </q-item-section>
           <q-item-section
             side

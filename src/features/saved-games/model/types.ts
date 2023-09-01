@@ -1,6 +1,6 @@
 import type { ExerciseWithSolution } from '@/widgets/games/math';
 
-interface BaseGameResult {
+export interface BaseGameResult {
   date: number;
 }
 

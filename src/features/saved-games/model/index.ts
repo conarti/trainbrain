@@ -3,4 +3,6 @@ export type {
   MathGameResult,
   SpeedCountingGameResult,
   SavedGameResult,
+  SavedGameName,
+  BaseGameResult,
 } from './types';
