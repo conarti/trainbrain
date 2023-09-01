@@ -2,10 +2,9 @@
 import isEmpty from 'lodash/isEmpty';
 import { computed } from 'vue';
 import { useSavedGames } from '@/features/saved-games';
-import { formatTime } from '@/features/stopwatch';
 import EmptyResults from './empty-results.vue';
-import GameResults from './game-results.vue';
 import MathGameResults from './math-game-results.vue';
+import SpeedCountingGameResults from './speed-counting-game-results.vue';
 
 const { savedGames } = useSavedGames();
 
@@ -17,18 +16,7 @@ const hasNoResults = computed(() => isEmpty(mathResults) && isEmpty(speedCountin
 <template>
   <q-page padding>
     <EmptyResults v-if="hasNoResults" />
-
     <MathGameResults :results="mathResults" />
-
-    <game-results
-      title="Speed Counting Game"
-      :results="speedCountingResults"
-    >
-      <template #result-body="{ value }">
-        <q-item-label>
-          Time: {{ formatTime(value.time) }}
-        </q-item-label>
-      </template>
-    </game-results>
+    <SpeedCountingGameResults :results="speedCountingResults" />
   </q-page>
 </template>
