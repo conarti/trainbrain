@@ -48,7 +48,14 @@ function concatenate(number: number, toInput: number | null): number {
     return number;
   }
 
-  return toNumber(`${toInput}${number}`);
+  const resultNumber = toNumber(`${toInput}${number}`);
+
+  const isBrokenResult = resultNumber >= Number.MAX_SAFE_INTEGER;
+  if (isBrokenResult) {
+    return toInput;
+  }
+
+  return resultNumber;
 }
 
 function erase(input: number | null): number | null {
