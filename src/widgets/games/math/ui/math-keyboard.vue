@@ -89,7 +89,6 @@ async function handleKeyPress(keyValue: MathKeyboardKey) {
   default:
     innerModelValue.value = concatenate(keyValue, innerModelValue.value);
   }
-  await doHapticFeedback(keyValue);
 }
 </script>
 
@@ -105,6 +104,7 @@ async function handleKeyPress(keyValue: MathKeyboardKey) {
           class="col-grow"
           :value="key"
           :disable="isEmptyInput && isDoneKey(key)"
+          @touchstart="doHapticFeedback(key)"
           @press="handleKeyPress"
         />
       </div>
