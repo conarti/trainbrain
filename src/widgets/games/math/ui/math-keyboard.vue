@@ -116,7 +116,8 @@ async function handleTouchstart(key: MathKeyboardKey) {
           :value="key"
           :disable="isEmptyInput && isDoneKey(key)"
           @touchstart="handleTouchstart"
-          @press="handleKeyPress"
+          @touchend="handleKeyPress(key)"
+          @click="handleKeyPress(key)"
         />
       </div>
     </div>
