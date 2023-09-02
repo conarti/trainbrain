@@ -2,10 +2,6 @@
 import isNull from 'lodash/isNull';
 import toNumber from 'lodash/toNumber';
 import { computed } from 'vue';
-import {
-  doImpact,
-  ImpactStyle,
-} from '@/features/haptic-feedback';
 import type { MathKeyboardKey } from '../model';
 import MathKeyboardButton from './math-keyboard-button.vue';
 
@@ -78,13 +74,6 @@ function done() {
   emit('done');
 }
 
-async function doHapticFeedback(keyValue: MathKeyboardKey) {
-  switch (keyValue) {
-  default:
-    await doImpact(ImpactStyle.Light);
-  }
-}
-
 async function handleKeyPress(keyValue: MathKeyboardKey) {
   switch (keyValue) {
   case 'reset':
@@ -96,10 +85,6 @@ async function handleKeyPress(keyValue: MathKeyboardKey) {
   default:
     innerModelValue.value = concatenate(keyValue, innerModelValue.value);
   }
-}
-
-async function handleTouchstart(key: MathKeyboardKey) {
-  await doHapticFeedback(key);
 }
 </script>
 
@@ -115,9 +100,7 @@ async function handleTouchstart(key: MathKeyboardKey) {
           class="col-grow"
           :value="key"
           :disable="isEmptyInput && isDoneKey(key)"
-          @touchstart="handleTouchstart"
-          @touchend="handleKeyPress(key)"
-          @click="handleKeyPress(key)"
+          @press="handleKeyPress(key)"
         />
       </div>
     </div>
