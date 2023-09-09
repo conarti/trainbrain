@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import {
-  Haptics,
-  ImpactStyle,
-} from '@capacitor/haptics';
-import { isNull } from 'lodash';
+import isNull from 'lodash/isNull';
 import toNumber from 'lodash/toNumber';
 import { computed } from 'vue';
 import type { MathKeyboardKey } from '../model';
@@ -48,7 +44,14 @@ function concatenate(number: number, toInput: number | null): number {
     return number;
   }
 
-  return toNumber(`${toInput}${number}`);
+  const resultNumber = toNumber(`${toInput}${number}`);
+
+  const isBrokenResult = resultNumber >= Number.MAX_SAFE_INTEGER;
+  if (isBrokenResult) {
+    return toInput;
+  }
+
+  return resultNumber;
 }
 
 function erase(input: number | null): number | null {
@@ -71,13 +74,6 @@ function done() {
   emit('done');
 }
 
-async function doHapticFeedback(keyValue: MathKeyboardKey) {
-  switch (keyValue) {
-  default:
-    await Haptics.impact({ style: ImpactStyle.Light });
-  }
-}
-
 async function handleKeyPress(keyValue: MathKeyboardKey) {
   switch (keyValue) {
   case 'reset':
@@ -89,7 +85,6 @@ async function handleKeyPress(keyValue: MathKeyboardKey) {
   default:
     innerModelValue.value = concatenate(keyValue, innerModelValue.value);
   }
-  await doHapticFeedback(keyValue);
 }
 </script>
 
@@ -105,7 +100,7 @@ async function handleKeyPress(keyValue: MathKeyboardKey) {
           class="col-grow"
           :value="key"
           :disable="isEmptyInput && isDoneKey(key)"
-          @press="handleKeyPress"
+          @press="handleKeyPress(key)"
         />
       </div>
     </div>
