@@ -1,13 +1,15 @@
 import type { ExerciseWithSolution } from '@/widgets/games/math';
 
-export interface MathGameResult {
+export interface BaseGameResult {
   date: number;
+}
+
+export interface MathGameResult extends BaseGameResult {
   time: number;
   solutions: ExerciseWithSolution[];
 }
 
-export interface SpeedCountingGameResult {
-  date: number;
+export interface SpeedCountingGameResult extends BaseGameResult {
   time: number;
 }
 
