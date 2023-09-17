@@ -5,6 +5,9 @@ require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
   root: true,
+  ignorePatterns: [
+    '/android/**/*',
+  ],
   extends: [
     'alloy',
     'alloy/typescript',
