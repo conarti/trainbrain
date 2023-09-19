@@ -1,7 +1,13 @@
 /* eslint-env node */
 /* eslint-disable filenames-simple/naming-convention */
+/* eslint-disable @typescript-eslint/no-require-imports */
+require('@rushstack/eslint-patch/modern-module-resolution');
+
 module.exports = {
   root: true,
+  ignorePatterns: [
+    '/android/**/*',
+  ],
   extends: [
     'alloy',
     'alloy/typescript',
