@@ -5,7 +5,7 @@ import type {
   TouchRepeatValue,
 } from 'quasar';
 import {
-  doImpact,
+  useHapticFeedback,
   ImpactStyle,
 } from '@/features/haptic-feedback';
 import type { MathKeyboardKey } from '../model';
@@ -19,6 +19,8 @@ type Emits = (event: 'press', key: MathKeyboardKey) => void
 
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
+
+const haptics = useHapticFeedback();
 
 function createLabel(keyValue: MathKeyboardKey): string | number | undefined {
   if (isNumber(keyValue)) {
@@ -51,7 +53,7 @@ function chooseIcon(keyValue: MathKeyboardKey): string | undefined {
 }
 
 async function doHaptics() {
-  await doImpact(ImpactStyle.Light);
+  await haptics.value.impact(ImpactStyle.Light);
 }
 
 type TouchRepeatEvent = Parameters<Exclude<TouchRepeatValue, undefined>>[0];
