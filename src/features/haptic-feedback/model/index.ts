@@ -1,4 +1,3 @@
-export {
-  doImpact,
-  ImpactStyle,
-} from './do-impact';
+export { useHapticFeedback } from './use-haptic-feedback';
+export { useHapticFeedbackStore } from './use-haptic-feedback-store';
+export { ImpactStyle } from './types';
