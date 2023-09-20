@@ -63,10 +63,11 @@ async function press(event: TouchRepeatEvent) {
     return;
   }
 
-  const isFirstInput = event.repeatCount === 1;
-  if (isFirstInput) {
+  const needDoHapticFeedback = event.repeatCount === 1 || event.repeatCount === 2;
+  if (needDoHapticFeedback) {
     await doHaptics();
   }
+
   emit('press', props.value);
 }
 </script>
