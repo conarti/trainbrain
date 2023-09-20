@@ -11,12 +11,16 @@ export function useHapticFeedback() {
   const hapticInstance = ref<BaseHapticFeedback>(new EmptyHapticFeedback());
   const store = useHapticFeedbackStore();
 
-  watchEffect(() => {
-    if (store.isEnabled) {
-      hapticInstance.value = new HapticFeedback();
-    } else {
-      hapticInstance.value = new EmptyHapticFeedback();
+  function getHapticInstance(isHapticsEnabled: boolean) {
+    if (isHapticsEnabled) {
+      return new HapticFeedback();
     }
+
+    return new EmptyHapticFeedback();
+  }
+
+  watchEffect(() => {
+    hapticInstance.value = getHapticInstance(store.isEnabled);
   });
 
   return hapticInstance;
