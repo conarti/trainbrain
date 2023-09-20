@@ -52,29 +52,33 @@ function chooseIcon(keyValue: MathKeyboardKey): string | undefined {
   }
 }
 
-async function doHaptics() {
-  await haptics.value.impact(ImpactStyle.Light);
+async function doHaptics(repeatCount?: number) {
+  const needDoHapticFeedback = repeatCount === 1 || repeatCount === 2;
+  if (needDoHapticFeedback) {
+    await haptics.value.impact(ImpactStyle.Light);
+  }
+}
+
+function press() {
+  emit('press', props.value);
 }
 
 type TouchRepeatEvent = Parameters<Exclude<TouchRepeatValue, undefined>>[0];
 
-async function press(event: TouchRepeatEvent) {
+async function handleTouchRepeat(event: TouchRepeatEvent) {
   if (props.disable) {
     return;
   }
 
-  const needDoHapticFeedback = event.repeatCount === 1 || event.repeatCount === 2;
-  if (needDoHapticFeedback) {
-    await doHaptics();
-  }
+  await doHaptics(event.repeatCount);
 
-  emit('press', props.value);
+  press();
 }
 </script>
 
 <template>
   <q-btn
-    v-touch-repeat:0:600:100.mouse="press"
+    v-touch-repeat:0:600:100.mouse="handleTouchRepeat"
     :color="chooseColor(value)"
     push
     size="lg"
