@@ -15,7 +15,12 @@ interface Props {
 
 defineProps<Props>();
 
-type Emits = (event: 'start' | 'showResult') => void;
+interface Emits {
+  (event: 'start'): void;
+  // FIXME off this rule
+  // eslint-disable-next-line @typescript-eslint/unified-signatures
+  (event: 'showResult'): void;
+}
 
 const emit = defineEmits<Emits>();
 
