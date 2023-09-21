@@ -3,6 +3,7 @@ import {
   GameProgress,
   useGameProgress,
 } from '@/entities/game';
+import { useAppPause } from '@/shared/lib/use-app-pause';
 import { useBackButtonGuard } from '../model';
 import GameWrapperHeader from './game-wrapper-header.vue';
 
@@ -68,6 +69,8 @@ function handleExit() {
 }
 
 useBackButtonGuard(progress, handlePause);
+
+useAppPause(handlePause);
 </script>
 
 <template>
