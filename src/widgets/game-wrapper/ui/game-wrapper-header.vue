@@ -8,7 +8,10 @@ interface Props {
 
 defineProps<Props>();
 
-type Emits = (event: 'pause' | 'play') => void;
+interface Emits {
+  (event: 'play'): void
+  (event: 'pause'): void
+}
 
 const emit = defineEmits<Emits>();
 
