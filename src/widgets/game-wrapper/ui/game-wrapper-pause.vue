@@ -3,6 +3,7 @@ import { useHapticFeedbackStore } from '@/features/haptic-feedback';
 
 interface Emits {
   (event: 'resume'): void;
+  (event: 'exit'): void;
 }
 
 const emit = defineEmits<Emits>();
@@ -18,13 +19,18 @@ const hapticFeedbackStore = useHapticFeedbackStore();
 function resume() {
   emit('resume');
 }
+
+function exit() {
+  emit('exit');
+}
 </script>
 
 <template>
   <q-dialog
     :model-value="isVisible"
     full-width
-    @hide="resume"
+    no-backdrop-dismiss
+    no-esc-dismiss
   >
     <q-card>
       <q-card-section class="row items-center">
@@ -49,10 +55,16 @@ function resume() {
 
       <q-card-actions align="right">
         <q-btn
-          v-close-popup
+          flat
+          label="Exit"
+          color="red"
+          @click="exit"
+        />
+        <q-btn
           flat
           label="Continue"
           color="primary"
+          @click="resume"
         />
       </q-card-actions>
     </q-card>

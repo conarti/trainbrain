@@ -61,6 +61,10 @@ function handleSolved(results: any /* todo */) {
 function handleRestart() {
   setProgressNotStarted();
 }
+
+function handleExit() {
+  setProgressNotStarted();
+}
 </script>
 
 <template>
@@ -69,6 +73,7 @@ function handleRestart() {
       :progress="progress"
       @pause="handlePause"
       @resume="handleResume"
+      @exit="handleExit"
     />
     <q-page-container>
       <q-page padding>

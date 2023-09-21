@@ -12,6 +12,7 @@ defineProps<Props>();
 interface Emits {
   (event: 'pause'): void
   (event: 'resume'): void
+  (event: 'exit'): void
 }
 
 const emit = defineEmits<Emits>();
@@ -25,12 +26,17 @@ function pause() {
 function resume() {
   emit('resume');
 }
+
+function exit() {
+  emit('exit');
+}
 </script>
 
 <template>
   <q-header>
     <q-toolbar>
       <q-btn
+        v-if="progress === GameProgress.NotStarted || progress === GameProgress.ShowingResults"
         icon="arrow_back"
         round
         flat
@@ -50,5 +56,6 @@ function resume() {
   <game-wrapper-pause
     :is-visible="progress === GameProgress.Paused"
     @resume="resume"
+    @exit="exit"
   />
 </template>
