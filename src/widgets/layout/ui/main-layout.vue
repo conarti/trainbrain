@@ -1,6 +1,31 @@
 <script setup lang="ts">
+import type { RouteLocationRaw } from 'vue-router';
 import { RouteNames } from '@/shared/config/route-names';
 import TheHeader from './the-header.vue';
+
+interface NavigationTab {
+  to: RouteLocationRaw;
+  label: string;
+  icon: string;
+}
+
+const NAVIGATION_TABS: NavigationTab[] = [
+  {
+    to: { name: RouteNames.Train },
+    label: 'Train',
+    icon: 'sym_r_psychology',
+  },
+  {
+    to: { name: RouteNames.Games },
+    label: 'Games',
+    icon: 'sym_r_category',
+  },
+  {
+    to: { name: RouteNames.Results },
+    label: 'Stats',
+    icon: 'sym_r_bar_chart_4_bars',
+  },
+];
 </script>
 
 <template>
@@ -18,19 +43,11 @@ import TheHeader from './the-header.vue';
         no-caps
       >
         <q-route-tab
-          :to="{ name: RouteNames.Train }"
-          label="Train"
-          icon="sym_r_psychology"
-        />
-        <q-route-tab
-          :to="{ name: RouteNames.Games }"
-          label="Games"
-          icon="sym_r_category"
-        />
-        <q-route-tab
-          :to="{ name: RouteNames.Results }"
-          label="Stats"
-          icon="sym_r_bar_chart_4_bars"
+          v-for="(tab, index) in NAVIGATION_TABS"
+          :key="index"
+          :to="tab.to"
+          :label="tab.label"
+          :icon="tab.icon"
         />
       </q-tabs>
     </q-footer>
