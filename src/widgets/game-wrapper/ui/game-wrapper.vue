@@ -1,33 +1,49 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import {
   GameProgress,
   useGameProgress,
 } from '@/entities/game';
 import GameWrapperHeader from './game-wrapper-header.vue';
-import GameWrapperPause from './game-wrapper-pause.vue';
+
+interface Emits {
+  (event: 'start', settings: any): void; // todo
+  (event: 'pause'): void;
+  (event: 'resume'): void;
+  (event: 'show-results', results: any): void; // todo
+}
+
+const emit = defineEmits<Emits>();
 
 const {
   progress,
+  setProgressNotStarted,
   setProgressStarted,
   setProgressShowingResults,
   setProgressPaused,
 } = useGameProgress();
 
-interface Game {
-	pause: () => void;
-	play: () => void;
-}
-const game = ref<Game>();
-
 function handlePause() {
   setProgressPaused();
-  game.value?.pause();
+  emit('pause');
 }
 
-function handlePlay() {
+function handleStart(settings: any /* todo */) {
   setProgressStarted();
-  game.value?.play();
+  emit('start', settings);
+}
+
+function handleResume() {
+  setProgressStarted();
+  emit('resume');
+}
+
+function handleSolved(results: any /* todo */) {
+  setProgressShowingResults();
+  emit('show-results', results);
+}
+
+function handleRestart() {
+  setProgressNotStarted();
 }
 </script>
 
@@ -36,25 +52,25 @@ function handlePlay() {
     <game-wrapper-header
       :progress="progress"
       @pause="handlePause"
-      @play="handlePlay"
+      @resume="handleResume"
     />
     <q-page-container>
       <q-page padding>
-        <game-wrapper-pause
-          :is-visible="progress === GameProgress.Paused"
-          @play="handlePlay"
+        <slot
+          v-if="progress === GameProgress.NotStarted"
+          name="start"
+          :handle-start="handleStart"
         />
-        <router-view
-          v-slot="{ Component }"
-          :progress="progress"
-          @start="setProgressStarted"
-          @show-result="setProgressShowingResults"
-        >
-          <component
-            :is="Component"
-            ref="game"
-          />
-        </router-view>
+        <slot
+          v-else-if="progress === GameProgress.Started || progress === GameProgress.Paused"
+          name="trainer"
+          :handle-solved="handleSolved"
+        />
+        <slot
+          v-else-if="progress === GameProgress.ShowingResults"
+          name="results"
+          :handle-restart="handleRestart"
+        />
       </q-page>
     </q-page-container>
   </q-layout>

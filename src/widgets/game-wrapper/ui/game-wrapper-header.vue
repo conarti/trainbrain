@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { GameProgress } from '@/entities/game';
+import GameWrapperPause from './game-wrapper-pause.vue';
 
 interface Props {
   progress: GameProgress;
@@ -9,8 +10,8 @@ interface Props {
 defineProps<Props>();
 
 interface Emits {
-  (event: 'play'): void
   (event: 'pause'): void
+  (event: 'resume'): void
 }
 
 const emit = defineEmits<Emits>();
@@ -21,8 +22,8 @@ function pause() {
   emit('pause');
 }
 
-function play() {
-  emit('play');
+function resume() {
+  emit('resume');
 }
 </script>
 
@@ -37,19 +38,17 @@ function play() {
       />
       <q-space />
       <q-btn
-        v-if="progress === GameProgress.Started"
+        v-if="progress === GameProgress.Started || progress === GameProgress.Paused"
         icon="pause"
         round
         flat
         @click="pause"
       />
-      <q-btn
-        v-else-if="progress === GameProgress.Paused"
-        icon="play_arrow"
-        round
-        flat
-        @click="play"
-      />
     </q-toolbar>
   </q-header>
+
+  <game-wrapper-pause
+    :is-visible="progress === GameProgress.Paused"
+    @resume="resume"
+  />
 </template>

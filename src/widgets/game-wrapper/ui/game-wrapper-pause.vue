@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useHapticFeedbackStore } from '@/features/haptic-feedback';
 
-type Emits = (event: 'play') => void
+interface Emits {
+  (event: 'resume'): void;
+}
 
 const emit = defineEmits<Emits>();
 
@@ -13,8 +15,8 @@ defineProps<Props>();
 
 const hapticFeedbackStore = useHapticFeedbackStore();
 
-function play() {
-  emit('play');
+function resume() {
+  emit('resume');
 }
 </script>
 
@@ -22,7 +24,7 @@ function play() {
   <q-dialog
     :model-value="isVisible"
     full-width
-    @hide="play"
+    @hide="resume"
   >
     <q-card>
       <q-card-section class="row items-center">
