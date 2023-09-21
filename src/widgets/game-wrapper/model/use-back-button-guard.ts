@@ -12,7 +12,7 @@ import { GameProgress } from '@/entities/game';
 export function useBackButtonGuard(progress: Ref<GameProgress>, handlePause: () => void) {
   const router = useRouter();
 
-  App.addListener('backButton', () => {
+  function handleBackButtonListener() {
     if (progress.value === GameProgress.Started) {
       handlePause();
       return;
@@ -23,9 +23,15 @@ export function useBackButtonGuard(progress: Ref<GameProgress>, handlePause: () 
     }
 
     router.back();
+  }
+
+  let listener: ReturnType<typeof App.addListener>;
+
+  App.removeAllListeners().then(() => {
+    listener = App.addListener('backButton', handleBackButtonListener);
   });
 
   onBeforeUnmount(() => {
-    App.removeAllListeners();
+    listener.remove();
   });
 }
