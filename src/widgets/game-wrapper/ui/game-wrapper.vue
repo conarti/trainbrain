@@ -22,24 +22,40 @@ const {
   setProgressPaused,
 } = useGameProgress();
 
+function pause() {
+  emit('pause');
+}
+
 function handlePause() {
   setProgressPaused();
-  emit('pause');
+  pause();
+}
+
+function start(settings: any /* todo */) {
+  emit('start', settings);
 }
 
 function handleStart(settings: any /* todo */) {
   setProgressStarted();
-  emit('start', settings);
+  start(settings);
+}
+
+function resume() {
+  emit('resume');
 }
 
 function handleResume() {
   setProgressStarted();
-  emit('resume');
+  resume();
+}
+
+function showResults(results: any /* todo */) {
+  emit('show-results', results);
 }
 
 function handleSolved(results: any /* todo */) {
   setProgressShowingResults();
-  emit('show-results', results);
+  showResults(results);
 }
 
 function handleRestart() {
