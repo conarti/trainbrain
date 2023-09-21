@@ -1,16 +1,20 @@
 <script setup lang="ts">
+import { formatTime } from '@/features/stopwatch';
+
 interface Props {
-  time: string;
+  time: number;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
-type Emits = (event: 'finish') => void;
+interface Emits {
+  (event: 'finish', results: number): void;
+}
 
 const emit = defineEmits<Emits>();
 
 function finish() {
-  emit('finish');
+  emit('finish', props.time);
 }
 </script>
 
@@ -21,7 +25,7 @@ function finish() {
   >
     <q-card-section>
       <h4 class="q-ma-none q-mb-md text-center">
-        {{ time }}
+        {{ formatTime(time) }}
       </h4>
     </q-card-section>
     <q-card-actions>

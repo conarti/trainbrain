@@ -1,23 +1,13 @@
 <script setup lang="ts">
-import { useSavedGames } from '@/features/saved-games';
+import { GameWrapper } from '@/widgets/game-wrapper';
 import {
-  formatTime,
-  useStopwatch,
-} from '@/features/stopwatch';
-import { GameProgress } from '@/entities/game';
+  type SavedGameResult,
+  useSavedGames,
+} from '@/features/saved-games';
+import { useStopwatch } from '@/features/stopwatch';
 import GameResults from './game-results.vue';
 import PlayGame from './play-game.vue';
 import StartGame from './start-game.vue';
-
-interface Props {
-  progress: GameProgress;
-}
-
-defineProps<Props>();
-
-type Emits = (event: 'start' | 'showResult') => void;
-
-const emit = defineEmits<Emits>();
 
 const {
   time: gameTime,
@@ -27,40 +17,66 @@ const {
 } = useStopwatch();
 const { save } = useSavedGames();
 
-function handleStartGame() {
-  emit('start');
+function handleGameStart() {
   resetStopwatch();
   startStopwatch();
 }
 
-function handleFinishGame() {
-  emit('showResult');
-  stopStopwatch();
-  save('speedCounting', {
-    date: Date.now(),
-    time: gameTime.value,
-  });
+function toSpeedCountingResult({
+  todayDate,
+  result,
+}: {
+  todayDate: ReturnType<typeof Date.now>,
+  result: number,
+}): SavedGameResult<'speedCounting'> {
+  return {
+    date: todayDate,
+    time: result,
+  };
 }
 
-defineExpose({
-  play: startStopwatch,
-  pause: stopStopwatch,
-});
+function handleShowResults(result: any) {
+  stopStopwatch();
+
+  const todayDate = Date.now();
+  save('speedCounting', toSpeedCountingResult({
+    todayDate,
+    result,
+  }));
+}
+
+function handleGameResume() {
+  startStopwatch();
+}
+
+function handleGamePause() {
+  stopStopwatch();
+}
 </script>
 
 <template>
-  <StartGame
-    v-if="progress === GameProgress.NotStarted"
-    @start="handleStartGame"
-  />
-  <GameResults
-    v-else-if="progress === GameProgress.ShowingResults"
-    :time="formatTime(gameTime)"
-    @restart="handleStartGame"
-  />
-  <PlayGame
-    v-else
-    :time="formatTime(gameTime)"
-    @finish="handleFinishGame"
-  />
+  <game-wrapper
+    @start="handleGameStart"
+    @resume="handleGameResume"
+    @pause="handleGamePause"
+    @show-results="handleShowResults"
+  >
+    <template #start="{ handleStart }">
+      <StartGame @start="handleStart" />
+    </template>
+
+    <template #trainer="{ handleSolved }">
+      <PlayGame
+        :time="gameTime"
+        @finish="handleSolved"
+      />
+    </template>
+
+    <template #results="{ handleRestart }">
+      <GameResults
+        :time="gameTime"
+        @restart="handleRestart"
+      />
+    </template>
+  </game-wrapper>
 </template>
