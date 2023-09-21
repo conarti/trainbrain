@@ -35,6 +35,7 @@ function play() {
         flat
         @click="router.back()"
       />
+      <q-space />
       <q-btn
         v-if="progress === GameProgress.Started"
         icon="pause"
