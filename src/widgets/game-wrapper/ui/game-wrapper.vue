@@ -4,7 +4,7 @@ import {
   GameProgress,
   useGameProgress,
 } from '@/entities/game';
-import GameWrapperActions from './game-wrapper-actions.vue';
+import GameWrapperHeader from './game-wrapper-header.vue';
 import GameWrapperPause from './game-wrapper-pause.vue';
 
 const {
@@ -33,13 +33,13 @@ function handlePlay() {
 
 <template>
   <q-layout view="hHh lpR fFf">
+    <game-wrapper-header
+      :progress="progress"
+      @pause="handlePause"
+      @play="handlePlay"
+    />
     <q-page-container>
       <q-page padding>
-        <game-wrapper-actions
-          :progress="progress"
-          @pause="handlePause"
-          @play="handlePlay"
-        />
         <game-wrapper-pause
           :is-visible="progress === GameProgress.Paused"
           @play="handlePlay"
