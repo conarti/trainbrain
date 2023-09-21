@@ -3,6 +3,7 @@ import {
   GameProgress,
   useGameProgress,
 } from '@/entities/game';
+import { useBackButtonGuard } from '../model';
 import GameWrapperHeader from './game-wrapper-header.vue';
 
 interface Emits {
@@ -65,6 +66,8 @@ function handleRestart() {
 function handleExit() {
   setProgressNotStarted();
 }
+
+useBackButtonGuard(progress, handlePause);
 </script>
 
 <template>
