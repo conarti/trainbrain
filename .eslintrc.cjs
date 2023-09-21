@@ -70,5 +70,7 @@ module.exports = {
       ignoreStrings: true,
       ignoreTemplateLiterals: true,
     }],
+    '@typescript-eslint/unified-signatures': 'off',
+    '@typescript-eslint/prefer-function-type': 'off',
   },
 };
