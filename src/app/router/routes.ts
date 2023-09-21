@@ -12,6 +12,7 @@ export const routes = [
   {
     path: '/',
     component: MainLayout,
+    redirect: '/games',
     children: [
       /* {
         path: '',
@@ -24,7 +25,7 @@ export const routes = [
         component: ResultsPage,
       },
       {
-        path: '',
+        path: 'games',
         name: RouteNames.Games,
         component: GamesPage,
       },
