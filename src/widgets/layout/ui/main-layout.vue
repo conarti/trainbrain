@@ -10,11 +10,11 @@ interface NavigationTab {
 }
 
 const NAVIGATION_TABS: NavigationTab[] = [
-  {
+  /* {
     to: { name: RouteNames.Train },
     label: 'Train',
     icon: 'sym_r_psychology',
-  },
+  }, */
   {
     to: { name: RouteNames.Games },
     label: 'Games',
