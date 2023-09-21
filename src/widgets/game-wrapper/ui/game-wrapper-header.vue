@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
 import { GameProgress } from '@/entities/game';
-import { RouteNames } from '@/shared/config/route-names';
 
 interface Props {
   progress: GameProgress;
@@ -11,6 +11,8 @@ defineProps<Props>();
 type Emits = (event: 'pause' | 'play') => void;
 
 const emit = defineEmits<Emits>();
+
+const router = useRouter();
 
 function pause() {
   emit('pause');
@@ -25,10 +27,10 @@ function play() {
   <q-header>
     <q-toolbar>
       <q-btn
-        :to="{ name: RouteNames.Games }"
         icon="arrow_back"
         round
         flat
+        @click="router.back()"
       />
       <q-btn
         v-if="progress === GameProgress.Started"
