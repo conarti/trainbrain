@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useHapticFeedbackStore } from '@/features/haptic-feedback';
+
 type Emits = (event: 'play') => void
 
 const emit = defineEmits<Emits>();
@@ -8,6 +10,8 @@ interface Props {
 }
 
 defineProps<Props>();
+
+const hapticFeedbackStore = useHapticFeedbackStore();
 
 function play() {
   emit('play');
@@ -26,6 +30,20 @@ function play() {
           Pause
         </h6>
       </q-card-section>
+
+      <q-list>
+        <q-item
+          v-ripple
+          tag="label"
+        >
+          <q-item-section>
+            <q-item-label>Enable vibration</q-item-label>
+          </q-item-section>
+          <q-item-section side>
+            <q-toggle v-model="hapticFeedbackStore.isEnabled" />
+          </q-item-section>
+        </q-item>
+      </q-list>
 
       <q-card-actions align="right">
         <q-btn

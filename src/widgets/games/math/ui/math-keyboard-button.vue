@@ -5,7 +5,7 @@ import type {
   TouchRepeatValue,
 } from 'quasar';
 import {
-  doImpact,
+  useHapticFeedback,
   ImpactStyle,
 } from '@/features/haptic-feedback';
 import type { MathKeyboardKey } from '../model';
@@ -19,6 +19,8 @@ type Emits = (event: 'press', key: MathKeyboardKey) => void
 
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
+
+const haptics = useHapticFeedback();
 
 function createLabel(keyValue: MathKeyboardKey): string | number | undefined {
   if (isNumber(keyValue)) {
@@ -50,28 +52,33 @@ function chooseIcon(keyValue: MathKeyboardKey): string | undefined {
   }
 }
 
-async function doHaptics() {
-  await doImpact(ImpactStyle.Light);
+async function doHaptics(repeatCount?: number) {
+  const needDoHapticFeedback = repeatCount === 1 || repeatCount === 2;
+  if (needDoHapticFeedback) {
+    await haptics.value.impact(ImpactStyle.Light);
+  }
+}
+
+function press() {
+  emit('press', props.value);
 }
 
 type TouchRepeatEvent = Parameters<Exclude<TouchRepeatValue, undefined>>[0];
 
-async function press(event: TouchRepeatEvent) {
+async function handleTouchRepeat(event: TouchRepeatEvent) {
   if (props.disable) {
     return;
   }
 
-  const isFirstInput = event.repeatCount === 1;
-  if (isFirstInput) {
-    await doHaptics();
-  }
-  emit('press', props.value);
+  await doHaptics(event.repeatCount);
+
+  press();
 }
 </script>
 
 <template>
   <q-btn
-    v-touch-repeat:0:600:100.mouse="press"
+    v-touch-repeat:0:600:100.mouse="handleTouchRepeat"
     :color="chooseColor(value)"
     push
     size="lg"
