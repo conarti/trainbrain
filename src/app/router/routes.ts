@@ -2,10 +2,7 @@ import { GamesPage } from '@/pages/games';
 import { ResultsPage } from '@/pages/results';
 import { MathGame } from '@/widgets/games/math';
 import { SpeedCountingGame } from '@/widgets/games/speed-counting';
-import {
-  MainLayout,
-  GameLayout,
-} from '@/widgets/layout';
+import { MainLayout } from '@/widgets/layout';
 import { RouteNames } from '@/shared/config/route-names';
 
 export const routes = [
@@ -32,19 +29,13 @@ export const routes = [
     ],
   },
   {
-    path: '/games',
-    component: GameLayout,
-    children: [
-      {
-        path: 'math',
-        name: RouteNames.MathGame,
-        component: MathGame,
-      },
-      {
-        path: 'speed-counting',
-        name: RouteNames.SpeedCounting,
-        component: SpeedCountingGame,
-      },
-    ],
+    path: '/games/math',
+    name: RouteNames.MathGame,
+    component: MathGame,
+  },
+  {
+    path: '/games/speed-counting',
+    name: RouteNames.SpeedCounting,
+    component: SpeedCountingGame,
   },
 ];
