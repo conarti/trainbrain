@@ -15,7 +15,9 @@ interface Props {
 
 const props = defineProps<Props>();
 
-type Emits = (event: 'restart') => void
+interface Emits {
+  (event: 'restart'): void;
+}
 
 const emit = defineEmits<Emits>();
 

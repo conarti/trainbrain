@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { GameProgress } from '@/entities/game';
+// eslint-disable-next-line @conarti/feature-sliced/layers-slices
+import { GameWrapper } from '@/widgets/game-wrapper'; // todo
 import {
   toExercisesWithSolutionsAdapter,
   useExercisesTrainer,
@@ -9,27 +10,12 @@ import ShowTrainResults from './show-train-results.vue';
 import SolveExercises from './solve-exercises.vue';
 import StartGame from './start-game.vue';
 
-interface Props {
-  progress: GameProgress;
-}
-
-defineProps<Props>();
-
-interface Emits {
-  (event: 'start'): void;
-  // FIXME off this rule
-  // eslint-disable-next-line @typescript-eslint/unified-signatures
-  (event: 'showResult'): void;
-}
-
-const emit = defineEmits<Emits>();
-
 const {
   gameTime,
   exercises,
-  start: startExerciseTrainer,
-  resume: resumeExerciseTrainer,
-  stop: stopExerciseTrainer,
+  start,
+  resume,
+  stop,
 } = useExercisesTrainer();
 
 const {
@@ -38,44 +24,50 @@ const {
   updateResults,
 } = useResults();
 
-function start(exercisesCount: number) {
-  emit('start');
-  startExerciseTrainer(exercisesCount);
+function handleGameStart(settings: number) {
+  start(settings);
 }
 
-function showResults(solutions: number[]) {
-  stopExerciseTrainer();
+function handleGamePause() {
+  stop();
+}
+
+function handleGameResume() {
+  resume();
+}
+
+function handleGameSolved(solutions: number[]) {
+  stop();
   const exerciseWithSolution = toExercisesWithSolutionsAdapter(solutions, exercises.value);
   updateResults(exerciseWithSolution, gameTime.value);
-  emit('showResult');
 }
-
-function handleRestart() {
-  const solvedExercisesCount = exercises.value.length;
-  start(solvedExercisesCount);
-}
-
-defineExpose({
-  play: resumeExerciseTrainer,
-  pause: stopExerciseTrainer,
-});
 </script>
 
 <template>
-  <StartGame
-    v-if="progress === GameProgress.NotStarted"
-    @start="start"
-  />
-  <ShowTrainResults
-    v-else-if="progress === GameProgress.ShowingResults"
-    :results="results"
-    :time="resultTime"
-    @restart="handleRestart"
-  />
-  <SolveExercises
-    v-else
-    :time="gameTime"
-    :exercises="exercises"
-    @solved="showResults"
-  />
+  <game-wrapper
+    @start="handleGameStart"
+    @pause="handleGamePause"
+    @resume="handleGameResume"
+    @show-results="handleGameSolved"
+  >
+    <template #start="{ handleStart }">
+      <StartGame @start="handleStart" />
+    </template>
+
+    <template #trainer="{ handleSolved }">
+      <SolveExercises
+        :time="gameTime"
+        :exercises="exercises"
+        @solved="handleSolved"
+      />
+    </template>
+
+    <template #results="{ handleRestart }">
+      <ShowTrainResults
+        :results="results"
+        :time="resultTime"
+        @restart="handleRestart"
+      />
+    </template>
+  </game-wrapper>
 </template>
