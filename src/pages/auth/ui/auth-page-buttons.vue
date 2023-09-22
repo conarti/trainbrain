@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import { useAuthDialog } from '@/features/auth';
+
+const {
+  openLogin,
+  openRegister,
+} = useAuthDialog();
+</script>
+
 <template>
   <div class="column items-stretch q-gutter-sm q-mt-auto">
     <p>
@@ -10,6 +19,7 @@
       rounded
       color="white"
       text-color="primary"
+      @click="openRegister"
     >
       Register
     </q-btn>
@@ -19,6 +29,7 @@
       outline
       rounded
       color="white"
+      @click="openLogin"
     >
       Login
     </q-btn>
