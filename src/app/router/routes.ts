@@ -1,3 +1,4 @@
+import type { RouteRecordRaw } from 'vue-router';
 import { GamesPage } from '@/pages/games';
 import { ProfilePage } from '@/pages/profile';
 import { ResultsPage } from '@/pages/results';
@@ -6,7 +7,7 @@ import { SpeedCountingGame } from '@/widgets/games/speed-counting';
 import { MainLayout } from '@/widgets/layout';
 import { RouteNames } from '@/shared/config/route-names';
 
-export const routes = [
+export const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: MainLayout,
