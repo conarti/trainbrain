@@ -25,6 +25,11 @@ const NAVIGATION_TABS: NavigationTab[] = [
     label: 'Stats',
     icon: 'sym_r_bar_chart_4_bars',
   },
+  {
+    to: { name: RouteNames.Profile },
+    label: 'Profile',
+    icon: 'sym_r_account_circle',
+  },
 ];
 </script>
 
