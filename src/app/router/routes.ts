@@ -1,4 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router';
+import { AuthPage } from '@/pages/auth';
 import { GamesPage } from '@/pages/games';
 import { ProfilePage } from '@/pages/profile';
 import { ResultsPage } from '@/pages/results';
@@ -34,6 +35,11 @@ export const routes: RouteRecordRaw[] = [
         component: ProfilePage,
       },
     ],
+  },
+  {
+    path: '/auth',
+    name: RouteNames.Auth,
+    component: AuthPage,
   },
   {
     path: '/games/math',
