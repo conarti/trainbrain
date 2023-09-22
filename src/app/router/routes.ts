@@ -1,4 +1,5 @@
 import { GamesPage } from '@/pages/games';
+import { ProfilePage } from '@/pages/profile';
 import { ResultsPage } from '@/pages/results';
 import { MathGame } from '@/widgets/games/math';
 import { SpeedCountingGame } from '@/widgets/games/speed-counting';
@@ -25,6 +26,11 @@ export const routes = [
         path: 'games',
         name: RouteNames.Games,
         component: GamesPage,
+      },
+      {
+        path: 'profile',
+        name: RouteNames.Profile,
+        component: ProfilePage,
       },
     ],
   },

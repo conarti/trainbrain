@@ -3,5 +3,6 @@ export const enum RouteNames {
 	Results = 'results',
 	Games = 'games',
 	MathGame = 'math',
-	SpeedCounting = 'speed-counting'
+	SpeedCounting = 'speed-counting',
+	Profile = 'profile',
 }
