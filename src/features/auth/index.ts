@@ -1,0 +1,1 @@
+export { useAuthDialog } from './lib';
