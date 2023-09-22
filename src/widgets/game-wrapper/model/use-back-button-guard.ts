@@ -1,37 +1,20 @@
-import {
-  onBeforeUnmount,
-  type Ref,
-} from 'vue';
-import { useRouter } from 'vue-router';
-import { App } from '@capacitor/app';
+import type { Ref } from 'vue';
 import { GameProgress } from '@/entities/game';
+import { useAndroidBackButton } from '@/shared/lib/use-android-back-button';
 
 /**
  * Prevents exiting the game using the "back" button and pauses if the button was pressed during the game
  */
 export function useBackButtonGuard(progress: Ref<GameProgress>, handlePause: () => void) {
-  const router = useRouter();
-
-  function handleBackButtonListener() {
+  function handleBackButtonListener(): boolean {
     if (progress.value === GameProgress.Started) {
       handlePause();
-      return;
+      return false;
     }
 
-    if (progress.value === GameProgress.Paused) {
-      return;
-    }
-
-    router.back();
+    const canLeaveRoute = progress.value !== GameProgress.Paused;
+    return canLeaveRoute;
   }
 
-  let listener: ReturnType<typeof App.addListener>;
-
-  App.removeAllListeners().then(() => {
-    listener = App.addListener('backButton', handleBackButtonListener);
-  });
-
-  onBeforeUnmount(() => {
-    listener.remove();
-  });
+  useAndroidBackButton(handleBackButtonListener);
 }
