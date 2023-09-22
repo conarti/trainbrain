@@ -3,6 +3,7 @@ import '@quasar/extras/material-symbols-rounded/material-symbols-rounded.css';
 import 'quasar/src/css/index.sass';
 import { createPinia } from 'pinia';
 import {
+  Dialog,
   LocalStorage,
   Quasar,
 } from 'quasar';
@@ -17,6 +18,7 @@ app.use(Quasar, {
     dark: 'auto',
   },
   plugins: {
+    Dialog,
     LocalStorage,
   },
 });
