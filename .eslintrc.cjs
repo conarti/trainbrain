@@ -30,6 +30,7 @@ module.exports = {
   rules: {
     /* feature sliced strict recommended rules */
     '@conarti/feature-sliced/public-api': ['error', { level: 'segments' }],
+    '@conarti/feature-sliced/layers-slices': ['error', { ignorePatterns: ['@capacitor/*'] }],
 
     /* my own style rules */
     'filenames-simple/naming-convention': ['error', { rule: 'kebab-case' }],
