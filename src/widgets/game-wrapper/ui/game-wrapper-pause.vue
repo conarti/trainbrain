@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { useHapticFeedbackStore } from '@/features/haptic-feedback';
 
-type Emits = (event: 'play') => void
+interface Emits {
+  (event: 'resume'): void;
+  (event: 'exit'): void;
+}
 
 const emit = defineEmits<Emits>();
 
@@ -13,8 +16,12 @@ defineProps<Props>();
 
 const hapticFeedbackStore = useHapticFeedbackStore();
 
-function play() {
-  emit('play');
+function resume() {
+  emit('resume');
+}
+
+function exit() {
+  emit('exit');
 }
 </script>
 
@@ -22,7 +29,8 @@ function play() {
   <q-dialog
     :model-value="isVisible"
     full-width
-    @hide="play"
+    no-backdrop-dismiss
+    no-esc-dismiss
   >
     <q-card>
       <q-card-section class="row items-center">
@@ -47,10 +55,16 @@ function play() {
 
       <q-card-actions align="right">
         <q-btn
-          v-close-popup
+          flat
+          label="Exit"
+          color="red"
+          @click="exit"
+        />
+        <q-btn
           flat
           label="Continue"
           color="primary"
+          @click="resume"
         />
       </q-card-actions>
     </q-card>

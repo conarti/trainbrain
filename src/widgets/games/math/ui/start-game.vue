@@ -3,7 +3,9 @@ import { ref } from 'vue';
 import { VALIDATION_RULES } from '@/shared/constants/validation-rules';
 import { EXERCISES_COUNT_DEFAULT } from '../config';
 
-type Emits = (event: 'start', exercisesCount: number) => void;
+interface Emits {
+  (event: 'start', exercisesCount: number): void;
+}
 
 const emit = defineEmits<Emits>();
 

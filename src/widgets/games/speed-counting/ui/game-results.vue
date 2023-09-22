@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { formatTime } from '@/features/stopwatch';
+
 interface Props {
-  time: string;
+  time: number;
 }
 
 defineProps<Props>();
@@ -21,7 +23,7 @@ function restart() {
   >
     <q-card-section>
       <h6 class="q-ma-none q-mb-md text-center">
-        Your time is {{ time }}
+        Your time is {{ formatTime(time) }}
       </h6>
     </q-card-section>
     <q-card-actions>
