@@ -32,7 +32,10 @@ function handleSubmit() {
       :rules="[VALIDATION_RULES.required]"
     />
     <InputUsername v-model="username" />
-    <InputPassword v-model="password" />
+    <InputPassword
+      v-model="password"
+      autocomplete="new-password"
+    />
     <q-btn
       type="submit"
       push
