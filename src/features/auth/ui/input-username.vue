@@ -11,5 +11,9 @@ const username = defineModel<string>();
     label="Username"
     lazy-rules
     :rules="[VALIDATION_RULES.username]"
-  />
+  >
+    <template #prepend>
+      <q-icon name="sym_r_account_circle" />
+    </template>
+  </q-input>
 </template>

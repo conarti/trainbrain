@@ -9,7 +9,7 @@ import { VALIDATION_RULES } from '@/shared/constants/validation-rules';
 const modelValue = defineModel<string>();
 const isTypePassword = ref(true);
 
-const iconName = computed(() => isTypePassword.value ? 'visibility_off' : 'visibility');
+const iconName = computed(() => isTypePassword.value ? 'sym_r_visibility_off' : 'sym_r_visibility');
 const inputType = computed(() => isTypePassword.value ? 'password' : 'text');
 
 function toggleInputType() {
@@ -25,6 +25,9 @@ function toggleInputType() {
     :type="inputType"
     :rules="[VALIDATION_RULES.password]"
   >
+    <template #prepend>
+      <q-icon name="sym_r_password" />
+    </template>
     <template #append>
       <q-icon
         :name="iconName"
