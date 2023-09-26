@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { VALIDATION_RULES } from '@/shared/constants/validation-rules';
+import InputFirstName from './input-first-name.vue';
+import InputLastName from './input-last-name.vue';
 import InputPassword from './input-password.vue';
 import InputUsername from './input-username.vue';
 
-const firstname = ref<string>('');
-const lastname = ref<string>('');
+const firstName = ref<string>('');
+const lastName = ref<string>('');
 const username = ref<string>('');
 const password = ref<string>('');
 
@@ -19,18 +20,8 @@ function handleSubmit() {
     class="column q-gutter-y-md"
     @submit="handleSubmit"
   >
-    <q-input
-      v-model="firstname"
-      label="Firstname"
-      lazy-rules
-      :rules="[VALIDATION_RULES.required]"
-    />
-    <q-input
-      v-model="lastname"
-      label="Lastname"
-      lazy-rules
-      :rules="[VALIDATION_RULES.required]"
-    />
+    <InputFirstName v-model="firstName" />
+    <InputLastName v-model="lastName" />
     <InputUsername v-model="username" />
     <InputPassword
       v-model="password"
