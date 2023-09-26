@@ -6,6 +6,14 @@ import {
 } from 'vue';
 import { VALIDATION_RULES } from '@/shared/constants/validation-rules';
 
+interface Props {
+  label?: string;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  label: 'Password',
+});
+
 const modelValue = defineModel<string>();
 const isTypePassword = ref(true);
 
@@ -20,7 +28,7 @@ function toggleInputType() {
 <template>
   <q-input
     v-model="modelValue"
-    label="Password"
+    :label="props.label"
     lazy-rules
     :type="inputType"
     :rules="[VALIDATION_RULES.password]"
