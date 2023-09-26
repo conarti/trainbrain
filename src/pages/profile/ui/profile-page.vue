@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { useQuasar } from 'quasar';
 import { ref } from 'vue';
+import EditNameDialog from './edit-name-dialog.vue';
 
 interface UserProfile {
   firstname: string;
@@ -12,6 +14,13 @@ const userProfile = ref<UserProfile>({
   lastname: 'Belous',
   username: 'conarti',
 });
+const $q = useQuasar();
+
+function openDialogEditName() {
+  $q.dialog({
+    component: EditNameDialog,
+  });
+}
 </script>
 
 <template>
@@ -34,6 +43,7 @@ const userProfile = ref<UserProfile>({
       <q-item
         v-ripple
         clickable
+        @click="openDialogEditName"
       >
         <q-item-section
           avatar
