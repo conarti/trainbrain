@@ -1,25 +1,42 @@
 <script setup lang="ts">
-import isNil from 'lodash/isNil';
 import { useDialogPluginComponent } from 'quasar';
 import { computed } from 'vue';
 
 interface Props {
   title?: string;
+  /**
+   * Adds a button with type "submit" and an event "submit". Wraps content in "q-form"
+   */
+  hasSubmit?: boolean;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  title: '',
+  hasSubmit: false,
+});
 
-defineEmits([
-  ...useDialogPluginComponent.emits,
-]);
+const emit = defineEmits({
+  ...useDialogPluginComponent.emitsObject,
+  submit: () => true,
+});
 
 const {
   dialogRef,
+  onDialogOK,
   onDialogHide,
   onDialogCancel,
 } = useDialogPluginComponent();
 
-const hasTitle = computed(() => !isNil(props.title));
+const hasTitle = computed(() => props.title === '');
+
+function handleSubmit() {
+  if (!props.hasSubmit) {
+    return;
+  }
+
+  emit('submit');
+  onDialogOK();
+}
 </script>
 
 <template>
@@ -31,24 +48,34 @@ const hasTitle = computed(() => !isNil(props.title));
     @hide="onDialogHide"
   >
     <q-card class="q-dialog-plugin">
-      <q-toolbar class="bg-primary text-white relative-position">
-        <q-btn
-          flat
-          round
-          color="white"
-          icon="arrow_back"
-          @click="onDialogCancel"
-        />
-        <q-toolbar-title
-          v-if="hasTitle"
-          class="absolute-center q-pa-none"
-          shrink
-        >
-          {{ title }}
-        </q-toolbar-title>
-      </q-toolbar>
+      <q-form @submit="handleSubmit">
+        <q-toolbar class="bg-primary text-white relative-position justify-between">
+          <q-btn
+            flat
+            round
+            color="white"
+            icon="arrow_back"
+            @click="onDialogCancel"
+          />
+          <q-toolbar-title
+            v-if="hasTitle"
+            class="absolute-center q-pa-none"
+            shrink
+          >
+            {{ title }}
+          </q-toolbar-title>
+          <q-btn
+            v-if="hasSubmit"
+            flat
+            round
+            color="white"
+            icon="sym_r_done"
+            type="submit"
+          />
+        </q-toolbar>
 
-      <slot />
+        <slot />
+      </q-form>
     </q-card>
   </q-dialog>
 </template>
