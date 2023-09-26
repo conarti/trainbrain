@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
 import { ref } from 'vue';
+import ChangePasswordDialog from './change-password-dialog.vue';
 import EditNameDialog from './edit-name-dialog.vue';
 
 interface UserProfile {
@@ -19,6 +20,12 @@ const $q = useQuasar();
 function openDialogEditName() {
   $q.dialog({
     component: EditNameDialog,
+  });
+}
+
+function openDialogChangePassword() {
+  $q.dialog({
+    component: ChangePasswordDialog,
   });
 }
 </script>
@@ -63,6 +70,7 @@ function openDialogEditName() {
       <q-item
         v-ripple
         clickable
+        @click="openDialogChangePassword"
       >
         <q-item-section
           avatar
