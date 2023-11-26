@@ -16,7 +16,12 @@ export default defineConfig({
   },
   plugins: [
     vue({
-      template: { transformAssetUrls },
+      template: {
+        transformAssetUrls,
+      },
+      script: {
+        defineModel: true,
+      },
     }),
     quasar({
       autoImportComponentCase: 'combined',
